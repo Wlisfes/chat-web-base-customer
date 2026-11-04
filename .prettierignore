@@ -1,0 +1,6 @@
+dist
+build
+node_modules
+yarn.lock
+*.tsbuildinfo
+web.components.d.ts

@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "moduleDetection": "force",
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "isolatedModules": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "lib": ["ESNext", "DOM"],
+        "types": ["vite/client"],
+        "paths": {
+            "@/*": ["./client/*"],
+            "@webpack/*": ["./webpack/*"]
+        }
+    },
+    "include": ["./client/**/*.ts", "./client/**/*.tsx", "./client/**/*.vue", "./client/**/*.d.ts", "./webpack/**/*.ts", "./webpack/**/*.d.ts", "../env.d.ts"]
+}
