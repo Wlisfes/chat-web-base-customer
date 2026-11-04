@@ -115,7 +115,7 @@ onMounted(() => {
         current.y += (mouse.y - current.y) * 0.2
         ctx.clearRect(0, 0, el.width, el.height)
         drawRibbons()
-        const radius = 110
+        const radius = 220
         for (const dot of dots) {
             const ox = dot.x - current.x
             const oy = dot.y - current.y
@@ -126,8 +126,8 @@ onMounted(() => {
             let size = 0.8
             if (dist < radius && dist > 0) {
                 const force = (1 - dist / radius) ** 2
-                x += (ox / dist) * force * 14
-                y += (oy / dist) * force * 14
+                x += (ox / dist) * force * 36
+                y += (oy / dist) * force * 36
                 alpha += force * 0.45
                 size += force * 0.65
             }
