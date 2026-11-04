@@ -5,6 +5,7 @@
     "description": "客户门户 SSR。NestJS 只负责 Vue3 服务端渲染。",
     "license": "UNLICENSED",
     "scripts": {
+        "install": "yarn install --ignore-scripts --ignore-engines",
         "dev": "cross-env NODE_ENV=development nest start --watch web-client-ssr-server",
         "build:web": "yarn build:web:client && yarn build:web:server",
         "build:web:client": "vite --config web/client/vite.config.mts build --ssrManifest --outDir ../../build/web-client/client",
