@@ -1,29 +1,32 @@
 <script lang="tsx">
-import { defineComponent, ref } from 'vue'
-import { useAosObserver } from '@webpack/hooks'
+import { defineComponent, h } from 'vue'
+import { RouterView } from 'vue-router'
+import { useState } from '@/hooks'
 import { useMouse, useStore } from '@/store'
 
-const navs = ['产品', '解决方案', '覆盖范围&定价', '支持中心', '关于我们']
-
 export default defineComponent({
-    name: 'SsrLayout',
+    name: 'BaseLayout',
     setup() {
-        const { fetchScrollbar } = useAosObserver()
         const { inverted } = useStore(useMouse)
-        const scrolled = ref(false)
+        const { state, setState } = useState({
+            scrolled: false,
+            navs: ['产品', '解决方案', '覆盖范围&定价', '支持中心', '关于我们']
+        })
 
         function onScroll(event: Event) {
             const target = event.target as HTMLElement
             const scroller = target?.closest?.('.n-scrollbar-container') || target
             const top = scroller?.scrollTop || target?.scrollTop || 0
-            scrolled.value = top > 0
-            fetchScrollbar(event as any)
+            return setState({ scrolled: top > 0 })
         }
 
         return () => (
-            <n-layout class={{ 'site-shell h-full overflow-hidden': true, 'is-dark': inverted.value }} content-class="flex flex-col overflow-hidden">
+            <n-layout
+                class={{ 'site-shell h-full overflow-hidden': true, 'is-dark': inverted.value }}
+                content-class="flex flex-col overflow-hidden"
+            >
                 <neon-background></neon-background>
-                <n-layout-header class={{ 'site-header': true, 'is-scrolled': scrolled.value }} bordered={false}>
+                <n-layout-header class={{ 'site-header': true, 'is-scrolled': state.scrolled }} bordered={false}>
                     <div class="site-nav">
                         <span class="site-nav-glow"></span>
                         <router-link to="/" class="site-brand">
@@ -32,7 +35,7 @@ export default defineComponent({
                             <em>SMS</em>
                         </router-link>
                         <nav class="site-links">
-                            {navs.map(item => (
+                            {state.navs.map(item => (
                                 <a key={item} href="javascript:void(0)">
                                     {item}
                                 </a>
@@ -57,7 +60,13 @@ export default defineComponent({
                     on-scroll={onScroll}
                 >
                     <n-element class="site-page flex flex-col flex-1">
-                        <router-view>{{ default: ({ Component, route }) => <Component key={route.fullPath} /> }}</router-view>
+                        <RouterView>
+                            {{
+                                default: ({ Component, route }: Omix) => {
+                                    return Component && h(Component, { key: route.fullPath })
+                                }
+                            }}
+                        </RouterView>
                     </n-element>
                     <layout-common-footer></layout-common-footer>
                 </n-layout-content>
@@ -93,7 +102,10 @@ export default defineComponent({
     background-color: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
-    transition: background 0.25s ease, backdrop-filter 0.25s ease, border-color 0.25s ease;
+    transition:
+        background 0.25s ease,
+        backdrop-filter 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .site-header.is-scrolled {
@@ -199,7 +211,7 @@ export default defineComponent({
     text-decoration: none;
 }
 
- .site-links a:hover,
+.site-links a:hover,
 .site-login:hover {
     color: #fff;
 }

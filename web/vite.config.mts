@@ -35,7 +35,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
             SvgLoader({ defaultImport: 'component' }),
             UnoCSS({ mode: 'global' }),
             Components({
-                dirs: ['components'],
+                dirs: ['components', 'layouts'],
                 extensions: ['vue'],
                 dts: 'web.components.d.ts',
                 resolvers: [NaiveUiResolver()]
