@@ -1,13 +1,16 @@
 <script lang="tsx">
 import { defineComponent, h } from 'vue'
 import { RouterView } from 'vue-router'
+import { useAosObserver } from '@webpack/hooks'
 
 export default defineComponent({
     name: 'BaseLayout',
     setup() {
+        const { fetchScrollbar } = useAosObserver()
+
         return () => (
-            <n-layout class="h-full overflow-hidden" content-class="flex flex-col overflow-hidden">
-                {/* <neon-background></neon-background> */}
+            <n-layout class="h-full overflow-hidden bg-transparent!" content-class="flex flex-col overflow-hidden">
+                <neon-background></neon-background>
                 <n-layout-header class="w-full overflow-hidden">
                     <n-element class="h-60 flex p-inline-20 gap-20 overflow-hidden">
                         <router-link to="/" class="flex overflow-hidden decoration-none">
@@ -53,10 +56,11 @@ export default defineComponent({
                     </n-element>
                 </n-layout-header>
                 <n-layout-content
-                    class="flex-1 overflow-hidden"
-                    content-class="min-h-full flex flex-col"
+                    class="flex-1 overflow-hidden bg-transparent!"
+                    content-class="min-h-full flex flex-col bg-transparent!"
                     native-scrollbar={false}
                     scrollbar-props={{ size: 8, trigger: 'none' }}
+                    on-scroll={fetchScrollbar}
                 >
                     <RouterView>
                         {{

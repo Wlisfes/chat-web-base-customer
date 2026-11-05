@@ -20,11 +20,11 @@ type Ribbon = {
 }
 
 const ribbons: Ribbon[] = [
-    { base: 0.56, amp: 0.07, freq: 1.15, phase: 0.2, hue: 268, light: 46, alpha: 0.3, width: 0.15, speed: 0.55, flow: 0.045, lift: 0.1 },
-    { base: 0.66, amp: 0.08, freq: 0.9, phase: 1.7, hue: 226, light: 48, alpha: 0.24, width: 0.12, speed: 0.42, flow: -0.034, lift: 0.08 },
-    { base: 0.76, amp: 0.06, freq: 1.35, phase: 2.8, hue: 188, light: 50, alpha: 0.21, width: 0.1, speed: 0.62, flow: 0.056, lift: 0.06 },
-    { base: 0.62, amp: 0.085, freq: 0.72, phase: 4.1, hue: 292, light: 44, alpha: 0.2, width: 0.09, speed: 0.36, flow: -0.048, lift: 0.12 },
-    { base: 0.84, amp: 0.05, freq: 1.05, phase: 0.9, hue: 168, light: 46, alpha: 0.15, width: 0.08, speed: 0.5, flow: 0.028, lift: 0.04 }
+    { base: 0.56, amp: 0.07, freq: 1.15, phase: 0.2, hue: 268, light: 34, alpha: 0.16, width: 0.15, speed: 0.55, flow: 0.045, lift: 0.1 },
+    { base: 0.66, amp: 0.08, freq: 0.9, phase: 1.7, hue: 226, light: 36, alpha: 0.13, width: 0.12, speed: 0.42, flow: -0.034, lift: 0.08 },
+    { base: 0.76, amp: 0.06, freq: 1.35, phase: 2.8, hue: 188, light: 38, alpha: 0.11, width: 0.1, speed: 0.62, flow: 0.056, lift: 0.06 },
+    { base: 0.62, amp: 0.085, freq: 0.72, phase: 4.1, hue: 292, light: 32, alpha: 0.1, width: 0.09, speed: 0.36, flow: -0.048, lift: 0.12 },
+    { base: 0.84, amp: 0.05, freq: 1.05, phase: 0.9, hue: 168, light: 34, alpha: 0.08, width: 0.08, speed: 0.5, flow: 0.028, lift: 0.04 }
 ]
 
 onMounted(() => {
@@ -66,7 +66,7 @@ onMounted(() => {
             glowCtx.moveTo(x, y)
             glowCtx.quadraticCurveTo(x, y, x + step / 2, (y + next) / 2)
             glowCtx.lineTo(x + step, next)
-            glowCtx.strokeStyle = `hsla(${ribbon.hue + pulse * 10}, 72%, ${ribbon.light + pulse * 6}%, ${ribbon.alpha * pulse})`
+            glowCtx.strokeStyle = `hsla(${ribbon.hue + pulse * 8}, 48%, ${ribbon.light + pulse * 3}%, ${ribbon.alpha * pulse})`
             glowCtx.lineWidth = height * ribbon.width * (0.78 + pulse * 0.35)
             glowCtx.stroke()
         }
@@ -185,3 +185,4 @@ onBeforeUnmount(() => stop?.())
     inset: 0;
 }
 </style>
+
