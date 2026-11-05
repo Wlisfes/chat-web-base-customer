@@ -30,3 +30,8 @@ SSR：http://localhost:5480
 yarn build
 yarn start
 ```
+
+## 云端部署
+
+生产页面是 `https://web.lisfes.cn`，API 是 `https://chat-web.lisfes.cn`。发布方式见 `deploy/RUNBOOK.md`。
+

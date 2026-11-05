@@ -1,0 +1,145 @@
+name: 构建并部署客户门户
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    verify:
+        name: 验证客户门户
+        runs-on: ubuntu-latest
+        steps:
+            - name: 检出代码
+              uses: actions/checkout@v4
+
+            - name: 设置 Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: yarn
+
+            - name: 安装依赖
+              run: yarn install --frozen-lockfile --non-interactive --ignore-engines
+
+            - name: 构建客户门户
+              run: yarn build
+
+    build:
+        name: 构建并发布镜像
+        needs: verify
+        runs-on: ubuntu-latest
+        concurrency:
+            group: build-customer-${{ github.ref }}
+            cancel-in-progress: true
+        permissions:
+            contents: read
+            packages: write
+        outputs:
+            image: ${{ steps.image.outputs.name }}
+
+        steps:
+            - name: 检出代码
+              uses: actions/checkout@v4
+
+            - name: 解析镜像名称
+              id: image
+              shell: bash
+              run: |
+                  repository="ghcr.io/${GITHUB_REPOSITORY,,}"
+                  echo "name=${repository}:${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+                  echo "latest=${repository}:latest" >> "$GITHUB_OUTPUT"
+
+            - name: 设置 Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: 登录 GitHub Container Registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: 构建并发布镜像
+              uses: docker/build-push-action@v6
+              with:
+                  context: .
+                  push: true
+                  tags: |
+                      ${{ steps.image.outputs.name }}
+                      ${{ steps.image.outputs.latest }}
+                  labels: |
+                      org.opencontainers.image.revision=${{ github.sha }}
+                      org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
+
+    deploy:
+        name: 部署到云端 web.lisfes.cn
+        needs: build
+        if: github.event_name != 'pull_request'
+        runs-on: ubuntu-latest
+        environment: production-cloud
+        concurrency:
+            group: deploy-chat-web-customer
+            cancel-in-progress: true
+        permissions:
+            contents: read
+            packages: read
+        env:
+            IMAGE: ${{ needs.build.outputs.image }}
+            CLOUD_HOST: ${{ vars.CLOUD_HOST || '47.119.21.228' }}
+            CLOUD_USER: ${{ vars.CLOUD_USER || 'root' }}
+            CLOUD_DEPLOY_PATH: ${{ vars.CLOUD_DEPLOY_PATH || '/opt/chat-web-cloud' }}
+
+        steps:
+            - name: 检出部署文件
+              uses: actions/checkout@v4
+
+            - name: 校验云端 SSH 配置
+              env:
+                  CLOUD_SSH_PRIVATE_KEY: ${{ secrets.CLOUD_SSH_PRIVATE_KEY }}
+                  CLOUD_KNOWN_HOSTS: ${{ secrets.CLOUD_KNOWN_HOSTS }}
+              run: |
+                  set -eu
+                  test -n "$CLOUD_SSH_PRIVATE_KEY" || { echo 'production-cloud 缺少 CLOUD_SSH_PRIVATE_KEY Secret。' >&2; exit 1; }
+                  test -n "$CLOUD_KNOWN_HOSTS" || { echo 'production-cloud 缺少 CLOUD_KNOWN_HOSTS Secret。' >&2; exit 1; }
+
+            - name: 配置云端 SSH
+              uses: webfactory/ssh-agent@v0.9.0
+              with:
+                  ssh-private-key: ${{ secrets.CLOUD_SSH_PRIVATE_KEY }}
+
+            - name: 写入云端主机指纹
+              env:
+                  CLOUD_KNOWN_HOSTS: ${{ secrets.CLOUD_KNOWN_HOSTS }}
+              run: |
+                  set -eu
+                  install -d -m 0700 "$HOME/.ssh"
+                  printf '%s\n' "$CLOUD_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+                  chmod 0600 "$HOME/.ssh/known_hosts"
+
+            - name: 安装云端部署文件
+              run: |
+                  set -eu
+                  ssh "$CLOUD_USER@$CLOUD_HOST" "install -d -m 0755 '$CLOUD_DEPLOY_PATH'"
+                  scp deploy/compose.yml "$CLOUD_USER@$CLOUD_HOST:$CLOUD_DEPLOY_PATH/customer-compose.yml"
+                  scp deploy/deploy.sh "$CLOUD_USER@$CLOUD_HOST:$CLOUD_DEPLOY_PATH/customer-deploy.sh"
+                  scp deploy/nginx-web.lisfes.cn.conf "$CLOUD_USER@$CLOUD_HOST:$CLOUD_DEPLOY_PATH/nginx-web.lisfes.cn.conf"
+                  ssh "$CLOUD_USER@$CLOUD_HOST" "chmod 0755 '$CLOUD_DEPLOY_PATH/customer-deploy.sh'"
+
+            - name: 登录镜像仓库并部署
+              env:
+                  GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  set -eu
+                  printf '%s' "$GHCR_TOKEN" | ssh "$CLOUD_USER@$CLOUD_HOST" "docker login ghcr.io --username '${{ github.actor }}' --password-stdin"
+                  ssh "$CLOUD_USER@$CLOUD_HOST" "cd '$CLOUD_DEPLOY_PATH' && ./customer-deploy.sh '$IMAGE' customer-compose.yml"
+
+            - name: 注销镜像仓库
+              if: always()
+              run: ssh "$CLOUD_USER@$CLOUD_HOST" 'docker logout ghcr.io >/dev/null 2>&1 || true' || true
