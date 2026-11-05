@@ -50,7 +50,7 @@ export default defineComponent({
                 </div>
                 <n-element class="chat-comment common-width-inline flex justify-between p-bs-48 p-be-64">
                     <div class="chat-book flex flex-col w-[var(--chat-book-width)] min-w-[var(--chat-book-min-width)] p-ie-16">
-                        <router-link to="/" class="flex overflow-hidden p-be-16">
+                        <router-link to="/" class="flex overflow-hidden p-be-16 decoration-none">
                             <n-button text focusable={false}>
                                 <common-element-wrapper
                                     name="nest-logo"
@@ -60,7 +60,7 @@ export default defineComponent({
                                 <h2 class="m-0 p-bs-8 p-inline-5 text-18">{state.chatBook.title}</h2>
                             </n-button>
                         </router-link>
-                        <n-text depth={3}>{state.chatBook.document}</n-text>
+                        <n-text depth={2}>{state.chatBook.document}</n-text>
                         <div class="flex gap-10 overflow-hidden p-bs-20">
                             <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
                                 <common-element-wrapper name="nest-telegram" size={20}></common-element-wrapper>
@@ -80,7 +80,7 @@ export default defineComponent({
                                 {state.solutions.columns.map((item, index) => (
                                     <n-grid-item key={index}>
                                         <router-link to={item.link}>
-                                            <n-button text focusable={false} style={{ '--n-text-color': 'var(--text-color-3)' }}>
+                                            <n-button text focusable={false} style={{ '--n-text-color': 'var(--text-color-2)' }}>
                                                 <div style={{ lineHeight: 1.6 }}>{item.name}</div>
                                             </n-button>
                                         </router-link>
@@ -94,7 +94,7 @@ export default defineComponent({
                                 {state.about.columns.map((item, index) => (
                                     <n-grid-item key={index}>
                                         <router-link to={item.link}>
-                                            <n-button text focusable={false} style={{ '--n-text-color': 'var(--text-color-3)' }}>
+                                            <n-button text focusable={false} style={{ '--n-text-color': 'var(--text-color-2)' }}>
                                                 <div style={{ lineHeight: 1.6 }}>{item.name}</div>
                                             </n-button>
                                         </router-link>
@@ -106,10 +106,10 @@ export default defineComponent({
                 </n-element>
                 <n-element class="common-width-inline flex flex-wrap gap-16 text-12 items-center justify-between p-block-16 gap-y-5">
                     <n-ellipsis tooltip={false}>
-                        <n-text>{`Copyright © 2021-${new Date().getFullYear()} ChatBook. All rights reserved.`}</n-text>
+                        <n-text depth={2}>{`Copyright © 2021-${new Date().getFullYear()} ChatBook. All rights reserved.`}</n-text>
                     </n-ellipsis>
                     <n-a class="whitespace-nowrap decoration-none text-center" target="_blank" href="https://beian.miit.gov.cn">
-                        <n-button text focusable={false} class="text-12">
+                        <n-button text focusable={false} class="text-12" style={{ '--n-text-color': 'var(--text-color-2)' }}>
                             粤ICP备18016996号-1
                         </n-button>
                     </n-a>
