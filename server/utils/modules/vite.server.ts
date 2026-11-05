@@ -34,7 +34,7 @@ export async function createServer(root: string) {
 }
 
 /**生产态读取 Vite 构建产物。__non_webpack_require__ 避免 webpack 把运行时文件收进包内。**/
-export function loadWebServer(mode: 'web-client'): ProductionWebServer {
+export function loadWebServer(mode: 'web'): ProductionWebServer {
     const base = resolve(process.cwd(), `build/${mode}`)
     const template = readFileSync(resolve(base, 'client/index.html'), 'utf-8')
     const manifest = JSON.parse(readFileSync(resolve(base, 'client/.vite/ssr-manifest.json'), 'utf-8'))

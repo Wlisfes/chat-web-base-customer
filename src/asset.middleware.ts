@@ -9,7 +9,7 @@ const compress = compression()
 
 @Injectable()
 export class AssetMiddleware implements NestMiddleware {
-    private readonly serve = express.static(resolve(process.cwd(), 'build/web-client/client'), { index: false })
+    private readonly serve = express.static(resolve(process.cwd(), 'build/web/client'), { index: false })
 
     use(request: Request, response: Response, next: NextFunction) {
         if (process.env.NODE_ENV === 'production') {

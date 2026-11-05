@@ -14,7 +14,7 @@ export async function createViteServer() {
 
 export async function createRouteServer(request: Request) {
     if (process.env.NODE_ENV === 'production') {
-        const webServer = await loadWebServer('web-client')
+        const webServer = await loadWebServer('web')
         const options = await webServer.render(request, webServer.manifest)
         return fetchViteRender(webServer.template, options)
     }
