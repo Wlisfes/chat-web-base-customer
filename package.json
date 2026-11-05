@@ -6,13 +6,13 @@
     "license": "UNLICENSED",
     "scripts": {
         "install": "yarn install --ignore-scripts --ignore-engines",
-        "dev": "cross-env NODE_ENV=development nest start --watch web-client-ssr-server",
+        "dev": "cross-env NODE_ENV=development nest start --watch",
         "build:web": "yarn build:web:client && yarn build:web:server",
         "build:web:client": "vite --config web/vite.config.mts build --ssrManifest --outDir ../build/web-client/client",
         "build:web:server": "vite --config web/vite.config.mts build --ssr entry-server.ts --outDir ../build/web-client/server",
-        "build:ssr": "cross-env NODE_ENV=production nest build web-client-ssr-server",
+        "build:ssr": "cross-env NODE_ENV=production nest build",
         "build": "yarn build:web && yarn build:ssr",
-        "start": "cross-env NODE_ENV=production node dist/apps/web-client-ssr-server/main.js",
+        "start": "cross-env NODE_ENV=production node dist/main.js",
         "format": "prettier --write .",
         "format:check": "prettier --check ."
     },

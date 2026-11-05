@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { fetchGlobalEnv } from '@server/utils'
-import { AppModule } from '@web-client-ssr-server/app.module'
+import { AppModule } from './app.module'
 
 async function bootstrap() {
     fetchGlobalEnv()

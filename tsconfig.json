@@ -16,10 +16,9 @@
         "resolveJsonModule": true,
         "outDir": "./dist",
         "paths": {
-            "@server/*": ["./server/*"],
-            "@web-client-ssr-server/*": ["./apps/web-client-ssr-server/src/*"]
+            "@server/*": ["./server/*"]
         }
     },
-    "include": ["apps/**/*.ts", "server/**/*.ts", "env.d.ts"],
+    "include": ["src/**/*.ts", "server/**/*.ts", "env.d.ts"],
     "exclude": ["dist", "build", "node_modules", "web"]
 }

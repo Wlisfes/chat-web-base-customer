@@ -2,7 +2,7 @@ module.exports = {
     apps: [
         {
             name: 'chat-web-base-customer-ssr',
-            script: 'dist/apps/web-client-ssr-server/main.js',
+            script: 'dist/main.js',
             instances: 1,
             exec_mode: 'fork',
             autorestart: true,

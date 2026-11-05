@@ -14,4 +14,4 @@ COPY --from=build /app/dist ./dist
 COPY --from=build /app/build ./build
 COPY --from=build /app/env ./env
 EXPOSE 5480
-CMD ["node", "dist/apps/web-client-ssr-server/main.js"]
+CMD ["node", "dist/main.js"]

@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express'
 import express from 'express'
 import { resolve } from 'path'
 import compression from 'compression'
-import { createViteServer } from '@web-client-ssr-server/vite.server'
+import { createViteServer } from './vite.server'
 
 const compress = compression()
 
