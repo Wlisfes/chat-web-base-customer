@@ -128,7 +128,7 @@ export default defineComponent({
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-image: url('https://cn.spugsms.com/assets/images/shape/y.png');
+        // background-image: url('https://cn.spugsms.com/assets/images/shape/y.png');
     }
     &::after {
         position: absolute;
@@ -140,7 +140,7 @@ export default defineComponent({
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-image: url('https://cn.spugsms.com/assets/images/shape/z.png');
+        // background-image: url('https://cn.spugsms.com/assets/images/shape/z.png');
     }
     @media (max-width: 1080px) {
         &::after,
