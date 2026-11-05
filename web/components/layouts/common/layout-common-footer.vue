@@ -48,9 +48,6 @@ export default defineComponent({
                         </n-button>
                     </div>
                 </div>
-                <div class="common-width-inline overflow-hidden">
-                    <n-divider class="m-0!"></n-divider>
-                </div>
                 <n-element class="chat-comment common-width-inline flex justify-between p-bs-48 p-be-64">
                     <div class="chat-book flex flex-col w-[var(--chat-book-width)] min-w-[var(--chat-book-min-width)] p-ie-16">
                         <router-link to="/" class="flex overflow-hidden p-be-16">
@@ -107,7 +104,6 @@ export default defineComponent({
                         </div>
                     </div>
                 </n-element>
-                <n-divider class="m-0!"></n-divider>
                 <n-element class="common-width-inline flex flex-wrap gap-16 text-12 items-center justify-between p-block-16 gap-y-5">
                     <n-ellipsis tooltip={false}>
                         <n-text>{`Copyright © 2021-${new Date().getFullYear()} ChatBook. All rights reserved.`}</n-text>

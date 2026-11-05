@@ -10,7 +10,7 @@ export default defineComponent({
 
         return () => (
             <n-layout class="h-full overflow-hidden bg-transparent!" content-class="flex flex-col overflow-hidden">
-                <neon-background></neon-background>
+                <layout-canvas></layout-canvas>
                 <n-layout-header class="w-full overflow-hidden">
                     <n-element class="h-60 flex p-inline-20 gap-20 overflow-hidden">
                         <router-link to="/" class="flex overflow-hidden decoration-none">
