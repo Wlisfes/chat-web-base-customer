@@ -7,7 +7,7 @@ import SvgLoader from 'vite-svg-loader'
 import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import compression from 'vite-plugin-compression'
-import { fetchEnvService } from '../webpack/config'
+import { fetchEnvService } from './config'
 
 export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
     return {
@@ -16,7 +16,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
         resolve: {
             alias: {
                 '@': resolve(__dirname, './'),
-                '@webpack': resolve(__dirname, '../webpack')
+                '@webpack': resolve(__dirname, './')
             }
         },
         build: {

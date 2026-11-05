@@ -1,3 +1,4 @@
+export * from './modules/icons'
 export * from './modules/is'
 export * from './modules/common'
 export * from './modules/theme'

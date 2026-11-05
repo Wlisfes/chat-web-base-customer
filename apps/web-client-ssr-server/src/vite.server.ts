@@ -7,7 +7,7 @@ let viteServer: ViteDevServer
 
 export async function createViteServer() {
     if (!viteServer) {
-        viteServer = await createServer('web/client')
+        viteServer = await createServer('web')
     }
     return viteServer
 }
@@ -20,7 +20,7 @@ export async function createRouteServer(request: Request) {
     }
 
     const vite = await createViteServer()
-    const html = readFileSync(resolve(process.cwd(), 'web/client/index.html'), 'utf-8')
+    const html = readFileSync(resolve(process.cwd(), 'web/index.html'), 'utf-8')
     const element = await vite.transformIndexHtml(request.originalUrl, html)
     const loaded = await vite.ssrLoadModule('/entry-server.ts')
     const options = await loaded.render(request, {})

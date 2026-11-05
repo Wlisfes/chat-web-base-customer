@@ -16,9 +16,9 @@
         "lib": ["ESNext", "DOM"],
         "types": ["vite/client"],
         "paths": {
-            "@/*": ["./client/*"],
-            "@webpack/*": ["./webpack/*"]
+            "@/*": ["./*"],
+            "@webpack/*": ["./*"]
         }
     },
-    "include": ["./client/**/*.ts", "./client/**/*.tsx", "./client/**/*.vue", "./client/**/*.d.ts", "./webpack/**/*.ts", "./webpack/**/*.d.ts", "../env.d.ts"]
+    "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue", "./**/*.d.ts", "../env.d.ts"]
 }

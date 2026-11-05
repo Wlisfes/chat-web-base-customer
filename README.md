@@ -9,8 +9,7 @@
 ```text
 apps/web-client-ssr-server   SSR 入口，开发态挂 Vite
 server                       环境变量和 SSR 渲染替换
-web/client                   Vue3 页面
-web/webpack                  前端请求、cookie、环境变量注入
+web                          Vue3 页面、请求、cookie 和环境变量注入
 env                          .env.development / .env.production
 ```
 
