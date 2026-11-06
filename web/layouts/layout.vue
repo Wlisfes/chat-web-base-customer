@@ -68,7 +68,7 @@ export default defineComponent({
                     </n-element>
                 </n-layout-header>
                 <n-layout-content
-                    class="flex-1 overflow-hidden bg-transparent!"
+                    class="layout-client-content flex-1 overflow-hidden bg-transparent!"
                     content-class="min-h-full flex flex-col bg-transparent! p-bs-60"
                     native-scrollbar={false}
                     scrollbar-props={{ size: 8, trigger: 'none' }}
@@ -88,9 +88,14 @@ export default defineComponent({
     }
 })
 </script>
-<style lang="scss">
+
+<style lang="scss" scoped>
+.layout-client-content > :deep(.n-scrollbar > .n-scrollbar-rail--vertical) {
+    z-index: 99;
+}
+
 .layout-site-header.n-layout-header {
-    z-index: 1;
+    z-index: 99;
     background-color: transparent !important;
     transition:
         background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
