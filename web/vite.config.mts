@@ -37,6 +37,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
                 dirs: ['components', 'layouts'],
                 extensions: ['vue'],
                 dts: 'web.components.d.ts',
+                exclude: [/[\\/]layouts[\\/]layout\.vue$/],
                 resolvers: [NaiveUiResolver()]
             }),
             compression({ threshold: 10240 })

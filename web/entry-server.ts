@@ -3,6 +3,7 @@ import { type HttpServerConfig } from '@/interface'
 import { type Request } from 'express'
 import { createAppServer } from '@/main'
 import { isPromise } from '@/utils'
+import { createPageLogger, resolvePageLabel } from '@/plugins'
 
 export async function render(request: Request, manifest: Record<string, string[]>) {
     const { app, router, pinia, collect, fetchWinston } = createAppServer({ request, ssr: true })
@@ -47,9 +48,10 @@ async function runHttpServer(matched: Array<{ components?: Record<string, any> |
     await Promise.all(
         tasks.map(async component => {
             const resolved = component && typeof component.then === 'function' ? await component : component
-            const loader = resolved?.httpServer || resolved?.default?.httpServer
+            const page = resolved?.default || resolved
+            const loader = page?.httpServer || resolved?.httpServer
             if (!loader) return
-            const result = loader(config)
+            const result = loader({ ...config, logger: createPageLogger(resolvePageLabel(page)) })
             if (isPromise(result)) await result
         })
     )

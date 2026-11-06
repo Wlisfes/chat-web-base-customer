@@ -1,4 +1,5 @@
 import { isPromise } from '@/utils'
+import { createPageLogger, resolvePageLabel } from '@/plugins'
 import { type HttpServerConfig } from '@/interface'
 import { createAppServer } from '@/main'
 
@@ -43,9 +44,10 @@ async function runHttpServer(matched: typeof router.currentRoute.value.matched, 
     const tasks = matched.flatMap(record => Object.values(record.components || {}))
     await Promise.all(
         tasks.map(component => {
-            const loader = (component as { httpServer?: (config: HttpServerConfig) => unknown }).httpServer
+            const page = component as { name?: string; __name?: string; __file?: string; httpServer?: (config: HttpServerConfig) => unknown }
+            const loader = page.httpServer
             if (!loader) return Promise.resolve()
-            const result = loader(config)
+            const result = loader({ ...config, logger: createPageLogger(resolvePageLabel(page)) })
             return isPromise(result) ? result : Promise.resolve(result)
         })
     )

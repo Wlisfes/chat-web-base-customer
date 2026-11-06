@@ -39,6 +39,6 @@ export function createAppServer(options: AppOptions): AppServer {
         router,
         pinia,
         collect,
-        fetchWinston: () => createPageLogger('web')
+        fetchWinston: () => createPageLogger()
     }
 }

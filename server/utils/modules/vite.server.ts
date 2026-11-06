@@ -29,7 +29,10 @@ export async function createServer(root: string) {
     return createViteDevServer({
         root,
         appType: 'custom',
-        server: { middlewareMode: true }
+        server: {
+            middlewareMode: true,
+            hmr: { port: 24681 }
+        }
     })
 }
 
