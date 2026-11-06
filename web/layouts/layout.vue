@@ -1,28 +1,28 @@
 <script lang="tsx">
-import { defineComponent, h, ref } from 'vue'
-import { RouterView } from 'vue-router'
-import { useAosObserver } from '@/hooks'
+import { defineComponent, h } from 'vue'
+import { useState, useAosObserver } from '@/hooks'
 import { useMouse, useStore } from '@/store'
+import { RouterView } from 'vue-router'
 
 export default defineComponent({
     name: 'BaseLayout',
     setup() {
+        const { state, setState } = useState({ scrolled: false })
         const { fetchScrollbar } = useAosObserver()
         const { inverted } = useStore(useMouse)
-        const scrolled = ref(false)
 
-        function onContentScroll(event: Event) {
-            const target = event.target
-            scrolled.value = target instanceof HTMLElement && target.scrollTop > 8
-            fetchScrollbar(event)
+        async function onContentScroll(event: Event) {
+            return await setState({ scrolled: (event.target as HTMLElement).scrollTop > 8 }).then(() => {
+                return fetchScrollbar(event)
+            })
         }
 
         return () => (
             <n-layout class="h-full overflow-hidden bg-transparent!" content-class="flex flex-col overflow-hidden">
-                <layout-canvas></layout-canvas>
+                <layout-client-canvas></layout-client-canvas>
                 <n-layout-header
                     position="absolute"
-                    class={['layout-site-header w-full', { 'is-scrolled': scrolled.value, 'is-dark': inverted.value }]}
+                    class={['layout-site-header w-full', { 'is-scrolled': state.scrolled, 'is-dark': inverted.value }]}
                 >
                     <n-element class="h-60 flex p-inline-20 gap-20 overflow-hidden bg-transparent!">
                         <router-link to="/" class="flex overflow-hidden decoration-none">
@@ -81,7 +81,7 @@ export default defineComponent({
                             }
                         }}
                     </RouterView>
-                    <layout-common-footer></layout-common-footer>
+                    <layout-client-footer></layout-client-footer>
                 </n-layout-content>
             </n-layout>
         )
@@ -112,4 +112,3 @@ export default defineComponent({
     box-shadow: none !important;
 }
 </style>
-
