@@ -8,6 +8,11 @@ export default defineComponent({
             title: '大苏打33的撒大1111111dsadasdsaDDSADAASDSADASDASDASDAdas',
             date: Date.now()
         })
+
+        logger.info({
+            title: '11111111111',
+            date: Date.now()
+        })
     },
     setup() {
         return () => (

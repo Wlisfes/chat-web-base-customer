@@ -51,7 +51,7 @@ async function runHttpServer(matched: Array<{ components?: Record<string, any> |
             const page = resolved?.default || resolved
             const loader = page?.httpServer || resolved?.httpServer
             if (!loader) return
-            const result = loader({ ...config, logger: createPageLogger(resolvePageLabel(page)) })
+            const result = loader({ ...config, logger: createPageLogger(resolvePageLabel(page), config.route.path) })
             if (isPromise(result)) await result
         })
     )

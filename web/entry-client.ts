@@ -44,10 +44,17 @@ async function runHttpServer(matched: typeof router.currentRoute.value.matched, 
     const tasks = matched.flatMap(record => Object.values(record.components || {}))
     await Promise.all(
         tasks.map(component => {
-            const page = component as { name?: string; __name?: string; __file?: string; httpServer?: (config: HttpServerConfig) => unknown }
+            const page = component as {
+                name?: string
+                __name?: string
+                __file?: string
+                httpServer?: (config: HttpServerConfig) => unknown
+            }
             const loader = page.httpServer
-            if (!loader) return Promise.resolve()
-            const result = loader({ ...config, logger: createPageLogger(resolvePageLabel(page)) })
+            if (!loader) {
+                return Promise.resolve()
+            }
+            const result = loader({ ...config, logger: createPageLogger(resolvePageLabel(page), config.route.path) })
             return isPromise(result) ? result : Promise.resolve(result)
         })
     )

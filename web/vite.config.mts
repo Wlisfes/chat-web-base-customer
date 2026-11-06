@@ -7,7 +7,7 @@ import SvgLoader from 'vite-svg-loader'
 import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import compression from 'vite-plugin-compression'
-import { fetchEnvService } from './config'
+import { fetchEnvService, vueFilePlugin } from './config'
 
 export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
     return {
@@ -30,6 +30,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
         },
         plugins: [
             vue(),
+            vueFilePlugin(),
             vueJsx(),
             SvgLoader({ defaultImport: 'component' }),
             UnoCSS({ mode: 'global' }),

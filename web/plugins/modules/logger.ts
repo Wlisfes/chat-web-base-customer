@@ -55,13 +55,14 @@ function createLogId() {
     return globalThis.crypto.randomUUID()
 }
 
-export function createPageLogger(scope?: string, logId = createLogId()): PageLogger {
+export function createPageLogger(scope?: string, path?: string): PageLogger {
     const write = (level: 'INFO' | 'WARN' | 'ERROR', args: unknown[]) => {
         const header = [
             colorText('green', `组件名称:[${scope || 'page'}]`),
+            // colorText('cyan', `路由:[${path || '-'}]`),
             colorHex('#fb9300', formatTimestamp(new Date())),
             colorText(level === 'ERROR' ? 'red' : level === 'WARN' ? 'yellow' : 'green', level),
-            colorHex('#536dfe', `日志ID:[${logId}]`)
+            colorHex('#536dfe', `日志ID:[${createLogId()}]`)
         ].join('  ')
         const line = `${header}${args.map(formatLogValue).join(' ')}`
         console[level === 'INFO' ? 'info' : level === 'WARN' ? 'warn' : 'error'](line)
@@ -70,11 +71,16 @@ export function createPageLogger(scope?: string, logId = createLogId()): PageLog
         info: (...args) => write('INFO', args),
         warn: (...args) => write('WARN', args),
         error: (...args) => write('ERROR', args),
-        scope: name => createPageLogger(name, logId)
+        scope: name => createPageLogger(name, path)
     }
 }
 
+/**__file 由 vueFilePlugin 写入，生产构建保留相对路径。**/
 export function resolvePageLabel(component: { name?: string; __name?: string; __file?: string } | null | undefined) {
-    const file = component?.__file?.split(/[/\\]/).pop()
+    const file = component?.__file?.replace(/\\/g, '/')
+    const index = file?.lastIndexOf('views/') ?? -1
+    if (file && index >= 0) {
+        return file.slice(index)
+    }
     return file || component?.name || component?.__name || 'page'
 }
