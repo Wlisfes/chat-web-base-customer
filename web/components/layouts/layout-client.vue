@@ -2,7 +2,7 @@
 import { defineComponent, h, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 import { useGlobal, useMouse, useStore } from '@/store'
-import { useAosObserver } from '@webpack/hooks'
+import { useAosObserver } from '@/hooks'
 
 export default defineComponent({
     name: 'LayoutClient',

@@ -15,8 +15,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
         define: fetchEnvService(mode),
         resolve: {
             alias: {
-                '@': resolve(__dirname, './'),
-                '@webpack': resolve(__dirname, './')
+                '@': resolve(__dirname, './')
             }
         },
         build: {

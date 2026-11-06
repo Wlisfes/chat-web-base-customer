@@ -1,1 +1,1 @@
-import { request } from '@webpack/utils'
+import { request } from '@/utils'

@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { defineComponent, nextTick } from 'vue'
 import { locale, fetchI18nUpdate } from '@/i18n'
-import { useState } from '@webpack/hooks'
+import { useState } from '@/hooks'
 
 export default defineComponent({
     name: 'LayoutCommonLanguage',

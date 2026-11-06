@@ -1,5 +1,5 @@
 import { createRouter as _createRouter, createMemoryHistory, createWebHistory } from 'vue-router'
-import { fetchConcat } from '@webpack/utils'
+import { fetchConcat } from '@/utils'
 import { mainRoutes } from '@/router/modules/main'
 import { clientRoutes } from '@/router/modules/client'
 import { ssrRoutes } from '@/router/modules/ssr'

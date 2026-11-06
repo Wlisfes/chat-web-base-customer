@@ -3,9 +3,15 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: 'BaseHome',
+    // async httpServer({ pinia, logger }) {
+    // logger.info('[Home.vue]', {
+    //     title: '大苏打33的撒大1111111dsadasdsaDDSADAASDSADASDASDASDAdas',
+    //     date: Date.now()
+    // })
+    // },
     setup() {
         return () => (
-            <n-element class="home-stage flex flex-col flex-1">
+            <n-element class="flex flex-col flex-1 bg-transparent!">
                 <layout-home-choose></layout-home-choose>
                 <layout-home-issues></layout-home-issues>
                 <layout-home-signal></layout-home-signal>
@@ -15,9 +21,3 @@ export default defineComponent({
     }
 })
 </script>
-
-<style lang="scss" scoped>
-.home-stage {
-    background: transparent;
-}
-</style>

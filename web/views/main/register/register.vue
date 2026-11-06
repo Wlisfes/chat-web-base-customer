@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { useFormService } from '@webpack/hooks'
+import { useFormService } from '@/hooks'
 
 export default defineComponent({
     name: 'MainRegister',

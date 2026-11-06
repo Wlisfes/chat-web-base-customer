@@ -1,5 +1,5 @@
-import { isPromise } from '@webpack/utils'
-import type { HttpServerConfig } from '@webpack/interface'
+import { isPromise } from '@/utils'
+import { type HttpServerConfig } from '@/interface'
 import { createAppServer } from '@/main'
 
 const { app, router, pinia, fetchWinston } = createAppServer({ ssr: false })

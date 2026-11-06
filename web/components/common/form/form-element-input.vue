@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { defineComponent, h, PropType, VNode } from 'vue'
 import { isNotEmpty } from 'class-validator'
-import { enter } from '@webpack/utils'
+import { enter } from '@/utils'
 
 export default defineComponent({
     name: 'FormElementInput',

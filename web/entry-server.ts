@@ -1,7 +1,7 @@
 import { renderToString } from 'vue/server-renderer'
 import type { Request } from 'express'
-import { isPromise } from '@webpack/utils'
-import type { HttpServerConfig } from '@webpack/interface'
+import { isPromise } from '@/utils'
+import type { HttpServerConfig } from '@/interface'
 import { createAppServer } from '@/main'
 
 export async function render(request: Request, manifest: Record<string, string[]>) {

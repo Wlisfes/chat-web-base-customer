@@ -1,4 +1,4 @@
-import '@webpack/styles/index.scss'
+import '@/styles/index.scss'
 import 'uno.css'
 import { createSSRApp, type App as VueApp } from 'vue'
 import { createPinia, type Pinia } from 'pinia'
@@ -7,7 +7,7 @@ import type { Request } from 'express'
 import type { Router } from 'vue-router'
 import { createRouter } from '@/router'
 import { i18n } from '@/i18n'
-import { CoutextServer, createPageLogger } from '@webpack/plugins'
+import { CoutextServer, createPageLogger } from '@/plugins'
 import App from '@/App.vue'
 
 export interface AppOptions {

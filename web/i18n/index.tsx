@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { createI18n, useI18n } from 'vue-i18n'
 import { messages } from '@/i18n/messages'
 import type { I18nContext, I18nNode, I18nStore } from '@/i18n/messages'
-import { useCoutext, AUTH } from '@webpack/hooks'
+import { useCoutext, AUTH } from '@/hooks'
 
 export const locale = ref<keyof typeof messages>(getDefaultLocale())
 export const i18n = createI18n({

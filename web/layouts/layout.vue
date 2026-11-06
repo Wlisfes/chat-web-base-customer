@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { defineComponent, h, ref } from 'vue'
 import { RouterView } from 'vue-router'
-import { useAosObserver } from '@webpack/hooks'
+import { useAosObserver } from '@/hooks'
 import { useMouse, useStore } from '@/store'
 
 export default defineComponent({
