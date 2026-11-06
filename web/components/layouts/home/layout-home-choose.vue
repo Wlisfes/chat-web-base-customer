@@ -38,7 +38,7 @@ export default defineComponent({
         })
 
         return () => (
-            <n-element class="layout-home-choose common-width-inline flex flex-col p-block-64">
+            <n-element class="layout-home-choose common-width-inline flex flex-col p-block-64 box-border">
                 <div class="flex flex-col items-center max-w-640 m-inline-auto">
                     <n-text class="chat-hot text-[var(--primary-color)]">{state.hot}</n-text>
                     <h1 class="m-0 text-28">{state.title}</h1>

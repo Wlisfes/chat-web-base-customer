@@ -8,7 +8,8 @@ export default defineComponent({
         return () => (
             <n-element class="flex flex-col flex-1 bg-transparent!">
                 <layout-home-choose></layout-home-choose>
-                <layout-home-issues></layout-home-issues>1<layout-home-signal></layout-home-signal>
+                <layout-home-issues></layout-home-issues>
+                <layout-home-signal></layout-home-signal>
                 <layout-home-facts></layout-home-facts>
             </n-element>
         )

@@ -22,7 +22,7 @@ export default defineComponent({
         })
 
         return () => (
-            <n-element class="layout-home-signal common-width-inline">
+            <n-element class="layout-home-signal common-width-inline box-border">
                 <div class="signal-panel">
                     <div class="signal-grid"></div>
                     <div class="signal-glow"></div>
@@ -72,8 +72,7 @@ export default defineComponent({
     padding: 36px;
     border-radius: 18px;
     color: #eef3ff;
-    background:
-        radial-gradient(circle at 12% 0%, rgba(83, 109, 254, 0.45), transparent 32%),
+    background: radial-gradient(circle at 12% 0%, rgba(83, 109, 254, 0.45), transparent 32%),
         linear-gradient(135deg, #0d1428 0%, #151c36 58%, #10182e 100%);
     box-shadow: 0 24px 60px rgba(18, 28, 68, 0.16);
 }
@@ -86,8 +85,7 @@ export default defineComponent({
 }
 
 .signal-grid {
-    background-image:
-        linear-gradient(rgba(140, 168, 255, 0.14) 1px, transparent 1px),
+    background-image: linear-gradient(rgba(140, 168, 255, 0.14) 1px, transparent 1px),
         linear-gradient(90deg, rgba(140, 168, 255, 0.14) 1px, transparent 1px);
     background-size: 28px 28px;
     mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 92%);

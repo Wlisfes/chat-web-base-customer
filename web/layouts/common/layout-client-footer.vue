@@ -36,7 +36,7 @@ export default defineComponent({
 
         return () => (
             <n-element class="layout-common-footer flex flex-col overflow-hidden">
-                <div class="chat-connect common-width-inline flex justify-between gap-16 p-block-24">
+                <div class="chat-connect common-width-inline flex justify-between gap-16 p-block-24 box-border">
                     <div class="flex flex-col gap-5 overflow-hidden">
                         <h1 class="m-0 text-22">订阅 ChatBook SMS 新闻</h1>
                         <n-text depth={3}>加入 20000 多人使用的 ChatBook SMS 行列</n-text>
@@ -48,7 +48,7 @@ export default defineComponent({
                         </n-button>
                     </div>
                 </div>
-                <n-element class="chat-comment common-width-inline flex justify-between p-bs-48 p-be-64">
+                <n-element class="chat-comment common-width-inline flex justify-between p-bs-48 p-be-64 box-border">
                     <div class="chat-book flex flex-col w-[var(--chat-book-width)] min-w-[var(--chat-book-min-width)] p-ie-16">
                         <router-link to="/" class="flex overflow-hidden p-be-16 decoration-none">
                             <n-button text focusable={false}>
@@ -73,7 +73,7 @@ export default defineComponent({
                             </n-button>
                         </div>
                     </div>
-                    <div class="chat-between w-[var(--chat-between-width)] flex overflow-hidden justify-between">
+                    <div class="chat-between w-[var(--chat-between-width)] flex overflow-hidden justify-between box-border">
                         <div class="flex flex-col w-65% p-inline-[var(--chat-between-inline-width)]">
                             <h2 class="m-0 text-18 line-height-32 p-be-16">{state.solutions.title}</h2>
                             <n-grid cols={2} x-gap={20} y-gap={20}>
@@ -88,7 +88,7 @@ export default defineComponent({
                                 ))}
                             </n-grid>
                         </div>
-                        <div class="flex flex-col w-35% p-inline-[var(--chat-between-inline-width)]">
+                        <div class="flex flex-col w-35% p-inline-[var(--chat-between-inline-width)] box-border">
                             <h2 class="m-0 text-18 line-height-32 p-be-16">{state.about.title}</h2>
                             <n-grid cols={1} x-gap={20} y-gap={20}>
                                 {state.about.columns.map((item, index) => (
@@ -104,7 +104,7 @@ export default defineComponent({
                         </div>
                     </div>
                 </n-element>
-                <n-element class="common-width-inline flex flex-wrap gap-16 text-12 items-center justify-between p-block-16 gap-y-5">
+                <n-element class="common-width-inline flex flex-wrap gap-16 text-12 items-center justify-between p-block-16 gap-y-5 box-border">
                     <n-ellipsis tooltip={false}>
                         <n-text depth={2}>{`Copyright © 2021-${new Date().getFullYear()} ChatBook. All rights reserved.`}</n-text>
                     </n-ellipsis>

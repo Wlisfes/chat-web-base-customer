@@ -20,7 +20,7 @@ export default defineComponent({
         })
 
         return () => (
-            <n-element class="layout-home-facts common-width-inline">
+            <n-element class="layout-home-facts common-width-inline box-border">
                 <div class="facts-box flex flex-col items-center">
                     <n-text class="chat-hot z-2 p-be-5">{state.hot}</n-text>
                     <h1 class="m-0 text-size-[var(--facts-box-title-size)] text-center max-w-870 z-2 p-be-24">{state.title}</h1>
