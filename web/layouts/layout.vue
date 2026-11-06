@@ -90,7 +90,7 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .layout-site-header.n-layout-header {
-    z-index: 20;
+    z-index: 1;
     background-color: transparent !important;
     transition:
         background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
