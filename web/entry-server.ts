@@ -1,8 +1,8 @@
 import { renderToString } from 'vue/server-renderer'
-import type { Request } from 'express'
-import { isPromise } from '@/utils'
-import type { HttpServerConfig } from '@/interface'
+import { type HttpServerConfig } from '@/interface'
+import { type Request } from 'express'
 import { createAppServer } from '@/main'
+import { isPromise } from '@/utils'
 
 export async function render(request: Request, manifest: Record<string, string[]>) {
     const { app, router, pinia, collect, fetchWinston } = createAppServer({ request, ssr: true })
