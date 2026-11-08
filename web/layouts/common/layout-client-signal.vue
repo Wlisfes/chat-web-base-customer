@@ -1,38 +1,24 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { useState } from '@/hooks'
+import { useI18nContext } from '@/i18n'
 
 export default defineComponent({
-    name: 'LayoutHomeSignal',
+    name: 'LayoutClientSignal',
     setup() {
-        const { state } = useState({
-            metrics: [
-                { value: '190+', label: '国家 / 地区', hint: '出海覆盖' },
-                { value: '800+', label: '运营商网络', hint: '多通道聚合' },
-                { value: '<1s', label: '触达响应', hint: '实时路由' },
-                { value: '99.9%', label: '通道可用', hint: '故障切换' }
-            ],
-            steps: [
-                { index: '01', title: '接入', document: '后台或 API 提交任务，模板、号码和发送窗口一次配置。' },
-                { index: '02', title: '路由', document: '按国家、运营商和内容策略选择通道，异常时自动分流。' },
-                { index: '03', title: '发送', document: '分布式节点并发下发，验证码、通知和营销短信分开排队。' },
-                { index: '04', title: '回执', document: '到达、失败和退订实时回传，报表按任务、通道和国家拆开。' }
-            ],
-            chips: ['HTTP API', '独立后台', '国际短信', '三网发送', '实时回执', '可视化报表', '权限隔离', '通道监控']
-        })
+        const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-home-signal common-width-inline box-border">
+            <n-element class="layout-client-signal common-width-inline box-border">
                 <div class="signal-panel">
                     <div class="signal-grid"></div>
                     <div class="signal-glow"></div>
                     <div class="signal-head">
-                        <n-text class="signal-kicker">SIGNAL MESH</n-text>
-                        <h2>一条链路，把发送、路由和回执收在同一张网上</h2>
-                        <p>常见问题下面不再留白。通道状态、发送步骤和支持范围直接铺在这里，方便先看能力，再往下看问答。</p>
+                        <n-text class="signal-kicker">{t('home.signal.kicker')}</n-text>
+                        <h2>{t('home.signal.title')}</h2>
+                        <p>{t('home.signal.document')}</p>
                     </div>
                     <div class="metric-row">
-                        {state.metrics.map(item => (
+                        {tm('home.signal.metrics').map(item => (
                             <div class="metric" key={item.label}>
                                 <span>{item.hint}</span>
                                 <strong>{item.value}</strong>
@@ -41,7 +27,7 @@ export default defineComponent({
                         ))}
                     </div>
                     <div class="step-row">
-                        {state.steps.map(item => (
+                        {tm('home.signal.steps').map(item => (
                             <div class="step" key={item.index}>
                                 <b>{item.index}</b>
                                 <h3>{item.title}</h3>
@@ -50,7 +36,7 @@ export default defineComponent({
                         ))}
                     </div>
                     <div class="chip-row">
-                        {state.chips.map(item => (
+                        {tm('home.signal.chips').map(item => (
                             <span key={item}>{item}</span>
                         ))}
                     </div>
@@ -62,7 +48,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.layout-home-signal {
+.layout-client-signal {
     padding-block: 12px 36px;
 }
 

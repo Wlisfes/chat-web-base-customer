@@ -7,10 +7,10 @@ export default defineComponent({
     setup() {
         return () => (
             <n-element class="flex flex-col flex-1 bg-transparent!">
-                <layout-home-choose></layout-home-choose>
-                <layout-home-issues></layout-home-issues>
-                <layout-home-signal></layout-home-signal>
-                <layout-home-facts></layout-home-facts>
+                <layout-client-choose></layout-client-choose>
+                <layout-client-issues></layout-client-issues>
+                <layout-client-signal></layout-client-signal>
+                <layout-client-facts></layout-client-facts>
             </n-element>
         )
     }

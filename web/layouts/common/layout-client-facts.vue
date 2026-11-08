@@ -1,31 +1,21 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
 import { useMouse, useStore } from '@/store'
-import { useState } from '@/hooks'
+import { useI18nContext } from '@/i18n'
 
 export default defineComponent({
-    name: 'LayoutHomeFacts',
-    setup(props) {
+    name: 'LayoutClientFacts',
+    setup() {
         const { inverted } = useStore(useMouse)
-        const { state } = useState({
-            hot: 'Important Facts About SMS',
-            title: `关于 SMS 的重要事实-在移动互联网时代，SMS 是接触潜在客户的最直接方式之一`,
-            document: ``,
-            columns: [
-                { title: '1520万', document: '全世界每分钟发送的短信条数' },
-                { title: '95%', document: '短信在送达后三分钟内被阅读' },
-                { title: '98%', document: '已发送的短信被用户查看' },
-                { title: '10倍+', document: '选择 SMS 营销可以获得更多利润' }
-            ]
-        })
+        const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-home-facts common-width-inline box-border">
+            <n-element class="layout-client-facts common-width-inline box-border">
                 <div class="facts-box flex flex-col items-center">
-                    <n-text class="chat-hot z-2 p-be-5">{state.hot}</n-text>
-                    <h1 class="m-0 text-size-[var(--facts-box-title-size)] text-center max-w-870 z-2 p-be-24">{state.title}</h1>
+                    <n-text class="chat-hot z-2 p-be-5">{t('home.facts.hot')}</n-text>
+                    <h1 class="m-0 text-size-[var(--facts-box-title-size)] text-center max-w-870 z-2 p-be-24">{t('home.facts.title')}</h1>
                     <div class="chat-element w-full grid gap-24 p-bs-24 z-2">
-                        {state.columns.map((item, index) => (
+                        {tm('home.facts.columns').map((item, index) => (
                             <div key={index} class="chat-element-column flex flex-col items-center" data-aos="zoom-in">
                                 <n-h1 type="primary" class="m-0 text-size-[var(--chat-element-title-size)]">
                                     <n-text strong type="primary">
@@ -48,17 +38,17 @@ export default defineComponent({
                                         name="nest-issues-chat"
                                     ></common-element-wrapper>
                                     <n-text class="text-18" strong>
-                                        ChatBook
+                                        {t('home.facts.brand')}
                                     </n-text>
                                 </div>
                                 <n-h1 class="m-0 text-center text-size-[var(--chat-super-title-size)]">
-                                    创新通信解决方案，
+                                    {t('home.facts.sloganBefore')}
                                     <br />
-                                    ChatBook 让 SMS 消息自由传递。
+                                    {t('home.facts.sloganAfter')}
                                 </n-h1>
                             </div>
                             <n-button class="min-w-120" size="large" type="primary">
-                                <n-text>立即使用</n-text>
+                                <n-text>{t('home.facts.action')}</n-text>
                             </n-button>
                         </div>
                     </n-card>

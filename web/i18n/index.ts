@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { createI18n, useI18n } from 'vue-i18n'
+import { PathValue } from '@/i18n/interface/deep'
 import { I18nContext, I18nNode, I18nStore, messages } from '@/i18n/messages'
 import { useCoutext, AUTH } from '@/hooks'
 
@@ -28,6 +29,8 @@ export async function fetchI18nUpdate(value: keyof typeof messages) {
     return (i18n.global.locale.value = value)
 }
 
+type I18nSchema = typeof messages.cn & typeof messages.en
+
 export function useI18nContext() {
     const ctx = useI18n()
 
@@ -41,14 +44,14 @@ export function useI18nContext() {
         return () => ctx.t(path, props)
     }
 
-    /**载tm方法**/
-    function tm<T, P extends I18nContext>(path: P): Array<Omix<I18nNode<T>>> {
-        return ctx.tm(path)
+    /**按路径返回原文案，字符串列表和对象列表都保留各自的结构。**/
+    function tm<P extends I18nContext>(path: P): PathValue<I18nSchema, P> {
+        return ctx.tm(path) as PathValue<I18nSchema, P>
     }
 
-    /**异步载tm方法**/
-    function atm<T, P extends I18nContext>(path: P): () => Array<Omix<I18nNode<T>>> {
-        return () => ctx.tm(path)
+    /**异步按路径返回原文案。**/
+    function atm<P extends I18nContext>(path: P): () => PathValue<I18nSchema, P> {
+        return () => ctx.tm(path) as PathValue<I18nSchema, P>
     }
 
     /**文字转换**/
