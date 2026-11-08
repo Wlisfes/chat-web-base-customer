@@ -32,7 +32,23 @@ export async function createServer(root: string) {
         appType: 'custom',
         server: {
             middlewareMode: true,
-            hmr: { port: 24681 }
+            hmr: { port: 24681 },
+            proxy: {
+                '/api': {
+                    target: 'https://chat-web.lisfes.cn',
+                    bypass(request) {
+                        const path = (request.url ?? '').split('?')[0]
+                        if (/\.(ts|tsx|mts|cts|vue|js|mjs|cjs|css|scss|json|map|svg)$/i.test(path)) {
+                            return request.url
+                        }
+                    },
+                    ws: true,
+                    changeOrigin: false,
+                    headers: {
+                        Host: 'chat-web.lisfes.cn'
+                    }
+                }
+            }
         }
     })
 }

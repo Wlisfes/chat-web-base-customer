@@ -11,7 +11,11 @@ export enum AUTH {
     /**语言存储存**/
     APP_NEST_LOCALE = 'APP_NEST_LOCALE',
     /**token存储**/
-    APP_NEST_TOKEN = 'APP_NEST_TOKEN'
+    APP_NEST_TOKEN = 'APP_NEST_TOKEN',
+    /**访问令牌有效期，单位秒**/
+    APP_NEST_TOKEN_EXPIRES = 'APP_NEST_TOKEN_EXPIRES',
+    /**访问令牌签发时间**/
+    APP_NEST_TOKEN_CREATED = 'APP_NEST_TOKEN_CREATED'
 }
 
 export async function fetchSetCoutext(request: Request) {

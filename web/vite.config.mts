@@ -12,6 +12,7 @@ import { fetchEnvService, vueFilePlugin } from './config'
 export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
     return {
         root: resolve(__dirname),
+        envPrefix: ['VITE_', 'NODE_WEB_'],
         define: fetchEnvService(mode),
         resolve: {
             alias: {
@@ -22,6 +23,24 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
             rollupOptions: {
                 output: {
                     format: isSsrBuild ? 'cjs' : 'es'
+                }
+            }
+        },
+        server: {
+            proxy: {
+                '/api': {
+                    target: 'https://chat-web.lisfes.cn',
+                    bypass(request) {
+                        const path = (request.url ?? '').split('?')[0]
+                        if (/\.(ts|tsx|mts|cts|vue|js|mjs|cjs|css|scss|json|map|svg)$/i.test(path)) {
+                            return request.url
+                        }
+                    },
+                    ws: true,
+                    changeOrigin: false,
+                    headers: {
+                        Host: 'chat-web.lisfes.cn'
+                    }
                 }
             }
         },

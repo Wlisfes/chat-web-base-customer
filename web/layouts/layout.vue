@@ -1,8 +1,8 @@
 <script lang="tsx">
 import { defineComponent, h } from 'vue'
 import { useState, useAosObserver } from '@/hooks'
-import { useMouse, useStore } from '@/store'
-import { RouterView } from 'vue-router'
+import { useGlobal, useMouse, useStore } from '@/store'
+import { RouterView, useRouter } from 'vue-router'
 
 export default defineComponent({
     name: 'BaseLayout',
@@ -10,6 +10,8 @@ export default defineComponent({
         const { state, setState } = useState({ scrolled: false })
         const { fetchScrollbar } = useAosObserver()
         const { inverted } = useStore(useMouse)
+        const { loggedIn } = useStore(useGlobal)
+        const router = useRouter()
 
         async function onContentScroll(event: Event) {
             return await setState({ scrolled: (event.target as HTMLElement).scrollTop > 8 }).then(() => {
@@ -56,13 +58,17 @@ export default defineComponent({
                             <layout-common-deploy></layout-common-deploy>
                             <n-divider vertical class="h-20! m-inline-20!" />
                             <n-element class="flex items-center gap-20 overflow-hidden">
-                                <n-button text focusable={false}>
-                                    登录
-                                </n-button>
+                                {!loggedIn.value ? (
+                                    <n-button text focusable={false} onClick={() => router.push('/main/login')}>
+                                        登录
+                                    </n-button>
+                                ) : null}
                                 <layout-common-consumer></layout-common-consumer>
-                                <n-button focusable={false} round type="primary">
-                                    免费体验
-                                </n-button>
+                                {!loggedIn.value ? (
+                                    <n-button focusable={false} round type="primary" onClick={() => router.push('/main/register')}>
+                                        免费体验
+                                    </n-button>
+                                ) : null}
                             </n-element>
                         </n-element>
                     </n-element>

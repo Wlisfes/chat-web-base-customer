@@ -1,10 +1,15 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { useFormService } from '@/hooks'
+import { useRouter } from 'vue-router'
+import { useCodeService, useFormService } from '@/hooks'
+import { httpAuthLogin } from '@/api'
+import { useGlobal, useStore } from '@/store'
 
 export default defineComponent({
     name: 'MainLogin',
-    setup(props) {
+    setup() {
+        const router = useRouter()
+        const { fetchApplyLogin } = useStore(useGlobal)
         const { formRef, form, rules, state, setState, fetchValidater } = useFormService({
             form: {
                 email: '',
@@ -18,34 +23,31 @@ export default defineComponent({
             }
         })
 
+        const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
+
         async function fetchSubmit() {
-            return await fetchValidater().then(async result => {
-                if (result) {
-                    // return await codexRef.value.fetchRefresh(300).then(() => {
-                    //     return setState({ loading: false, disabled: false })
-                    // })
-                }
-                try {
-                    // return await Service.httpBaseSystemUserTokenAuthorize({
-                    //     code: form.value.code,
-                    //     number: form.value.number,
-                    //     password: window.btoa(encodeURIComponent(form.value.password))
-                    // }).then(async ({ data }) => {
-                    //     return await setCompose(data).then(async () => {
-                    //         return router.push({ path: '/', replace: true })
-                    //     })
-                    // })
-                } catch (err) {
-                    // return await codexRef.value.fetchRefresh(300).then(() => {
-                    //     return setState({ loading: false, disabled: false })
-                    // })
-                }
-            })
+            const valid = await fetchValidater()
+            if (!valid) return
+            await setState({ loading: true })
+            try {
+                const { data } = await httpAuthLogin({
+                    accountType: 'crm',
+                    email: form.value.email,
+                    password: form.value.password,
+                    code: form.value.code
+                })
+                await fetchApplyLogin(data)
+                await router.push({ path: '/', replace: true })
+            } catch (error) {
+                await fetchRefresh()
+                await setState({ loading: false })
+                throw error
+            }
         }
 
         return () => (
             <n-element class="w-full select-none">
-                <n-form size="large" ref={formRef} model={form.value} rules={state.rules} disabled={state.loading} show-label={false}>
+                <n-form size="large" ref={formRef} model={form.value} rules={rules.value} disabled={state.loading} show-label={false}>
                     <n-form-item path="email">
                         <form-element-input
                             maxlength={64}
@@ -71,7 +73,7 @@ export default defineComponent({
                         ></form-element-input>
                     </n-form-item>
                     <n-form-item path="code">
-                        <div class="flex flex-1 items-center overflow-hidden">
+                        <div class="flex flex-1 items-center gap-12 overflow-hidden">
                             <form-element-input
                                 class="flex-1"
                                 type="text"
@@ -81,6 +83,15 @@ export default defineComponent({
                                 prefix={{ name: 'nest-unset-codex', size: 22 }}
                                 onSubmit={fetchSubmit}
                             ></form-element-input>
+                            <common-base-codex
+                                link={link.value}
+                                loading={captchaLoading.value}
+                                error={captchaError.value}
+                                disabled={state.loading}
+                                onClick={fetchRefresh}
+                                onComplete={fetchComplete}
+                                onError={fetchError}
+                            ></common-base-codex>
                         </div>
                     </n-form-item>
                     <n-form-item>

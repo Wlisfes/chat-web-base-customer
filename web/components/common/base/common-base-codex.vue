@@ -25,7 +25,14 @@ export default defineComponent({
                     aria-label={props.error ? '验证码加载失败，点击重试' : '点击刷新验证码'}
                     onClick={() => emit('click', 0)}
                 >
-                    {props.error ? (
+                    {!props.link ? (
+                        <n-skeleton
+                            class="w-120 h-40"
+                            width={120}
+                            height={40}
+                            style={{ borderRadius: 'var(--n-border-radius)' }}
+                        ></n-skeleton>
+                    ) : props.error ? (
                         <n-text class="w-120 h-40 flex justify-center items-center text-12" depth={3}>
                             加载失败，点击重试
                         </n-text>
@@ -38,7 +45,9 @@ export default defineComponent({
                             src={props.link}
                             imgProps={{ crossOrigin: 'use-credentials' }}
                             on-load={() => emit('complete', 100)}
-                            on-error={() => emit('error', 100)}
+                            on-error={() => {
+                                if (props.link) emit('error', 100)
+                            }}
                         >
                             {{
                                 placeholder: () => (
