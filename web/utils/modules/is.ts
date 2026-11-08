@@ -25,3 +25,5 @@ export function isObject(val: any) {
 export function isPromise(val: any) {
     return is(val, 'Promise') && isObject(val) && isFunction(val.then) && isFunction(val.catch)
 }
+
+export { isNotEmpty, isEmpty, isArray, isString } from 'class-validator'

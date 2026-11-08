@@ -26,7 +26,20 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
             }
         },
         ssr: {
-            noExternal: ['naive-ui', 'vueuc', 'date-fns', 'vue-i18n', '@css-render/vue3-ssr', 'class-validator', 'aos-observer']
+            noExternal: [
+                'naive-ui',
+                'vueuc',
+                'date-fns',
+                'vue-i18n',
+                '@css-render/vue3-ssr',
+                'class-validator',
+                'aos-observer',
+                '@vueuse/core',
+                'vue-collapsed',
+                'vue-draggable-plus',
+                '@vicons/carbon',
+                'big.js'
+            ]
         },
         plugins: [
             vue(),

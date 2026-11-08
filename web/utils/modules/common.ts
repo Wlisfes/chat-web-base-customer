@@ -58,12 +58,23 @@ export async function fetchHandler<T>(where: boolean | Function, handler?: Funct
     return value as T
 }
 
-/**根据条件返回不同参数**/
-export function fetchWherer<T>(where: boolean, scope: Omix<{ value: T; fallback?: T; defaultValue?: T }>): T {
-    if (where) {
-        return (scope.value ?? scope.defaultValue) as T
+type FetchWhererScope<T> = { value: T; fallback?: T; defaultValue?: T }
+
+/**根据条件返回不同参数。兼容对象参数和直接值参数。**/
+export function fetchWherer<T>(where: boolean, value: T, defaultValue?: T): T
+export function fetchWherer<T>(where: boolean, scope: FetchWhererScope<T>): T
+export function fetchWherer<T>(where: boolean, valueOrScope: T | FetchWhererScope<T>, defaultValue?: T): T {
+    if (arguments.length === 2 && isWhererScope<T>(valueOrScope)) {
+        if (where) {
+            return (valueOrScope.value ?? valueOrScope.defaultValue) as T
+        }
+        return (valueOrScope.fallback ?? valueOrScope.defaultValue) as T
     }
-    return (scope.fallback ?? scope.defaultValue) as T
+    return (where ? valueOrScope : defaultValue) as T
+}
+
+function isWhererScope<T>(value: T | FetchWhererScope<T>): value is FetchWhererScope<T> {
+    return value != null && typeof value === 'object' && ('value' in value || 'fallback' in value || 'defaultValue' in value)
 }
 
 /**枚举对象转换**/
