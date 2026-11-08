@@ -6,7 +6,7 @@ import { setup } from '@css-render/vue3-ssr'
 import type { Request } from 'express'
 import type { Router } from 'vue-router'
 import { createRouter } from '@/router'
-import { i18n } from '@/i18n'
+import { applyLocale, getDefaultLocale, i18n } from '@/i18n'
 import { CoutextServer, createPageLogger } from '@/plugins'
 import App from '@/App.vue'
 
@@ -30,6 +30,7 @@ export function createAppServer(options: AppOptions): AppServer {
     const { collect } = setup(app)
 
     app.use(CoutextServer(options.ssr, options.request))
+    applyLocale(getDefaultLocale())
     app.use(pinia)
     app.use(router)
     app.use(i18n)

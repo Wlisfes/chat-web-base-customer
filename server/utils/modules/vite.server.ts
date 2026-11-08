@@ -11,6 +11,7 @@ export interface EntryOptions {
     links: string
     css: string
     state: string
+    locale?: string
     meta: {
         title?: string
         keywords?: string
@@ -57,5 +58,6 @@ export function fetchViteRender(html: string, opts: EntryOptions) {
         .replace('!--app-ssr-keywords--', opts.meta?.keywords ?? '')
         .replace('!--app-ssr-description--', opts.meta?.description ?? '')
         .replace("'<!--app--ssr-state-->'", opts.state ?? '{}')
+        .replace('<!--app-ssr-locale-->', opts.locale === 'cn' ? 'cn' : 'en')
         .replace('<!--app-ssr-style-->', style)
 }

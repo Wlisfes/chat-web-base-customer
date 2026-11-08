@@ -2,6 +2,7 @@ import { renderToString } from 'vue/server-renderer'
 import { type HttpServerConfig } from '@/interface'
 import { type Request } from 'express'
 import { createAppServer } from '@/main'
+import { locale } from '@/i18n'
 import { isPromise } from '@/utils'
 import { createPageLogger, resolvePageLabel } from '@/plugins'
 
@@ -39,7 +40,8 @@ export async function render(request: Request, manifest: Record<string, string[]
         links: renderPreloadLinks(renderCtx.modules, manifest),
         meta,
         state: JSON.stringify(pinia.state.value).replace(/</g, '\\u003c'),
-        css: collect()
+        css: collect(),
+        locale: locale.value
     }
 }
 

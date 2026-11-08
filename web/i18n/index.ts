@@ -15,18 +15,33 @@ export const i18n = createI18n({
     messages
 })
 
-/**获取默认语言**/
-export function getDefaultLocale() {
+export type AppLocale = keyof typeof messages
+
+export function isAppLocale(value: unknown): value is AppLocale {
+    return value === 'cn' || value === 'en'
+}
+
+/**优先使用服务端写进页面的语言，保证水合时和 HTML 一致。**/
+export function getDefaultLocale(): AppLocale {
+    if (typeof window !== 'undefined' && isAppLocale(window.__INITIAL_LOCALE__)) {
+        return window.__INITIAL_LOCALE__
+    }
     const { cookies } = useCoutext()
-    return cookies.get(AUTH.APP_NEST_LOCALE) ?? 'en'
+    const value = cookies.get(AUTH.APP_NEST_LOCALE)
+    return isAppLocale(value) ? value : 'en'
+}
+
+export function applyLocale(value: AppLocale) {
+    locale.value = value
+    i18n.global.locale.value = value
+    return value
 }
 
 /**切换语言**/
-export async function fetchI18nUpdate(value: keyof typeof messages) {
+export async function fetchI18nUpdate(value: AppLocale) {
     const { cookies } = useCoutext()
     await cookies.set(AUTH.APP_NEST_LOCALE, value)
-    locale.value = value
-    return (i18n.global.locale.value = value)
+    return applyLocale(value)
 }
 
 type I18nSchema = typeof messages.cn & typeof messages.en
