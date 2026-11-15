@@ -59,7 +59,7 @@ export default defineComponent({
                         <n-element class="h-full flex items-center gap-x-20 overflow-hidden">
                             <layout-common-deploy></layout-common-deploy>
                             {loggedIn.value ? (
-                                <layout-common-consumer></layout-common-consumer>
+                                <layout-common-user></layout-common-user>
                             ) : (
                                 <n-button focusable={false} round type="primary" onClick={() => router.push('/main/register')}>
                                     免费体验

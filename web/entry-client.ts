@@ -5,10 +5,6 @@ import { createAppServer } from '@/main'
 
 const { app, router, pinia, fetchWinston } = createAppServer({ ssr: false })
 
-if (window.__INITIAL_DATA__) {
-    pinia.state.value = window.__INITIAL_DATA__
-}
-
 router.beforeResolve(async (to, from, next) => {
     if (from && !from.name) {
         return next()

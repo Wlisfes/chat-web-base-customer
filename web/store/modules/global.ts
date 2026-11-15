@@ -62,9 +62,8 @@ export const useGlobal = defineStore('APP_NEST_GLOBAL_STORE', () => {
     return {
         ...toRefs(state),
         /**登录状态**/
-        loggedIn: computed(() => {
-            return Boolean(getAccessToken(cookies) || isNotEmpty(faseUser.value.uid) || isNotEmpty(faseUser.value.email))
-        }),
+        // 只看已序列化的账户。浏览器 cookie 不能单独决定首屏，否则会和服务端 HTML 不一致。
+        loggedIn: computed(() => isNotEmpty(faseUser.value.uid) || isNotEmpty(faseUser.value.email)),
         state,
         setState,
         faseUser,

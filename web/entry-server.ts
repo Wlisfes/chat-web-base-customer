@@ -5,6 +5,8 @@ import { createAppServer } from '@/main'
 import { locale } from '@/i18n'
 import { isPromise } from '@/utils'
 import { createPageLogger, resolvePageLabel } from '@/plugins'
+import { useGlobal } from '@/store'
+import { setActivePinia } from 'pinia'
 
 export async function render(request: Request, manifest: Record<string, string[]>) {
     const { app, router, pinia, collect, fetchWinston } = createAppServer({ request, ssr: true })
@@ -12,6 +14,8 @@ export async function render(request: Request, manifest: Record<string, string[]
 
     await router.push(request.originalUrl)
     await router.isReady()
+    setActivePinia(pinia)
+    await useGlobal(pinia).fetchInitialize()
 
     const route = router.currentRoute.value
     const meta = route.meta

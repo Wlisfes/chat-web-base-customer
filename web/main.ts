@@ -32,6 +32,9 @@ export function createAppServer(options: AppOptions): AppServer {
     app.use(CoutextServer(options.ssr, options.request))
     applyLocale(getDefaultLocale())
     app.use(pinia)
+    if (!options.ssr && typeof window !== 'undefined' && window.__INITIAL_DATA__) {
+        pinia.state.value = window.__INITIAL_DATA__
+    }
     app.use(router)
     app.use(i18n)
 
