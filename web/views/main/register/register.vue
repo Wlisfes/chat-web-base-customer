@@ -11,8 +11,8 @@ export default defineComponent({
         const router = useRouter()
         const { fetchApplyLogin } = useStore(useGlobal)
         const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
-        const { formRef, form, rules, state, setState, fetchValidater } = useFormService({
-            form: {
+        const { formRef, formState, state, setState, fetchValidater } = useFormService({
+            formState: {
                 nickname: '',
                 email: '',
                 password: '',
@@ -33,29 +33,31 @@ export default defineComponent({
                 }
                 try {
                     return await Service.httpAuthAccountTokenRegister({
-                        nickname: form.value.nickname,
-                        email: form.value.email,
-                        password: form.value.password,
-                        code: form.value.code
+                        nickname: formState.value.nickname,
+                        email: formState.value.email,
+                        password: formState.value.password,
+                        code: formState.value.code
                     }).then(async ({ data }) => {
                         await fetchApplyLogin(data)
                         return await router.push({ path: '/', replace: true })
                     })
                 } catch (error) {
-                    return await Promise.all([fetchRefresh(), setState({ loading: false, disabled: false })])
+                    return await setState({ loading: false, disabled: false }).then(async () => {
+                        return await fetchRefresh()
+                    })
                 }
             })
         }
 
         return () => (
             <n-element class="w-full select-none">
-                <n-form size="large" ref={formRef} model={form.value} rules={rules.value} disabled={state.loading} show-label={false}>
+                <n-form size="large" ref={formRef} model={formState.value} rules={state.rules} disabled={state.loading} show-label={false}>
                     <n-form-item path="nickname">
                         <form-element-input
                             maxlength={32}
                             type="text"
                             placeholder="请输入昵称"
-                            v-model:value={form.value.nickname}
+                            v-model:value={formState.value.nickname}
                             input-props={{ autocomplete: 'nickname' }}
                             prefix={{ name: 'nest-unset-user', size: 20 }}
                             onSubmit={fetchSubmit}
@@ -66,7 +68,7 @@ export default defineComponent({
                             maxlength={64}
                             type="text"
                             placeholder="请输入邮箱"
-                            v-model:value={form.value.email}
+                            v-model:value={formState.value.email}
                             input-props={{ autocomplete: 'email' }}
                             prefix={{ name: 'nest-unset-user', size: 22 }}
                             onSubmit={fetchSubmit}
@@ -80,7 +82,7 @@ export default defineComponent({
                             show-password-on="click"
                             input-props={{ autocomplete: 'new-password' }}
                             style={{ '--input-password-right': '46px' }}
-                            v-model:value={form.value.password}
+                            v-model:value={formState.value.password}
                             prefix={{ name: 'nest-unset-ockes', size: 22 }}
                             onSubmit={fetchSubmit}
                         ></form-element-input>
@@ -92,7 +94,7 @@ export default defineComponent({
                                 type="text"
                                 placeholder="验证码"
                                 maxlength={4}
-                                v-model:value={form.value.code}
+                                v-model:value={formState.value.code}
                                 prefix={{ name: 'nest-unset-codex', size: 22 }}
                                 onSubmit={fetchSubmit}
                             ></form-element-input>
