@@ -1,5 +1,6 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
+import { useI18nContext } from '@/i18n'
 
 export default defineComponent({
     name: 'CommonBaseCodex',
@@ -15,6 +16,8 @@ export default defineComponent({
         link: { type: String, required: true }
     },
     setup(props, { emit }) {
+        const { t } = useI18nContext()
+
         return () => (
             <n-spin class="common-base-codex" size="small" content-class="flex flex-col" show={props.loading}>
                 <common-base-button
@@ -22,7 +25,7 @@ export default defineComponent({
                     size="large"
                     secondary
                     disabled={props.loading || props.disabled}
-                    aria-label={props.error ? '验证码加载失败，点击重试' : '点击刷新验证码'}
+                    aria-label={props.error ? t('auth.captcha.retryLabel') : t('auth.captcha.refreshLabel')}
                     onClick={() => emit('click', 0)}
                 >
                     {!props.link ? (
@@ -34,7 +37,7 @@ export default defineComponent({
                         ></n-skeleton>
                     ) : props.error ? (
                         <n-text class="w-120 h-40 flex justify-center items-center text-12" depth={3}>
-                            加载失败，点击重试
+                            {t('auth.captcha.retry')}
                         </n-text>
                     ) : (
                         <n-image

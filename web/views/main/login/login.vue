@@ -1,6 +1,7 @@
 <script lang="tsx">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18nContext } from '@/i18n'
 import { useCodeService, useFormService } from '@/hooks'
 import { useGlobal, useStore } from '@/store'
 import * as Service from '@/api'
@@ -9,19 +10,20 @@ export default defineComponent({
     name: 'MainLogin',
     setup() {
         const router = useRouter()
+        const { t } = useI18nContext()
         const { fetchApplyLogin } = useStore(useGlobal)
         const { formRef, formState, state, setState, fetchValidater } = useFormService({
             formState: {
                 email: '',
                 password: '',
                 code: ''
-            },
-            rules: {
-                email: { required: true, trigger: 'blur', message: '请输入登录账号' },
-                password: { required: true, trigger: 'blur', min: 6, max: 18, message: '请输入6~18位登录密码' },
-                code: { required: true, trigger: 'blur', message: '请输入验证码' }
             }
         })
+        const rules = computed(() => ({
+            email: { required: true, trigger: 'blur', message: t('auth.login.emailRule') },
+            password: { required: true, trigger: 'blur', min: 6, max: 18, message: t('auth.login.passwordRule') },
+            code: { required: true, trigger: 'blur', message: t('auth.login.codeRule') }
+        }))
 
         const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
 
@@ -49,12 +51,12 @@ export default defineComponent({
 
         return () => (
             <n-element class="w-full select-none">
-                <n-form size="large" ref={formRef} model={formState.value} rules={state.rules} disabled={state.loading} show-label={false}>
+                <n-form size="large" ref={formRef} model={formState.value} rules={rules.value} disabled={state.loading} show-label={false}>
                     <n-form-item path="email">
                         <form-element-input
                             maxlength={64}
                             type="text"
-                            placeholder="请输入邮箱"
+                            placeholder={t('auth.login.email')}
                             v-model:value={formState.value.email}
                             input-props={{ autocomplete: 'on' }}
                             prefix={{ name: 'nest-unset-user', size: 22 }}
@@ -64,7 +66,7 @@ export default defineComponent({
                     <n-form-item path="password">
                         <form-element-input
                             maxlength={32}
-                            placeholder="请输入密码"
+                            placeholder={t('auth.login.password')}
                             type="password"
                             show-password-on="click"
                             input-props={{ autocomplete: 'password' }}
@@ -79,7 +81,7 @@ export default defineComponent({
                             <form-element-input
                                 class="flex-1"
                                 type="text"
-                                placeholder="验证码"
+                                placeholder={t('auth.login.code')}
                                 maxlength={4}
                                 v-model:value={formState.value.code}
                                 prefix={{ name: 'nest-unset-codex', size: 22 }}
@@ -104,21 +106,21 @@ export default defineComponent({
                             loading={state.loading}
                             onClick={fetchSubmit}
                         >
-                            立即登录
+                            {t('auth.login.submit')}
                         </common-element-button>
                     </n-form-item>
                     <div class="flex flex-1 items-center justify-between">
                         <div class="flex items-center">
-                            <n-text>还没有账号？</n-text>
+                            <n-text class="text-#eef3ffad">{t('auth.login.noAccount')}</n-text>
                             <router-link to="/main/register">
                                 <n-button text type="primary" focusable={false}>
-                                    去注册
+                                    {t('auth.login.register')}
                                 </n-button>
                             </router-link>
                         </div>
                         <router-link to="/main/register">
                             <n-button text type="primary" focusable={false}>
-                                忘记密码
+                                {t('auth.login.forgot')}
                             </n-button>
                         </router-link>
                     </div>

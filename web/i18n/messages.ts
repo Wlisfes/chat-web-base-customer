@@ -1,17 +1,20 @@
 import { zhCN, enUS, dateZhCN, dateEnUS } from 'naive-ui'
 import { Path } from '@/i18n/interface/deep'
 import { homeCn, homeEn } from '@/i18n/modules/home'
+import { authCn, authEn } from '@/i18n/modules/auth'
 
 export const messages = {
     cn: {
         i18nDate: dateZhCN,
         ...zhCN,
-        home: homeCn
+        home: homeCn,
+        auth: authCn
     },
     en: {
         i18nDate: dateEnUS,
         ...enUS,
-        home: homeEn
+        home: homeEn,
+        auth: authEn
     }
 }
 export default messages

@@ -1,6 +1,7 @@
 <script lang="tsx">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18nContext } from '@/i18n'
 import { useCodeService, useFormService } from '@/hooks'
 import { useGlobal, useStore } from '@/store'
 import * as Service from '@/api'
@@ -9,6 +10,7 @@ export default defineComponent({
     name: 'MainRegister',
     setup() {
         const router = useRouter()
+        const { t } = useI18nContext()
         const { fetchApplyLogin } = useStore(useGlobal)
         const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
         const { formRef, formState, state, setState, fetchValidater } = useFormService({
@@ -17,14 +19,14 @@ export default defineComponent({
                 email: '',
                 password: '',
                 code: ''
-            },
-            rules: {
-                nickname: { required: true, trigger: 'blur', message: '请输入昵称' },
-                email: { required: true, trigger: 'blur', type: 'email', message: '请输入正确的邮箱' },
-                password: { required: true, trigger: 'blur', min: 6, max: 18, message: '请输入6~18位登录密码' },
-                code: { required: true, trigger: 'blur', len: 4, message: '请输入4位验证码' }
             }
         })
+        const rules = computed(() => ({
+            nickname: { required: true, trigger: 'blur', message: t('auth.register.nicknameRule') },
+            email: { required: true, trigger: 'blur', type: 'email', message: t('auth.register.emailRule') },
+            password: { required: true, trigger: 'blur', min: 6, max: 18, message: t('auth.register.passwordRule') },
+            code: { required: true, trigger: 'blur', len: 4, message: t('auth.register.codeRule') }
+        }))
 
         async function fetchSubmit() {
             return await fetchValidater().then(async error => {
@@ -51,12 +53,12 @@ export default defineComponent({
 
         return () => (
             <n-element class="w-full select-none">
-                <n-form size="large" ref={formRef} model={formState.value} rules={state.rules} disabled={state.loading} show-label={false}>
+                <n-form size="large" ref={formRef} model={formState.value} rules={rules.value} disabled={state.loading} show-label={false}>
                     <n-form-item path="nickname">
                         <form-element-input
                             maxlength={32}
                             type="text"
-                            placeholder="请输入昵称"
+                            placeholder={t('auth.register.nickname')}
                             v-model:value={formState.value.nickname}
                             input-props={{ autocomplete: 'nickname' }}
                             prefix={{ name: 'nest-unset-user', size: 20 }}
@@ -67,7 +69,7 @@ export default defineComponent({
                         <form-element-input
                             maxlength={64}
                             type="text"
-                            placeholder="请输入邮箱"
+                            placeholder={t('auth.register.email')}
                             v-model:value={formState.value.email}
                             input-props={{ autocomplete: 'email' }}
                             prefix={{ name: 'nest-unset-user', size: 22 }}
@@ -77,7 +79,7 @@ export default defineComponent({
                     <n-form-item path="password">
                         <form-element-input
                             maxlength={32}
-                            placeholder="请输入密码"
+                            placeholder={t('auth.register.password')}
                             type="password"
                             show-password-on="click"
                             input-props={{ autocomplete: 'new-password' }}
@@ -92,7 +94,7 @@ export default defineComponent({
                             <form-element-input
                                 class="flex-1"
                                 type="text"
-                                placeholder="验证码"
+                                placeholder={t('auth.register.code')}
                                 maxlength={4}
                                 v-model:value={formState.value.code}
                                 prefix={{ name: 'nest-unset-codex', size: 22 }}
@@ -117,14 +119,14 @@ export default defineComponent({
                             loading={state.loading}
                             onClick={fetchSubmit}
                         >
-                            立即注册
+                            {t('auth.register.submit')}
                         </common-element-button>
                     </n-form-item>
                     <div class="flex items-center justify-center">
-                        <n-text>已有账号？</n-text>
+                        <n-text class="text-#eef3ffad">{t('auth.register.hasAccount')}</n-text>
                         <router-link to="/main/login">
                             <n-button text type="primary" focusable={false}>
-                                去登录
+                                {t('auth.register.login')}
                             </n-button>
                         </router-link>
                     </div>

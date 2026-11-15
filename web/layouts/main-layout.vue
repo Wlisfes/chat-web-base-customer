@@ -1,13 +1,14 @@
 <script lang="tsx">
 import { computed, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18nContext } from '@/i18n'
 
 export default defineComponent({
     name: 'MainLayout',
     setup() {
         const route = useRoute()
+        const { t, tm } = useI18nContext()
         const isRegister = computed(() => route.path.startsWith('/main/register'))
-
         return () => (
             <n-element class="auth-layout">
                 <section class="auth-visual">
@@ -16,33 +17,12 @@ export default defineComponent({
                         <span>ChatBook</span>
                     </router-link>
                     <div class="auth-visual-copy">
-                        <p>WHY CHOOSE US</p>
-                        <h1>把短信发送、路由和回执收在同一张网上</h1>
+                        <p>{t('auth.visual.kicker')}</p>
+                        <h1>{t('auth.visual.title')}</h1>
                         <ul>
-                            <li>覆盖 190+ 国家 / 地区</li>
-                            <li>800+ 运营商网络</li>
-                            <li>独立后台，实时回执</li>
-                        </ul>
-                        <p class="auth-visual-note">
-                            中间的光是调度核心。外圈的地球、月球、木星和土星是接入节点：短信从核心发出，落到当地运营商，回执再沿原路返回。
-                        </p>
-                        <ul class="auth-legend">
-                            <li>
-                                <i class="auth-legend-mark auth-legend-earth"></i>
-                                <span>地球，客户从这里接入</span>
-                            </li>
-                            <li>
-                                <i class="auth-legend-mark auth-legend-moon"></i>
-                                <span>月球，回执从这里返回</span>
-                            </li>
-                            <li>
-                                <i class="auth-legend-mark auth-legend-jupiter"></i>
-                                <span>木星，当地运营商节点</span>
-                            </li>
-                            <li>
-                                <i class="auth-legend-mark auth-legend-saturn"></i>
-                                <span>土星，路由绕开拥堵，回执沿环回来</span>
-                            </li>
+                            {tm('auth.visual.points').map(item => (
+                                <li key={item}>{item}</li>
+                            ))}
                         </ul>
                     </div>
                     <div class="auth-stage" aria-hidden="true">
@@ -89,8 +69,8 @@ export default defineComponent({
                             <span>ChatBook</span>
                         </router-link>
                         <div class="auth-heading">
-                            <h2>{isRegister.value ? '创建客户账号' : '欢迎回来'}</h2>
-                            <p>{isRegister.value ? '注册后即可使用邮箱登录客户门户。' : '使用邮箱登录 ChatBook 客户门户。'}</p>
+                            <h2>{isRegister.value ? t('auth.register.title') : t('auth.login.title')}</h2>
+                            <p>{isRegister.value ? t('auth.register.document') : t('auth.login.document')}</p>
                         </div>
                         <router-view></router-view>
                     </div>
@@ -194,60 +174,6 @@ export default defineComponent({
     font-size: 13px;
 }
 
-.auth-visual-copy .auth-visual-note {
-    max-width: 540px;
-    margin: 18px 0 0;
-    color: rgba(215, 228, 255, 0.78);
-    letter-spacing: 0;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.auth-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 16px;
-    max-width: 560px;
-    margin: 14px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.auth-visual-copy .auth-legend li {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    color: #d7e4ff;
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-.auth-legend-mark {
-    flex: none;
-    width: 18px;
-    height: 18px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.auth-legend-earth {
-    background-image: url('@/assets/images/planets/earth.png');
-}
-.auth-legend-moon {
-    background-image: url('@/assets/images/planets/moon.png');
-}
-.auth-legend-jupiter {
-    background-image: url('@/assets/images/planets/jupiter.png');
-}
-.auth-legend-saturn {
-    width: 30px;
-    background-image: url('@/assets/images/planets/saturn.png');
-}
 
 .auth-stage {
     position: relative;
