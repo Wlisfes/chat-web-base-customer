@@ -4,6 +4,8 @@ declare type Omix<T = Record<string, any>> = T & Record<string, any>
 declare interface Window {
     __INITIAL_DATA__?: Omix
     __INITIAL_LOCALE__?: 'cn' | 'en'
+    $dialog: import('naive-ui').DialogApi
+    $notification: import('naive-ui').NotificationApi
 }
 
 declare interface EnvOptions {

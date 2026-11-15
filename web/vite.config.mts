@@ -57,7 +57,13 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
                 'vue-collapsed',
                 'vue-draggable-plus',
                 '@vicons/carbon',
-                'big.js'
+                'big.js',
+                '@better-scroll/core',
+                '@better-scroll/mouse-wheel',
+                '@better-scroll/observe-dom',
+                '@better-scroll/observe-image',
+                '@better-scroll/scroll-bar',
+                '@better-scroll/shared-utils'
             ]
         },
         plugins: [
@@ -70,6 +76,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
                 dirs: ['components', 'layouts'],
                 extensions: ['vue'],
                 dts: 'web.components.d.ts',
+                include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],
                 exclude: [/[\\/]layouts[\\/]layout\.vue$/],
                 resolvers: [NaiveUiResolver()]
             }),

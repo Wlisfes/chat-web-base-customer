@@ -20,7 +20,13 @@ export default defineComponent({
                 theme-overrides={themeOverrides.value}
             >
                 <n-global-style />
-                <RouterView></RouterView>
+                <n-dialog-provider>
+                    <n-notification-provider max={5}>
+                        <layout-common-mount>
+                            <RouterView></RouterView>
+                        </layout-common-mount>
+                    </n-notification-provider>
+                </n-dialog-provider>
             </n-config-provider>
         )
     }

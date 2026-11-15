@@ -1,4 +1,5 @@
 import DayJS from 'dayjs'
+import { isArray, isNotEmpty, isString } from './is'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 DayJS.extend(timezone)
@@ -27,6 +28,16 @@ export async function enter(event: KeyboardEvent, handler?: Function) {
         return await handler()
     }
     return event
+}
+
+/**对象排除空字段**/
+export function fetchExclude<T>(data: Omix, options: Omix = {}): Omix<T> {
+    return Object.keys(data).reduce((merge: Omix, key: string) => {
+        if (isNotEmpty(data[key]) && !(isArray(data[key]) && data[key].length === 0)) {
+            merge[key] = data[key]
+        }
+        return merge
+    }, options) as Omix<T>
 }
 
 /**参数组合函数**/
@@ -101,4 +112,24 @@ export function fetchObsContent<T extends Record<string, any>>(
     const obs = fetchObsGetter(data, value, { fieldName: opts.fieldName, default: {} as T })
     const record = obs as Record<string, any>
     return record[opts.key ?? 'label'] ?? opts.default ?? '-'
+}
+/**快捷方式。开始时间按当前时刻或自然日回推，结束时间统一为当天结束。*/
+export function fetchShortcuts<T extends '近1小时' | '近3小时' | '近24小时' | '近3天' | '近7天' | '近30天'>(type: T | Array<T>) {
+    const shortcutRanges = {
+        近1小时: () => [moment().subtract(1, 'hour').valueOf(), moment().endOf('day').valueOf()] as [number, number],
+        近3小时: () => [moment().subtract(3, 'hour').valueOf(), moment().endOf('day').valueOf()] as [number, number],
+        近24小时: () => [moment().subtract(24, 'hour').valueOf(), moment().endOf('day').valueOf()] as [number, number],
+        近3天: () => [moment().subtract(2, 'day').startOf('day').valueOf(), moment().endOf('day').valueOf()] as [number, number],
+        近7天: () => [moment().subtract(6, 'day').startOf('day').valueOf(), moment().endOf('day').valueOf()] as [number, number],
+        近30天: () => [moment().subtract(29, 'day').startOf('day').valueOf(), moment().endOf('day').valueOf()] as [number, number]
+    }
+    if (isString(type)) {
+        return {
+            startTime: moment().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+            endTime: moment().endOf('day').format('YYYY-MM-DD HH:mm:ss')
+        }
+    } else if (isArray(type) && type.length > 0) {
+        return Object.fromEntries(type.map(name => [name, shortcutRanges[name]]))
+    }
+    return {}
 }

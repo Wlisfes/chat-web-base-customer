@@ -12,11 +12,25 @@ export interface SessionToken {
 export interface AccountProfile {
     accountType?: 'crm' | 'srm'
     keyId?: number
-    name?: string
-    alias?: string
-    email?: string
     uid?: string
-    avatar?: string
+    ownerUserUid?: string
+    name?: string
+    alias?: string | null
+    brandKeyId?: number | null
+    currency?: string
+    email?: string
+    avatar?: string | null
+    phone?: string | null
+    status?: string
+    payMode?: string
+    classType?: string | null
+    level?: number
+    stage?: string
+    authStatus?: string | null
+    source?: number
+    remark?: string | null
+    createTime?: string | null
+    modifyTime?: string | null
 }
 
 function jar(cookies?: Cookies) {

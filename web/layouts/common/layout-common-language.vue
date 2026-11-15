@@ -28,7 +28,7 @@ export default defineComponent({
                     trigger: () => (
                         <div class="flex gap-5 items-center justify-end select-none cursor-pointer">
                             <common-element-wrapper name="nest-i18n" size={24}></common-element-wrapper>
-                            <span class="text-13">简体中文</span>
+                            <span class="text-13 w-52">{locale.value === 'cn' ? '简体中文' : 'English'}</span>
                         </div>
                     ),
                     default: () => (

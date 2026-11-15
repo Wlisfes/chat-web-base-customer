@@ -17,6 +17,11 @@
         "format:check": "prettier --check ."
     },
     "dependencies": {
+        "@better-scroll/core": "^2.5.1",
+        "@better-scroll/mouse-wheel": "^2.5.1",
+        "@better-scroll/observe-dom": "^2.5.1",
+        "@better-scroll/observe-image": "^2.5.1",
+        "@better-scroll/scroll-bar": "^2.5.1",
         "@css-render/vue3-ssr": "^0.15.14",
         "@nestjs/common": "^10.4.15",
         "@nestjs/config": "^3.3.0",
