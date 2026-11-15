@@ -10,7 +10,7 @@ export default defineComponent({
     name: 'LayoutCommonConsumer',
     setup(props, ctx) {
         const router = useRouter()
-        const { user, loggedIn, fetchInitialize, fetchLogout } = useStore(useGlobal)
+        const { faseUser, loggedIn, fetchInitialize, fetchLogout } = useStore(useGlobal)
         const { theme, fetchThemeUpdate } = useProvider()
         const { state, setState } = useState({ visible: false, delay: false })
 
@@ -59,7 +59,7 @@ export default defineComponent({
                     </n-button>
                 )
             }
-            const name = user.value.alias || user.value.name || user.value.email || '-'
+            const name = faseUser.value.alias || faseUser.value.name || faseUser.value.email || '-'
             return (
                 <n-popover
                     placement="bottom-end"
@@ -71,12 +71,12 @@ export default defineComponent({
                     v-slots={{
                         trigger: () => (
                             <div class="flex items-center gap-8 cursor-pointer select-none" onClick={fetchOpenCollapse}>
-                                {utils.isEmpty(user.value.avatar) ? (
+                                {utils.isEmpty(faseUser.value.avatar) ? (
                                     <n-avatar round size={36} color="var(--primary-color)">
                                         {String(name).slice(0, 1)}
                                     </n-avatar>
                                 ) : (
-                                    <n-avatar round size={36} src={user.value.avatar}></n-avatar>
+                                    <n-avatar round size={36} src={faseUser.value.avatar}></n-avatar>
                                 )}
                                 <n-text class="max-w-120 text-14" depth={1}>
                                     <n-ellipsis tooltip={false}>{name}</n-ellipsis>
@@ -87,19 +87,19 @@ export default defineComponent({
                 >
                     <n-element class="flex flex-col overflow-hidden">
                         <div class="flex items-center gap-10 p-16 select-none cursor-pointer border-b border-b-solid border-b-[var(--divider-color)]">
-                            {utils.isEmpty(user.value.avatar) ? (
+                            {utils.isEmpty(faseUser.value.avatar) ? (
                                 <n-avatar round size={44} color="var(--primary-color)" class="text-18">
                                     {String(name).slice(0, 1)}
                                 </n-avatar>
                             ) : (
-                                <n-avatar round size={44} src={user.value.avatar}></n-avatar>
+                                <n-avatar round size={44} src={faseUser.value.avatar}></n-avatar>
                             )}
                             <div class="flex flex-col flex-1">
                                 <n-text depth={1} style={{ fontSize: '16px', lineHeight: '24px' }}>
                                     <n-ellipsis tooltip={false}>{name}</n-ellipsis>
                                 </n-text>
                                 <n-text depth={3} style={{ lineHeight: '20px' }}>
-                                    <n-ellipsis tooltip={false}>{user.value.email || `UID：${user.value.uid ?? '-'}`}</n-ellipsis>
+                                    <n-ellipsis tooltip={false}>{faseUser.value.email || `UID：${faseUser.value.uid ?? '-'}`}</n-ellipsis>
                                 </n-text>
                             </div>
                         </div>

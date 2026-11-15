@@ -6,6 +6,7 @@
         "moduleDetection": "force",
         "skipLibCheck": true,
         "strict": true,
+        "useUnknownInCatchVariables": false /**catch变量设定未any类型**/,
         "noEmit": true,
         "allowSyntheticDefaultImports": true,
         "jsx": "preserve",

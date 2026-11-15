@@ -28,7 +28,7 @@ async function resetAccount() {
     fetchDestroySession()
     if (typeof window === 'undefined') return
     const { useGlobal } = await import('@/store/modules/global')
-    useGlobal().fetchResetUser()
+    useGlobal().fetchUserUpdate()
 }
 
 async function renewToken() {

@@ -37,7 +37,7 @@ export default defineComponent({
                                 <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
                             </n-button>
                         </router-link>
-                        <n-element class="h-full flex flex-1 items-center justify-end gap-48 p-inline-40">
+                        <n-element class="h-full flex flex-1 items-center justify-end gap-x-32 overflow-hidden">
                             <n-button text focusable={false}>
                                 <div class="text-16">产品</div>
                             </n-button>
@@ -54,7 +54,8 @@ export default defineComponent({
                                 <div class="text-16">关于我们</div>
                             </n-button>
                         </n-element>
-                        <n-element class="h-full flex items-center overflow-hidden">
+                        <n-element class="h-full flex items-center overflow-hidden">大萨达萨达</n-element>
+                        {/* <n-element class="h-full flex items-center overflow-hidden">
                             <layout-common-deploy></layout-common-deploy>
                             <n-divider vertical class="h-20! m-inline-20!" />
                             <n-element class="flex items-center gap-20 overflow-hidden">
@@ -70,7 +71,7 @@ export default defineComponent({
                                     </n-button>
                                 ) : null}
                             </n-element>
-                        </n-element>
+                        </n-element> */}
                     </n-element>
                 </n-layout-header>
                 <n-layout-content

@@ -48,7 +48,7 @@ export function getAccessToken(cookies?: Cookies) {
 }
 
 /**保存登录会话，供请求拦截器判断是否需要续期。*/
-export function fetchComposeSession(data: SessionToken, cookies?: Cookies) {
+export async function fetchComposeSession(data: SessionToken, cookies?: Cookies) {
     const store = jar(cookies)
     const options = cookieOptions(data.expiresIn)
     store.set(TOKEN, `Bearer ${data.accessToken}`, options)
@@ -57,7 +57,7 @@ export function fetchComposeSession(data: SessionToken, cookies?: Cookies) {
 }
 
 /**清理本地登录会话。*/
-export function fetchDestroySession(cookies?: Cookies) {
+export async function fetchDestroySession(cookies?: Cookies) {
     const store = jar(cookies)
     const options = { path: '/' }
     store.remove(TOKEN, options)
@@ -71,14 +71,5 @@ export function readSessionClock(cookies?: Cookies) {
     return {
         expires: Number(store.get(TOKEN_EXPIRES) || 0),
         created: Number(store.get(TOKEN_CREATED) || 0)
-    }
-}
-
-/**登录响应里的客户资料补齐 uid，便于顶栏立即展示。*/
-export function normalizeAccount(user?: AccountProfile) {
-    if (!user) return {}
-    return {
-        ...user,
-        uid: user.uid || (user.keyId != null ? String(user.keyId) : undefined)
     }
 }

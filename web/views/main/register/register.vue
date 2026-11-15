@@ -2,14 +2,15 @@
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCodeService, useFormService } from '@/hooks'
-import { httpAuthRegister } from '@/api'
 import { useGlobal, useStore } from '@/store'
+import * as Service from '@/api'
 
 export default defineComponent({
     name: 'MainRegister',
     setup() {
         const router = useRouter()
         const { fetchApplyLogin } = useStore(useGlobal)
+        const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
         const { formRef, form, rules, state, setState, fetchValidater } = useFormService({
             form: {
                 nickname: '',
@@ -25,26 +26,25 @@ export default defineComponent({
             }
         })
 
-        const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
-
         async function fetchSubmit() {
-            const valid = await fetchValidater()
-            if (!valid) return
-            await setState({ loading: true })
-            try {
-                const { data } = await httpAuthRegister({
-                    nickname: form.value.nickname,
-                    email: form.value.email,
-                    password: form.value.password,
-                    code: form.value.code
-                })
-                await fetchApplyLogin(data)
-                await router.push({ path: '/', replace: true })
-            } catch (error) {
-                await fetchRefresh()
-                await setState({ loading: false })
-                throw error
-            }
+            return await fetchValidater().then(async error => {
+                if (error) {
+                    return await setState({ loading: false, disabled: false })
+                }
+                try {
+                    return await Service.httpAuthAccountTokenRegister({
+                        nickname: form.value.nickname,
+                        email: form.value.email,
+                        password: form.value.password,
+                        code: form.value.code
+                    }).then(async ({ data }) => {
+                        await fetchApplyLogin(data)
+                        return await router.push({ path: '/', replace: true })
+                    })
+                } catch (error) {
+                    return await Promise.all([fetchRefresh(), setState({ loading: false, disabled: false })])
+                }
+            })
         }
 
         return () => (

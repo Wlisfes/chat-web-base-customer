@@ -4,13 +4,12 @@ import { FormInst, DataTableColumn } from 'naive-ui'
 import { Observer, fetchExclude, fetchHandler, isNotEmpty } from '@/utils'
 import { ResultResolver, ResultColumn } from '@/interface/instance.resolver'
 import { fetchNotifyService } from '@/plugins'
-import { useGlobal, useStore } from '@/store'
 import { cloneDeep, pick } from 'lodash-es'
 import { useState } from '@/hooks/modules/hook-state'
 import * as Service from '@/api/instance.service'
 
 /**列表缓存对象**/
-interface BaseServiceState<T, C> extends Omix {
+interface BaseServiceState<T> extends Omix {
     /**折叠收缩**/
     when: boolean
     /**边距值**/
@@ -37,11 +36,9 @@ interface BaseServiceState<T, C> extends Omix {
     customize: Array<Omix>
     /**搜索栏字段自定义排版规则**/
     database: Array<Omix>
-    /**权限标识**/
-    actions: Array<Omix<C>>
 }
 /**列表包装配置（不含列表接口）；不能用 Omit 从 BaseServiceOptions 派生，Omix 的索引签名会让 Omit 后所有字段退化为 any。**/
-interface BaseServiceConfig<T, U, R, C> extends Partial<BaseServiceState<T, C>> {
+interface BaseServiceConfig<T, U, R> extends Partial<BaseServiceState<T>> {
     /**立即执行**/
     immediate?: boolean
     /**刷新列表后保留已选中的数据，用于跨页、搜索后继续勾选；默认 false 刷新即清空**/
@@ -53,18 +50,18 @@ interface BaseServiceConfig<T, U, R, C> extends Partial<BaseServiceState<T, C>> 
     /**列表数据转换函数**/
     transform?: (data: ResultColumn<T>) => Array<Omix> | Promise<Array<Omix>>
     /**回调函数**/
-    callback?: (formState: Omix<U>, base: BaseServiceState<T & Omix<R>, C>) => void | any | Promise<any>
+    callback?: (formState: Omix<U>, base: BaseServiceState<T & Omix<R>>) => void | any | Promise<any>
 }
 /**列表包装配置**/
-interface BaseServiceOptions<T, U, R, C> extends BaseServiceConfig<T, U, R, C> {
+interface BaseServiceOptions<T, U, R> extends BaseServiceConfig<T, U, R> {
     /**列表接口**/
-    request: (base: BaseServiceState<T & Omix<R>, C>, body: Omix<U>, options: Omix) => Promise<ResultResolver<ResultColumn<T>>>
+    request: (base: BaseServiceState<T & Omix<R>>, body: Omix<U>, options: Omix) => Promise<ResultResolver<ResultColumn<T>>>
 }
 
 /**列表包装hook**/
-export function useColumnService<T extends Omix, U extends Omix, R extends Omix, C extends Partial<Omix> = {}>(
-    request: BaseServiceOptions<T, U, R, C>['request'],
-    options: BaseServiceConfig<T, U, R, C> & { formState: U }
+export function useColumnService<T extends Omix, U extends Omix, R extends Omix>(
+    request: BaseServiceOptions<T, U, R>['request'],
+    options: BaseServiceConfig<T, U, R> & { formState: U }
 ) {
     const route = useRoute()
     const router = useRouter()
@@ -72,9 +69,6 @@ export function useColumnService<T extends Omix, U extends Omix, R extends Omix,
     const formRef = ref<FormInst>() as Ref<FormInst & Omix<{ $el: HTMLFormElement }>>
     const formState = ref<typeof options.formState>(cloneDeep(options.formState))
     const observer = ref(Observer<Record<string, Omix>>())
-    const global = useStore(useGlobal) as Omix
-    const superAdmin = global.superAdmin ?? { value: false }
-    const sheetOptions = global.sheetOptions ?? { value: [] as Array<string> }
     const { state, setState } = useState({
         when: options.when ?? true,
         limit: options.limit ?? 12,
@@ -89,9 +83,8 @@ export function useColumnService<T extends Omix, U extends Omix, R extends Omix,
         select: options.select ?? [],
         customize: options.customize ?? [],
         database: options.database ?? [],
-        actions: options.actions ?? [],
         ...(options.options ?? {})
-    } as BaseServiceState<T, C> & Omix<R>)
+    } as BaseServiceState<T> & Omix<R>)
 
     /**初始化**/
     onMounted(fetchInitialize)
@@ -161,7 +154,7 @@ export function useColumnService<T extends Omix, U extends Omix, R extends Omix,
     }
 
     /**刷新**/
-    async function fetchRefresh(data: Partial<BaseServiceState<T, C> & Omix<R>> = {}, opt: Omix = {}) {
+    async function fetchRefresh(data: Partial<BaseServiceState<T> & Omix<R>> = {}, opt: Omix = {}) {
         return await setState(pick(data, ['size', 'page']) as typeof state).then(async () => {
             return await fetchRequest(opt)
         })
@@ -173,7 +166,7 @@ export function useColumnService<T extends Omix, U extends Omix, R extends Omix,
         return await setState({ initialize: false, loading: false, select, ...opts } as never).then(async () => {
             return await fetchHandler(isNotEmpty(options.callback), async () => {
                 return await options.callback!(formState.value, state as never)
-            }).then(() => state as BaseServiceState<T, C> & Omix<R>)
+            }).then(() => state as BaseServiceState<T> & Omix<R>)
         })
     }
 
@@ -182,7 +175,7 @@ export function useColumnService<T extends Omix, U extends Omix, R extends Omix,
         return await setState({ loading: true } as never).then(async () => {
             try {
                 const body = fetchExclude<U>(formState.value, pick(state, ['page', 'size']))
-                return await request(state as BaseServiceState<T & Omix<R>, C>, body, opts).then(async ({ data }) => {
+                return await request(state as BaseServiceState<T & Omix<R>>, body, opts).then(async ({ data }) => {
                     if (options.transform && typeof options.transform === 'function') {
                         data.list = ((await options.transform(data)) ?? []) as Array<Omix<T>>
                     }
@@ -200,12 +193,9 @@ export function useColumnService<T extends Omix, U extends Omix, R extends Omix,
 
     /**通用配置聚合**/
     const instState = computed(() => {
-        const keyNames = state.actions.map((item: Omix) => item.key)
         return {
-            /**超级管理员**/
-            superAdmin: superAdmin.value,
             /**操作列是否显示**/
-            showCommand: superAdmin.value || (keyNames.length > 0 && keyNames.some((code: string) => sheetOptions.value.includes(code))),
+            showCommand: true,
             /**单选按钮禁用**/
             isSingle: state.select.length !== 1,
             /**多选按钮禁用**/

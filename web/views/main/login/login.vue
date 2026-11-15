@@ -2,8 +2,8 @@
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCodeService, useFormService } from '@/hooks'
-import { httpAuthLogin } from '@/api'
 import { useGlobal, useStore } from '@/store'
+import * as Service from '@/api'
 
 export default defineComponent({
     name: 'MainLogin',
@@ -30,7 +30,7 @@ export default defineComponent({
             if (!valid) return
             await setState({ loading: true })
             try {
-                const { data } = await httpAuthLogin({
+                const { data } = await Service.httpAuthAccountToken({
                     accountType: 'crm',
                     email: form.value.email,
                     password: form.value.password,
