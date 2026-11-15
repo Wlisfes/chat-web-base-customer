@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18nContext } from '@/i18n'
 import { useCodeService, useFormService } from '@/hooks'
@@ -20,13 +20,13 @@ export default defineComponent({
                 email: '',
                 password: '',
                 code: ''
+            },
+            rules: {
+                email: { required: true, trigger: 'blur', message: t('auth.login.emailRule') },
+                password: { required: true, trigger: 'blur', min: 6, max: 18, message: t('auth.login.passwordRule') },
+                code: { required: true, trigger: 'blur', message: t('auth.login.codeRule') }
             }
         })
-        const rules = computed(() => ({
-            email: { required: true, trigger: 'blur', message: t('auth.login.emailRule') },
-            password: { required: true, trigger: 'blur', min: 6, max: 18, message: t('auth.login.passwordRule') },
-            code: { required: true, trigger: 'blur', message: t('auth.login.codeRule') }
-        }))
 
         async function fetchSubmit() {
             return await fetchValidater().then(async error => {
@@ -52,7 +52,7 @@ export default defineComponent({
 
         return () => (
             <n-element class="w-full select-none">
-                <n-form size="large" ref={formRef} model={formState.value} rules={rules.value} disabled={state.loading} show-label={false}>
+                <n-form size="large" ref={formRef} model={formState.value} rules={state.rules} disabled={state.loading} show-label={false}>
                     <n-form-item path="email">
                         <form-element-input
                             maxlength={64}

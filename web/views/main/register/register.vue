@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18nContext } from '@/i18n'
 import { useCodeService, useFormService } from '@/hooks'
@@ -21,14 +21,14 @@ export default defineComponent({
                 email: '',
                 password: '',
                 code: ''
+            },
+            rules: {
+                nickname: { required: true, trigger: 'blur', message: t('auth.register.nicknameRule') },
+                email: { required: true, trigger: 'blur', type: 'email', message: t('auth.register.emailRule') },
+                password: { required: true, trigger: 'blur', min: 6, max: 18, message: t('auth.register.passwordRule') },
+                code: { required: true, trigger: 'blur', len: 4, message: t('auth.register.codeRule') }
             }
         })
-        const rules = computed(() => ({
-            nickname: { required: true, trigger: 'blur', message: t('auth.register.nicknameRule') },
-            email: { required: true, trigger: 'blur', type: 'email', message: t('auth.register.emailRule') },
-            password: { required: true, trigger: 'blur', min: 6, max: 18, message: t('auth.register.passwordRule') },
-            code: { required: true, trigger: 'blur', len: 4, message: t('auth.register.codeRule') }
-        }))
 
         async function fetchSubmit() {
             return await fetchValidater().then(async error => {
@@ -55,7 +55,7 @@ export default defineComponent({
 
         return () => (
             <n-element class="w-full select-none">
-                <n-form size="large" ref={formRef} model={formState.value} rules={rules.value} disabled={state.loading} show-label={false}>
+                <n-form size="large" ref={formRef} model={formState.value} rules={state.rules} disabled={state.loading} show-label={false}>
                     <n-form-item path="nickname">
                         <form-element-input
                             maxlength={32}

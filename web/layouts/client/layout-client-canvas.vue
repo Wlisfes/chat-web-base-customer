@@ -19,9 +19,9 @@ const darkPaint: ThemePaint = {
 }
 
 const lightPaint: ThemePaint = {
-    dot: '168, 178, 204',
-    dotAlpha: 0.22,
-    dotBoost: 0.16
+    dot: '62, 80, 124',
+    dotAlpha: 0.4,
+    dotBoost: 0.22
 }
 
 onMounted(() => {
