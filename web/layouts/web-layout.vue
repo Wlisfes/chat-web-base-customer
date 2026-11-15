@@ -10,18 +10,9 @@ export default defineComponent({
 
         return () => (
             <n-layout class="h-full overflow-hidden bg-transparent!" content-class="flex flex-col overflow-hidden">
-                <n-layout-header class="layout-site-header w-full" position="absolute">
+                <n-layout-header class="layout-site-header w-full">
                     <n-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden bg-transparent!">
-                        <router-link to="/" class="flex overflow-hidden decoration-none">
-                            <n-button text focusable={false}>
-                                <common-element-wrapper
-                                    name="nest-logo"
-                                    color="var(--n-text-color-hover)"
-                                    size={40}
-                                ></common-element-wrapper>
-                                <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
-                            </n-button>
-                        </router-link>
+                        <layout-common-logo></layout-common-logo>
                         <n-element class="h-full flex flex-1 items-center justify-end gap-x-24 overflow-hidden">
                             <n-button text focusable={false}>
                                 <div class="text-16">{t('home.site.nav.product')}</div>
@@ -46,8 +37,8 @@ export default defineComponent({
                     </n-element>
                 </n-layout-header>
                 <n-layout-content
-                    class="layout-client-content flex-1 overflow-hidden bg-transparent!"
-                    content-class="min-h-full flex flex-col bg-transparent! p-bs-60"
+                    class="layout-client-content flex-1 overflow-hidden"
+                    content-class="min-h-full flex flex-col"
                     native-scrollbar={false}
                     scrollbar-props={{ size: 8, trigger: 'none' }}
                 >

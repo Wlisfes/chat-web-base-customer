@@ -30,16 +30,7 @@ export default defineComponent({
                     class={['layout-site-header w-full', { 'is-scrolled': state.scrolled, 'is-dark': inverted.value }]}
                 >
                     <n-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden bg-transparent!">
-                        <router-link to="/" class="flex overflow-hidden decoration-none">
-                            <n-button text focusable={false}>
-                                <common-element-wrapper
-                                    name="nest-logo"
-                                    color="var(--n-text-color-hover)"
-                                    size={40}
-                                ></common-element-wrapper>
-                                <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
-                            </n-button>
-                        </router-link>
+                        <layout-common-logo></layout-common-logo>
                         <n-element class="h-full flex flex-1 items-center justify-end gap-x-24 overflow-hidden">
                             <n-button text focusable={false}>
                                 <div class="text-16">{t('home.site.nav.product')}</div>

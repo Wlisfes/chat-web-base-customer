@@ -1,9 +1,9 @@
 <script lang="tsx">
 import { defineComponent, Fragment } from 'vue'
-import { useRouter } from 'vue-router'
-import { useGlobal, useStore } from '@/store'
 import { useState, useProvider } from '@/hooks'
 import { fetchDialogService } from '@/plugins'
+import { useGlobal, useStore } from '@/store'
+import { useRouter } from 'vue-router'
 import * as utils from '@/utils'
 
 export default defineComponent({
@@ -74,9 +74,6 @@ export default defineComponent({
                                     ) : (
                                         <n-avatar round size={36} src={faseUser.value.avatar}></n-avatar>
                                     )}
-                                    {/* <n-text class="max-w-120 text-14" depth={1}>
-                                        <n-ellipsis tooltip={false}>{faseUser.value.name}</n-ellipsis>
-                                    </n-text> */}
                                 </div>
                             )
                         }}
@@ -98,24 +95,22 @@ export default defineComponent({
                                         <n-ellipsis tooltip={false}>{faseUser.value.name}</n-ellipsis>
                                     </n-text>
                                     <n-text depth={3} style={{ lineHeight: '20px' }}>
-                                        <n-ellipsis tooltip={false}>
-                                            {faseUser.value.email || `UID：${faseUser.value.uid ?? '-'}`}
-                                        </n-ellipsis>
+                                        <n-ellipsis tooltip={false}>{faseUser.value.email}</n-ellipsis>
                                     </n-text>
                                 </div>
                             </div>
                             <n-list hoverable clickable show-divider={false} class="p-inline-10 p-block-10 select-none">
                                 <n-list-item style={{ padding: 0 }}>
-                                    <div class="h-24 flex items-center gap-10 p-inline-10 p-block-10">
-                                        <common-base-icon size={22} name="nest-issues-cost"></common-base-icon>
-                                        <n-text>进入控制台</n-text>
-                                    </div>
+                                    <router-link to="/web" class="h-24 flex items-center gap-10 p-inline-10 p-block-10 decoration-none">
+                                        <common-base-icon size={22} name="nest-issues-cost" color="var(--text-color-2)"></common-base-icon>
+                                        <n-text depth="2">进入控制台</n-text>
+                                    </router-link>
                                 </n-list-item>
                                 <n-list-item style={{ padding: 0 }}>
-                                    <div class="h-24 flex items-center gap-10 p-inline-10 p-block-10">
-                                        <common-base-icon size={22} name="nest-settings"></common-base-icon>
-                                        <n-text>账户设置</n-text>
-                                    </div>
+                                    <router-link to="/web" class="h-24 flex items-center gap-10 p-inline-10 p-block-10 decoration-none">
+                                        <common-base-icon size={22} name="nest-settings" color="var(--text-color-2)"></common-base-icon>
+                                        <n-text depth="2">账户设置</n-text>
+                                    </router-link>
                                 </n-list-item>
                                 <n-list-item
                                     style={{ padding: 0 }}
