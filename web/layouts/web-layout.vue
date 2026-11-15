@@ -45,13 +45,15 @@ export default defineComponent({
                         native-scrollbar={false}
                         scrollbar-props={{ size: 100, trigger: 'none' }}
                     >
-                        <RouterView>
-                            {{
-                                default: ({ Component, route }: Omix) => {
-                                    return Component && h(Component, { key: route.fullPath })
-                                }
-                            }}
-                        </RouterView>
+                        <n-element class="flex flex-col flex-1 relative transition-background-color transition-duration-300 bg-[var(--common-body-bg-color)]">
+                            <RouterView>
+                                {{
+                                    default: ({ Component, route }: Omix) => {
+                                        return Component && h(Component, { key: route.fullPath })
+                                    }
+                                }}
+                            </RouterView>
+                        </n-element>
                     </n-layout-content>
                 </n-layout>
             </n-layout>
