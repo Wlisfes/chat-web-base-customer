@@ -74,9 +74,9 @@ export default defineComponent({
                                     ) : (
                                         <n-avatar round size={36} src={faseUser.value.avatar}></n-avatar>
                                     )}
-                                    <n-text class="max-w-120 text-14" depth={1}>
+                                    {/* <n-text class="max-w-120 text-14" depth={1}>
                                         <n-ellipsis tooltip={false}>{faseUser.value.name}</n-ellipsis>
-                                    </n-text>
+                                    </n-text> */}
                                 </div>
                             )
                         }}
