@@ -12,5 +12,7 @@ declare module 'vue-router' {
         keywords?: string
         description?: string
         AUTH?: string
+        /**是否显示控制台左侧菜单，默认显示**/
+        sider?: boolean
     }
 }

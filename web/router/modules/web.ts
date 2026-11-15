@@ -10,7 +10,7 @@ export const webRoutes: Array<RouteRecordRaw> = [
         children: [
             {
                 path: '/web/home',
-                meta: { AUTH: 'AUTH' },
+                meta: { AUTH: 'AUTH', sider: false },
                 component: () => import('@/views/main/home/index.vue')
             },
             {
