@@ -107,6 +107,12 @@ export default defineComponent({
                             <n-list hoverable clickable show-divider={false} class="p-inline-10 p-block-10 select-none">
                                 <n-list-item style={{ padding: 0 }}>
                                     <div class="h-24 flex items-center gap-10 p-inline-10 p-block-10">
+                                        <common-base-icon size={22} name="nest-issues-cost"></common-base-icon>
+                                        <n-text>进入控制台</n-text>
+                                    </div>
+                                </n-list-item>
+                                <n-list-item style={{ padding: 0 }}>
+                                    <div class="h-24 flex items-center gap-10 p-inline-10 p-block-10">
                                         <common-base-icon size={22} name="nest-settings"></common-base-icon>
                                         <n-text>账户设置</n-text>
                                     </div>
