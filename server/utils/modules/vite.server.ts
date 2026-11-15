@@ -1,4 +1,4 @@
-import { createServer as createViteDevServer, type ViteDevServer } from 'vite'
+import type { ViteDevServer } from 'vite'
 import { readFileSync } from 'fs'
 import { resolve } from 'path'
 
@@ -27,6 +27,7 @@ export interface ProductionWebServer {
 
 /**开发态 Vite，中间件模式，不自己托管 index.html。**/
 export async function createServer(root: string) {
+    const { createServer: createViteDevServer } = await import('vite')
     return createViteDevServer({
         root,
         appType: 'custom',
