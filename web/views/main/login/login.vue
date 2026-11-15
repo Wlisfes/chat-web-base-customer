@@ -12,6 +12,9 @@ export default defineComponent({
         const router = useRouter()
         const { t } = useI18nContext()
         const { fetchApplyLogin } = useStore(useGlobal)
+        const { link, loading, error, fetchRefresh, fetchComplete, fetchError } = useCodeService({
+            inverse: 1
+        })
         const { formRef, formState, state, setState, fetchValidater } = useFormService({
             formState: {
                 email: '',
@@ -24,8 +27,6 @@ export default defineComponent({
             password: { required: true, trigger: 'blur', min: 6, max: 18, message: t('auth.login.passwordRule') },
             code: { required: true, trigger: 'blur', message: t('auth.login.codeRule') }
         }))
-
-        const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
 
         async function fetchSubmit() {
             return await fetchValidater().then(async error => {
@@ -89,8 +90,8 @@ export default defineComponent({
                             ></form-element-input>
                             <common-base-codex
                                 link={link.value}
-                                loading={captchaLoading.value}
-                                error={captchaError.value}
+                                loading={loading.value}
+                                error={error.value}
                                 disabled={state.loading}
                                 onClick={fetchRefresh}
                                 onComplete={fetchComplete}

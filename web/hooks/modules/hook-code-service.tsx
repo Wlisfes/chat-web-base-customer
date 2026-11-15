@@ -19,6 +19,8 @@ interface BaseServiceState {
 interface BaseServiceOptions<T> extends Partial<BaseServiceState> {
     /**立即执行**/
     immediate?: boolean
+    /**验证码主题**/
+    inverse?: number
     /**额外数据**/
     options?: Omix<T>
 }
@@ -60,7 +62,7 @@ export function useCodeService<T extends Omix>(options: BaseServiceOptions<T> = 
             return await setState({
                 loading: true,
                 error: false,
-                link: `${state.url}?inverse=${Number(inverted.value)}&timestamp=${Date.now()}`
+                link: `${state.url}?inverse=${options.inverse ?? Number(inverted.value)}&timestamp=${Date.now()}`
             } as never)
         })
     }

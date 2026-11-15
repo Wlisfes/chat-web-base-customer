@@ -12,7 +12,9 @@ export default defineComponent({
         const router = useRouter()
         const { t } = useI18nContext()
         const { fetchApplyLogin } = useStore(useGlobal)
-        const { link, loading: captchaLoading, error: captchaError, fetchRefresh, fetchComplete, fetchError } = useCodeService()
+        const { link, loading, error, fetchRefresh, fetchComplete, fetchError } = useCodeService({
+            inverse: 1
+        })
         const { formRef, formState, state, setState, fetchValidater } = useFormService({
             formState: {
                 nickname: '',
@@ -102,8 +104,8 @@ export default defineComponent({
                             ></form-element-input>
                             <common-base-codex
                                 link={link.value}
-                                loading={captchaLoading.value}
-                                error={captchaError.value}
+                                loading={loading.value}
+                                error={error.value}
                                 disabled={state.loading}
                                 onClick={fetchRefresh}
                                 onComplete={fetchComplete}
