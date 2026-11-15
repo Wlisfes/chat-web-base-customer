@@ -24,12 +24,14 @@ interface ImportMetaEnv extends EnvOptions {}
 declare namespace NodeJS {
     interface ProcessEnv extends EnvOptions {}
 }
+interface ResultBody<T = any> {
+    data: T
+    code: number
+    message: string
+    timestamp: string
+}
+
 interface AxiosRequest extends import('axios').AxiosInstance {
-    <T = any, R = import('axios').AxiosResponse<T>, D = any>(
-        config: import('axios').AxiosRequestConfig<D>
-    ): Promise<R & import('./web/interface').ResultResolver<T>>
-    <T = any, R = import('axios').AxiosResponse<T>, D = any>(
-        url: string,
-        config?: import('axios').AxiosRequestConfig<D>
-    ): Promise<R & import('./web/interface').ResultResolver<T>>
+    <T = any, R = import('axios').AxiosResponse<T>, D = any>(config: import('axios').AxiosRequestConfig<D>): Promise<R & ResultBody<T>>
+    <T = any, R = import('axios').AxiosResponse<T>, D = any>(url: string, config?: import('axios').AxiosRequestConfig<D>): Promise<R & ResultBody<T>>
 }

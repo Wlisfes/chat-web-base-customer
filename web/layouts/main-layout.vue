@@ -23,12 +23,26 @@ export default defineComponent({
                             <li>800+ 运营商网络</li>
                             <li>独立后台，实时回执</li>
                         </ul>
-                        <p class="auth-visual-note">中间的光是调度核心。外圈的地球、月球、木星和土星是接入节点：短信从核心发出，落到当地运营商，回执再沿原路返回。</p>
+                        <p class="auth-visual-note">
+                            中间的光是调度核心。外圈的地球、月球、木星和土星是接入节点：短信从核心发出，落到当地运营商，回执再沿原路返回。
+                        </p>
                         <ul class="auth-legend">
-                            <li><i class="auth-legend-mark auth-legend-earth"></i><span>地球，客户从这里接入</span></li>
-                            <li><i class="auth-legend-mark auth-legend-moon"></i><span>月球，回执从这里返回</span></li>
-                            <li><i class="auth-legend-mark auth-legend-jupiter"></i><span>木星，当地运营商节点</span></li>
-                            <li><i class="auth-legend-mark auth-legend-saturn"></i><span>土星，路由绕开拥堵，回执沿环回来</span></li>
+                            <li>
+                                <i class="auth-legend-mark auth-legend-earth"></i>
+                                <span>地球，客户从这里接入</span>
+                            </li>
+                            <li>
+                                <i class="auth-legend-mark auth-legend-moon"></i>
+                                <span>月球，回执从这里返回</span>
+                            </li>
+                            <li>
+                                <i class="auth-legend-mark auth-legend-jupiter"></i>
+                                <span>木星，当地运营商节点</span>
+                            </li>
+                            <li>
+                                <i class="auth-legend-mark auth-legend-saturn"></i>
+                                <span>土星，路由绕开拥堵，回执沿环回来</span>
+                            </li>
                         </ul>
                     </div>
                     <div class="auth-stage" aria-hidden="true">
@@ -61,7 +75,9 @@ export default defineComponent({
                             <div class="auth-orbit auth-orbit-d">
                                 <span class="auth-ringline"></span>
                                 <span class="auth-moon auth-moon-jupiter"></span>
-                                <span class="auth-anchor auth-anchor-mars"><span class="auth-moon auth-moon-mars"></span></span>
+                                <span class="auth-anchor auth-anchor-mars">
+                                    <span class="auth-moon auth-moon-mars"></span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -104,8 +120,7 @@ export default defineComponent({
     min-height: 0;
     overflow: hidden;
     padding: 36px 56px 24px;
-    background:
-        radial-gradient(circle at 48% 64%, rgba(83, 109, 254, 0.28), transparent 26%),
+    background: radial-gradient(circle at 48% 64%, rgba(83, 109, 254, 0.28), transparent 26%),
         radial-gradient(circle at 18% 16%, rgba(83, 109, 254, 0.28), transparent 24%),
         radial-gradient(circle at 78% 78%, rgba(88, 214, 255, 0.1), transparent 22%),
         linear-gradient(165deg, #121a33 0%, #0b1220 62%, #10182c 100%);
@@ -179,7 +194,6 @@ export default defineComponent({
     font-size: 13px;
 }
 
-
 .auth-visual-copy .auth-visual-note {
     max-width: 540px;
     margin: 18px 0 0;
@@ -221,9 +235,15 @@ export default defineComponent({
     background-size: contain;
 }
 
-.auth-legend-earth { background-image: url('@/assets/images/planets/earth.png'); }
-.auth-legend-moon { background-image: url('@/assets/images/planets/moon.png'); }
-.auth-legend-jupiter { background-image: url('@/assets/images/planets/jupiter.png'); }
+.auth-legend-earth {
+    background-image: url('@/assets/images/planets/earth.png');
+}
+.auth-legend-moon {
+    background-image: url('@/assets/images/planets/moon.png');
+}
+.auth-legend-jupiter {
+    background-image: url('@/assets/images/planets/jupiter.png');
+}
 .auth-legend-saturn {
     width: 30px;
     background-image: url('@/assets/images/planets/saturn.png');
@@ -240,102 +260,115 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
     margin-top: 6px;
-  }
-  .auth-stars, .auth-stars::before, .auth-stars::after {
+}
+.auth-stars,
+.auth-stars::before,
+.auth-stars::after {
     position: absolute;
     inset: 0;
     pointer-events: none;
     background-repeat: no-repeat;
-  }
-  .auth-stars {
-    background-image:
-      radial-gradient(1px 1px at 7% 18%, rgba(255,255,255,.85) 50%, transparent 52%),
-      radial-gradient(1.5px 1.5px at 16% 34%, rgba(210,226,255,.7) 50%, transparent 52%),
-      radial-gradient(1px 1px at 24% 12%, rgba(255,255,255,.45) 50%, transparent 52%),
-      radial-gradient(2px 2px at 31% 46%, rgba(255,255,255,.9) 50%, transparent 52%),
-      radial-gradient(1px 1px at 38% 22%, rgba(255,255,255,.4) 50%, transparent 52%),
-      radial-gradient(1px 1px at 44% 58%, rgba(190,214,255,.7) 50%, transparent 52%),
-      radial-gradient(1.5px 1.5px at 53% 16%, rgba(255,255,255,.75) 50%, transparent 52%),
-      radial-gradient(1px 1px at 61% 38%, rgba(255,255,255,.5) 50%, transparent 52%),
-      radial-gradient(2px 2px at 69% 24%, rgba(232,242,255,.95) 50%, transparent 52%),
-      radial-gradient(1px 1px at 76% 48%, rgba(255,255,255,.55) 50%, transparent 52%),
-      radial-gradient(1px 1px at 84% 18%, rgba(180,210,255,.6) 50%, transparent 52%),
-      radial-gradient(1.5px 1.5px at 91% 36%, rgba(255,255,255,.8) 50%, transparent 52%),
-      radial-gradient(1px 1px at 12% 62%, rgba(255,255,255,.4) 50%, transparent 52%),
-      radial-gradient(1px 1px at 22% 74%, rgba(255,255,255,.65) 50%, transparent 52%),
-      radial-gradient(2px 2px at 48% 78%, rgba(255,255,255,.8) 50%, transparent 52%),
-      radial-gradient(1px 1px at 66% 68%, rgba(210,230,255,.55) 50%, transparent 52%),
-      radial-gradient(1px 1px at 80% 72%, rgba(255,255,255,.45) 50%, transparent 52%),
-      radial-gradient(1.5px 1.5px at 88% 84%, rgba(255,255,255,.7) 50%, transparent 52%);
+}
+.auth-stars {
+    background-image: radial-gradient(1px 1px at 7% 18%, rgba(255, 255, 255, 0.85) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 16% 34%, rgba(210, 226, 255, 0.7) 50%, transparent 52%),
+        radial-gradient(1px 1px at 24% 12%, rgba(255, 255, 255, 0.45) 50%, transparent 52%),
+        radial-gradient(2px 2px at 31% 46%, rgba(255, 255, 255, 0.9) 50%, transparent 52%),
+        radial-gradient(1px 1px at 38% 22%, rgba(255, 255, 255, 0.4) 50%, transparent 52%),
+        radial-gradient(1px 1px at 44% 58%, rgba(190, 214, 255, 0.7) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 53% 16%, rgba(255, 255, 255, 0.75) 50%, transparent 52%),
+        radial-gradient(1px 1px at 61% 38%, rgba(255, 255, 255, 0.5) 50%, transparent 52%),
+        radial-gradient(2px 2px at 69% 24%, rgba(232, 242, 255, 0.95) 50%, transparent 52%),
+        radial-gradient(1px 1px at 76% 48%, rgba(255, 255, 255, 0.55) 50%, transparent 52%),
+        radial-gradient(1px 1px at 84% 18%, rgba(180, 210, 255, 0.6) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 91% 36%, rgba(255, 255, 255, 0.8) 50%, transparent 52%),
+        radial-gradient(1px 1px at 12% 62%, rgba(255, 255, 255, 0.4) 50%, transparent 52%),
+        radial-gradient(1px 1px at 22% 74%, rgba(255, 255, 255, 0.65) 50%, transparent 52%),
+        radial-gradient(2px 2px at 48% 78%, rgba(255, 255, 255, 0.8) 50%, transparent 52%),
+        radial-gradient(1px 1px at 66% 68%, rgba(210, 230, 255, 0.55) 50%, transparent 52%),
+        radial-gradient(1px 1px at 80% 72%, rgba(255, 255, 255, 0.45) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 88% 84%, rgba(255, 255, 255, 0.7) 50%, transparent 52%);
     animation: auth-drift 90s linear infinite;
-  }
-  .auth-stars::before {
-    content: "";
-    background-image:
-      radial-gradient(circle at 18% 42%, rgba(255,255,255,.95) 0 1.2px, rgba(142,182,255,.35) 2px, transparent 7px),
-      radial-gradient(circle at 73% 30%, rgba(255,255,255,.9) 0 1.4px, rgba(88,214,255,.28) 2.4px, transparent 8px),
-      radial-gradient(circle at 40% 70%, rgba(255,255,255,.8) 0 1px, rgba(142,182,255,.25) 2px, transparent 6px),
-      radial-gradient(circle at 86% 62%, rgba(255,255,255,.75) 0 1.1px, rgba(180,210,255,.2) 2px, transparent 7px),
-      radial-gradient(1px 1px at 9% 48%, rgba(255,255,255,.55) 50%, transparent 52%),
-      radial-gradient(1px 1px at 28% 58%, rgba(255,255,255,.35) 50%, transparent 52%),
-      radial-gradient(1px 1px at 57% 52%, rgba(255,255,255,.4) 50%, transparent 52%),
-      radial-gradient(1px 1px at 94% 54%, rgba(255,255,255,.5) 50%, transparent 52%);
+}
+.auth-stars::before {
+    content: '';
+    background-image: radial-gradient(circle at 18% 42%, rgba(255, 255, 255, 0.95) 0 1.2px, rgba(142, 182, 255, 0.35) 2px, transparent 7px),
+        radial-gradient(circle at 73% 30%, rgba(255, 255, 255, 0.9) 0 1.4px, rgba(88, 214, 255, 0.28) 2.4px, transparent 8px),
+        radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.8) 0 1px, rgba(142, 182, 255, 0.25) 2px, transparent 6px),
+        radial-gradient(circle at 86% 62%, rgba(255, 255, 255, 0.75) 0 1.1px, rgba(180, 210, 255, 0.2) 2px, transparent 7px),
+        radial-gradient(1px 1px at 9% 48%, rgba(255, 255, 255, 0.55) 50%, transparent 52%),
+        radial-gradient(1px 1px at 28% 58%, rgba(255, 255, 255, 0.35) 50%, transparent 52%),
+        radial-gradient(1px 1px at 57% 52%, rgba(255, 255, 255, 0.4) 50%, transparent 52%),
+        radial-gradient(1px 1px at 94% 54%, rgba(255, 255, 255, 0.5) 50%, transparent 52%);
     animation: auth-twinkle 5.5s ease-in-out infinite;
-  }
-  .auth-system {
+}
+.auth-system {
     position: relative;
     width: min(520px, 74%);
     max-height: calc(100vh - 520px);
     aspect-ratio: 1;
     container-type: size;
-  }
-  .auth-nebula {
+}
+.auth-nebula {
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    background:
-      radial-gradient(circle at 46% 48%, rgba(98,126,255,.34), transparent 46%),
-      radial-gradient(circle at 62% 58%, rgba(88,214,255,.12), transparent 40%);
+    background: radial-gradient(circle at 46% 48%, rgba(98, 126, 255, 0.34), transparent 46%),
+        radial-gradient(circle at 62% 58%, rgba(88, 214, 255, 0.12), transparent 40%);
     filter: blur(18px);
     pointer-events: none;
-  }
-  .auth-halo {
+}
+.auth-halo {
     position: absolute;
     inset: 2%;
     border-radius: 50%;
-    background: conic-gradient(from 24deg, transparent 0 16%, rgba(142,182,255,.22) 30%, transparent 46%, rgba(88,214,255,.14) 68%, transparent 84%);
+    background: conic-gradient(
+        from 24deg,
+        transparent 0 16%,
+        rgba(142, 182, 255, 0.22) 30%,
+        transparent 46%,
+        rgba(88, 214, 255, 0.14) 68%,
+        transparent 84%
+    );
     filter: blur(16px);
     animation: auth-spin 54s linear infinite;
     -webkit-mask: radial-gradient(circle, transparent 58%, #000 70% 76%, transparent 86%);
     mask: radial-gradient(circle, transparent 58%, #000 70% 76%, transparent 86%);
-  }
-  .auth-core {
+}
+.auth-core {
     position: absolute;
     left: 50%;
     top: 50%;
     width: 18cqi;
     height: 18cqi;
     margin: -9cqi 0 0 -9cqi;
-  }
-  .auth-corona, .auth-sun {
+}
+.auth-corona,
+.auth-sun {
     position: absolute;
     border-radius: 50%;
-  }
-  .auth-corona {
+}
+.auth-corona {
     inset: -18%;
-    background: radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(176,198,255,.72) 18%, rgba(83,109,254,.28) 46%, transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(176, 198, 255, 0.72) 18%,
+        rgba(83, 109, 254, 0.28) 46%,
+        transparent 70%
+    );
     box-shadow:
-      0 0 24px 8px rgba(142,182,255,.5),
-      0 0 70px 22px rgba(83,109,254,.32),
-      0 0 120px 36px rgba(88,214,255,.14);
+        0 0 24px 8px rgba(142, 182, 255, 0.5),
+        0 0 70px 22px rgba(83, 109, 254, 0.32),
+        0 0 120px 36px rgba(88, 214, 255, 0.14);
     animation: auth-breathe 5.2s ease-in-out infinite;
-  }
-  .auth-sun {
+}
+.auth-sun {
     inset: 18%;
     background: radial-gradient(circle at 34% 32%, #fff 0%, #e7efff 22%, #8eafff 58%, #3d5bff 100%);
-    box-shadow: inset -8px -6px 12px rgba(18,28,72,.35);
-  }
-  .auth-disk {
+    box-shadow: inset -8px -6px 12px rgba(18, 28, 72, 0.35);
+}
+.auth-disk {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -343,45 +376,92 @@ export default defineComponent({
     height: 28cqi;
     margin: -14cqi 0 0 -14cqi;
     border-radius: 50%;
-    background: conic-gradient(from 70deg, transparent 0 8%, rgba(210,226,255,.15) 16%, rgba(255,255,255,.7) 24%, rgba(120,210,255,.2) 34%, transparent 46%, transparent 70%, rgba(142,182,255,.4) 82%, transparent 92%);
+    background: conic-gradient(
+        from 70deg,
+        transparent 0 8%,
+        rgba(210, 226, 255, 0.15) 16%,
+        rgba(255, 255, 255, 0.7) 24%,
+        rgba(120, 210, 255, 0.2) 34%,
+        transparent 46%,
+        transparent 70%,
+        rgba(142, 182, 255, 0.4) 82%,
+        transparent 92%
+    );
     -webkit-mask: radial-gradient(circle, transparent 58%, #000 64% 68%, transparent 74%);
     mask: radial-gradient(circle, transparent 58%, #000 64% 68%, transparent 74%);
     animation: auth-spin 26s linear infinite;
-  }
-  .auth-orbit {
+}
+.auth-orbit {
     position: absolute;
-    left: 0; right: 0; top: 0; bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     margin: auto;
     border-radius: 50%;
     animation: auth-spin var(--dur) linear infinite;
     animation-delay: var(--delay, 0s);
-  }
-  .auth-orbit-a { --dur: 22s; --delay: -6s; --from: 10deg; width: 32%; height: 32%; }
-  .auth-orbit-b { --dur: 34s; --delay: -15s; --from: 140deg; width: 50%; height: 50%; animation-direction: reverse; }
-  .auth-orbit-c { --dur: 48s; --delay: -9s; --from: 200deg; width: 70%; height: 70%; }
-  .auth-orbit-d { --dur: 68s; --delay: -24s; --from: 80deg; width: 86%; height: 86%; animation-direction: reverse; }
-  .auth-orbit-a .auth-ringline { opacity: .95; }
-  .auth-orbit-b .auth-ringline { opacity: .7; }
-  .auth-orbit-c .auth-ringline { opacity: .48; }
-  .auth-orbit-d .auth-ringline { opacity: .32; }
-  .auth-ringline {
+}
+.auth-orbit-a {
+    --dur: 22s;
+    --delay: -6s;
+    --from: 10deg;
+    width: 32%;
+    height: 32%;
+}
+.auth-orbit-b {
+    --dur: 34s;
+    --delay: -15s;
+    --from: 140deg;
+    width: 50%;
+    height: 50%;
+    animation-direction: reverse;
+}
+.auth-orbit-c {
+    --dur: 48s;
+    --delay: -9s;
+    --from: 200deg;
+    width: 70%;
+    height: 70%;
+}
+.auth-orbit-d {
+    --dur: 68s;
+    --delay: -24s;
+    --from: 80deg;
+    width: 86%;
+    height: 86%;
+    animation-direction: reverse;
+}
+.auth-orbit-a .auth-ringline {
+    opacity: 0.95;
+}
+.auth-orbit-b .auth-ringline {
+    opacity: 0.7;
+}
+.auth-orbit-c .auth-ringline {
+    opacity: 0.48;
+}
+.auth-orbit-d .auth-ringline {
+    opacity: 0.32;
+}
+.auth-ringline {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     background: conic-gradient(
-      from var(--from, 20deg),
-      rgba(176,202,255,.04) 0%,
-      rgba(176,202,255,.22) 16%,
-      rgba(236,244,255,.72) 27%,
-      rgba(176,202,255,.16) 40%,
-      rgba(176,202,255,.05) 58%,
-      rgba(120,200,255,.28) 76%,
-      rgba(176,202,255,.05) 100%
+        from var(--from, 20deg),
+        rgba(176, 202, 255, 0.04) 0%,
+        rgba(176, 202, 255, 0.22) 16%,
+        rgba(236, 244, 255, 0.72) 27%,
+        rgba(176, 202, 255, 0.16) 40%,
+        rgba(176, 202, 255, 0.05) 58%,
+        rgba(120, 200, 255, 0.28) 76%,
+        rgba(176, 202, 255, 0.05) 100%
     );
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.6px), #000 calc(100% - 1px));
     mask: radial-gradient(farthest-side, transparent calc(100% - 1.6px), #000 calc(100% - 1px));
-  }
-  .auth-glint {
+}
+.auth-glint {
     position: absolute;
     top: 0;
     left: 50%;
@@ -389,11 +469,11 @@ export default defineComponent({
     height: 6px;
     margin: -3px 0 0 -11%;
     border-radius: 999px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.95), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
     filter: blur(1.2px);
-    box-shadow: 0 0 12px rgba(186,214,255,.85);
-  }
-  .auth-trail {
+    box-shadow: 0 0 12px rgba(186, 214, 255, 0.85);
+}
+.auth-trail {
     position: absolute;
     top: 0;
     left: 50%;
@@ -401,10 +481,10 @@ export default defineComponent({
     height: 3px;
     margin: -1.5px 0 0 -24%;
     border-radius: 999px;
-    background: linear-gradient(90deg, transparent, rgba(120,236,255,.2) 45%, rgba(210,250,255,.9));
-    filter: blur(.8px);
-  }
-  .auth-moon {
+    background: linear-gradient(90deg, transparent, rgba(120, 236, 255, 0.2) 45%, rgba(210, 250, 255, 0.9));
+    filter: blur(0.8px);
+}
+.auth-moon {
     position: absolute;
     display: block;
     left: 50%;
@@ -415,43 +495,50 @@ export default defineComponent({
     filter: drop-shadow(0 0 10px rgba(150, 184, 255, 0.35));
     animation: auth-spin var(--dur) linear infinite reverse;
     animation-delay: var(--delay, 0s);
-  }
-  .auth-orbit-b .auth-moon,
-  .auth-orbit-d .auth-moon { animation-direction: normal; }
-  .auth-moon-moon {
+}
+.auth-orbit-b .auth-moon,
+.auth-orbit-d .auth-moon {
+    animation-direction: normal;
+}
+.auth-moon-moon {
     width: 3.2cqi;
     height: 3.2cqi;
     margin: -1.6cqi 0 0 -1.6cqi;
     background-image: url('@/assets/images/planets/moon.png');
-  }
-  .auth-moon-earth {
+}
+.auth-moon-earth {
     width: 7.4cqi;
     height: 7.4cqi;
     margin: -3.7cqi 0 0 -3.7cqi;
     background-image: url('@/assets/images/planets/earth.png');
-  }
-  .auth-moon-saturn {
+}
+.auth-moon-saturn {
     width: 16cqi;
     height: 6cqi;
     margin: -3cqi 0 0 -8cqi;
     background-image: url('@/assets/images/planets/saturn.png');
     filter: drop-shadow(0 0 12px rgba(214, 196, 150, 0.32));
-  }
-  .auth-moon-jupiter {
+}
+.auth-moon-jupiter {
     width: 5.4cqi;
     height: 5.4cqi;
     margin: -2.7cqi 0 0 -2.7cqi;
     background-image: url('@/assets/images/planets/jupiter.png');
-  }
-  .auth-moon-mars {
+}
+.auth-moon-mars {
     width: 3.8cqi;
     height: 3.8cqi;
     margin: -1.9cqi 0 0 -1.9cqi;
     background-image: url('@/assets/images/planets/mars.png');
-  }
-    .auth-anchor { position: absolute; inset: 0; }
-  .auth-anchor-mars { transform: rotate(128deg); }
-  .auth-belt {
+}
+.auth-anchor {
+    position: absolute;
+    inset: 0;
+}
+.auth-anchor-mars {
+    transform: rotate(128deg);
+}
+.auth-belt {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -459,23 +546,36 @@ export default defineComponent({
     height: 59%;
     margin: -29.5% 0 0 -29.5%;
     border-radius: 50%;
-    background: repeating-conic-gradient(rgba(220,232,255,.8) 0 .35deg, transparent .35deg 5.6deg);
+    background: repeating-conic-gradient(rgba(220, 232, 255, 0.8) 0 0.35deg, transparent 0.35deg 5.6deg);
     -webkit-mask: radial-gradient(circle, transparent 93.5%, #000 95% 96.6%, transparent 98%);
     mask: radial-gradient(circle, transparent 93.5%, #000 95% 96.6%, transparent 98%);
-    opacity: .42;
+    opacity: 0.42;
     animation: auth-spin 120s linear infinite;
-  }
-  @keyframes auth-spin { to { transform: rotate(360deg); } }
-  @keyframes auth-breathe {
-    50% { transform: scale(1.07); opacity: .82; }
-  }
-  @keyframes auth-drift {
-    from { transform: translate3d(0,0,0); }
-    to { transform: translate3d(-28px,-16px,0); }
-  }
-  @keyframes auth-twinkle {
-    50% { opacity: .45; }
-  }
+}
+@keyframes auth-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes auth-breathe {
+    50% {
+        transform: scale(1.07);
+        opacity: 0.82;
+    }
+}
+@keyframes auth-drift {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-28px, -16px, 0);
+    }
+}
+@keyframes auth-twinkle {
+    50% {
+        opacity: 0.45;
+    }
+}
 
 @media (prefers-reduced-motion: reduce) {
     .auth-orbit,
