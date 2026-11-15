@@ -1,6 +1,7 @@
 <script lang="tsx">
 import { defineComponent, h } from 'vue'
 import { useState, useAosObserver } from '@/hooks'
+import { useI18nContext } from '@/i18n'
 import { useGlobal, useMouse, useStore } from '@/store'
 import { RouterView, useRouter } from 'vue-router'
 
@@ -12,6 +13,7 @@ export default defineComponent({
         const { inverted } = useStore(useMouse)
         const { loggedIn } = useStore(useGlobal)
         const router = useRouter()
+        const { t } = useI18nContext()
 
         async function onContentScroll(event: Event) {
             return await setState({ scrolled: (event.target as HTMLElement).scrollTop > 8 }).then(() => {
@@ -26,7 +28,7 @@ export default defineComponent({
                     position="absolute"
                     class={['layout-site-header w-full', { 'is-scrolled': state.scrolled, 'is-dark': inverted.value }]}
                 >
-                    <n-element class="h-60 flex p-inline-20 gap-20 overflow-hidden bg-transparent!">
+                    <n-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden bg-transparent!">
                         <router-link to="/" class="flex overflow-hidden decoration-none">
                             <n-button text focusable={false}>
                                 <common-element-wrapper
@@ -37,24 +39,26 @@ export default defineComponent({
                                 <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
                             </n-button>
                         </router-link>
-                        <n-element class="h-full flex flex-1 items-center justify-end gap-x-32 overflow-hidden">
+                        <n-element class="h-full flex flex-1 items-center justify-end gap-x-24 overflow-hidden">
                             <n-button text focusable={false}>
-                                <div class="text-16">产品</div>
+                                <div class="text-16">{t('home.site.nav.product')}</div>
                             </n-button>
                             <n-button text focusable={false}>
-                                <div class="text-16">解决方案</div>
+                                <div class="text-16">{t('home.site.nav.solutions')}</div>
                             </n-button>
                             <n-button text focusable={false}>
-                                <div class="text-16">覆盖范围&定价</div>
+                                <div class="text-16">{t('home.site.nav.coverage')}</div>
                             </n-button>
                             <n-button text focusable={false}>
-                                <div class="text-16">支持中心</div>
+                                <div class="text-16">{t('home.site.nav.support')}</div>
                             </n-button>
                             <n-button text focusable={false}>
-                                <div class="text-16">关于我们</div>
+                                <div class="text-16">{t('home.site.nav.about')}</div>
                             </n-button>
                         </n-element>
-                        <n-element class="h-full flex items-center overflow-hidden">大萨达萨达</n-element>
+                        <n-element class="h-full flex items-center overflow-hidden">
+                            <layout-common-deploy></layout-common-deploy>
+                        </n-element>
                         {/* <n-element class="h-full flex items-center overflow-hidden">
                             <layout-common-deploy></layout-common-deploy>
                             <n-divider vertical class="h-20! m-inline-20!" />

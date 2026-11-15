@@ -1,50 +1,23 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { useState } from '@/hooks'
+import { useI18nContext } from '@/i18n'
 
 export default defineComponent({
     name: 'LayoutCommonFooter',
     setup(props) {
-        const { state, setState } = useState({
-            chatBook: {
-                title: 'ChatBook',
-                document: `我们致力于创新通信解决方案，让 SMS 消息自由传递，满足您所有短信营销需求。您可以毫不费力地发送一次性验证码、通知、时事通讯、提醒和营销短信。`
-            },
-            about: {
-                title: '关于',
-                columns: [
-                    { link: '/', name: '公司简介' },
-                    { link: '/', name: '联系我们' },
-                    { link: '/', name: '隐私政策' },
-                    { link: '/', name: '动态公告' }
-                ]
-            },
-            solutions: {
-                title: '产品 & 解决方案',
-                columns: [
-                    { link: '/', name: '国内短信' },
-                    { link: '/', name: '国际短信' },
-                    { link: '/', name: '五类短信' },
-                    { link: '/', name: '卡发短信' },
-                    { link: '/', name: '覆盖范围 & 定价' },
-                    { link: '/', name: '使用流程' },
-                    { link: '/', name: '常见问题' },
-                    { link: '/', name: 'API 文档' }
-                ]
-            }
-        })
+        const { t, tm } = useI18nContext()
 
         return () => (
             <n-element class="layout-common-footer flex flex-col overflow-hidden">
                 <div class="chat-connect common-width-inline flex justify-between gap-16 p-block-24">
                     <div class="flex flex-col gap-5 overflow-hidden">
-                        <h1 class="m-0 text-22">订阅 ChatBook SMS 新闻</h1>
-                        <n-text depth={3}>加入 20000 多人使用的 ChatBook SMS 行列</n-text>
+                        <h1 class="m-0 text-22">{t('home.site.subscribe.title')}</h1>
+                        <n-text depth={3}>{t('home.site.subscribe.document')}</n-text>
                     </div>
                     <div class="chat-connect-input flex gap-16 items-center">
-                        <n-input class="flex-1" size="large" placeholder="请输入您的邮箱" />
+                        <n-input class="flex-1" size="large" placeholder={t('home.site.subscribe.placeholder')} />
                         <n-button class="w-[var(--chat-connect-mail-width)]" size="large" type="primary">
-                            订阅
+                            {t('home.site.subscribe.action')}
                         </n-button>
                     </div>
                 </div>
@@ -57,10 +30,10 @@ export default defineComponent({
                                     color="var(--n-text-color-hover)"
                                     size={32}
                                 ></common-element-wrapper>
-                                <h2 class="m-0 p-bs-8 p-inline-5 text-18">{state.chatBook.title}</h2>
+                                <h2 class="m-0 p-bs-8 p-inline-5 text-18">{t('home.site.brand.title')}</h2>
                             </n-button>
                         </router-link>
-                        <n-text depth={2}>{state.chatBook.document}</n-text>
+                        <n-text depth={2}>{t('home.site.brand.document')}</n-text>
                         <div class="flex gap-10 overflow-hidden p-bs-20">
                             <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
                                 <common-element-wrapper name="nest-telegram" size={20}></common-element-wrapper>
@@ -75,9 +48,9 @@ export default defineComponent({
                     </div>
                     <div class="chat-between w-[var(--chat-between-width)] flex overflow-hidden justify-between">
                         <div class="flex flex-col w-65% p-inline-[var(--chat-between-inline-width)]">
-                            <h2 class="m-0 text-18 line-height-32 p-be-16">{state.solutions.title}</h2>
+                            <h2 class="m-0 text-18 line-height-32 p-be-16">{t('home.site.solutions.title')}</h2>
                             <n-grid cols={2} x-gap={20} y-gap={20}>
-                                {state.solutions.columns.map((item, index) => (
+                                {tm('home.site.solutions.columns').map((item, index) => (
                                     <n-grid-item key={index}>
                                         <router-link to={item.link}>
                                             <n-button text focusable={false} style={{ '--n-text-color': 'var(--text-color-2)' }}>
@@ -89,9 +62,9 @@ export default defineComponent({
                             </n-grid>
                         </div>
                         <div class="flex flex-col w-35% p-inline-[var(--chat-between-inline-width)]">
-                            <h2 class="m-0 text-18 line-height-32 p-be-16">{state.about.title}</h2>
+                            <h2 class="m-0 text-18 line-height-32 p-be-16">{t('home.site.about.title')}</h2>
                             <n-grid cols={1} x-gap={20} y-gap={20}>
-                                {state.about.columns.map((item, index) => (
+                                {tm('home.site.about.columns').map((item, index) => (
                                     <n-grid-item key={index}>
                                         <router-link to={item.link}>
                                             <n-button text focusable={false} style={{ '--n-text-color': 'var(--text-color-2)' }}>
