@@ -4,7 +4,7 @@ COPY package.json yarn.lock* ./
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
     set -eu; \
     attempt=1; \
-    until yarn install --frozen-lockfile --ignore-engines --network-timeout 600000; do \
+    until yarn install --frozen-lockfile --ignore-engines --registry https://registry.npmjs.org --network-timeout 600000; do \
         if [ "$attempt" -ge 3 ]; then \
             exit 1; \
         fi; \
@@ -23,7 +23,17 @@ ENV NODE_ENV=production
 ENV NODE_WEB_CLIENT_SSR_PORT=5480
 COPY package.json yarn.lock* ./
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
-    yarn install --frozen-lockfile --production --ignore-scripts --ignore-engines --network-timeout 600000
+    set -eu; \
+    attempt=1; \
+    until yarn install --frozen-lockfile --production --ignore-scripts --ignore-engines --registry https://registry.npmjs.org --network-timeout 600000; do \
+        if [ "$attempt" -ge 3 ]; then \
+            exit 1; \
+        fi; \
+        delay=$((attempt * 5)); \
+        echo "Production install attempt $attempt failed; retrying in ${delay}s." >&2; \
+        sleep "$delay"; \
+        attempt=$((attempt + 1)); \
+    done
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/build ./build
 COPY --from=build /app/env ./env
