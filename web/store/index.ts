@@ -1,3 +1,4 @@
+export * from '@/utils'
 export * from '@/store/modules/mouse'
 export * from '@/store/modules/global'
 import { defineStore, storeToRefs } from 'pinia'

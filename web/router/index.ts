@@ -1,7 +1,7 @@
 import { createRouter as _createRouter, createMemoryHistory, createWebHistory } from 'vue-router'
+import { useGlobal, useStore, fetchConcat } from '@/store'
 import { clientRoutes } from '@/router/modules/client'
-import { fetchConcat } from '@/utils'
-import { useGlobal, useStore } from '@/store'
+import { webRoutes } from '@/router/modules/web'
 
 /**路由配置**/
 export const routes = fetchConcat(clientRoutes)
