@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'Home',
+    name: 'CalintHome',
     async httpServer({ pinia, logger }) {},
     setup() {
         return () => (

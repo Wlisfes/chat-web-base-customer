@@ -11,8 +11,7 @@ export const webRoutes: Array<RouteRecordRaw> = [
             {
                 path: '/web/home',
                 meta: { AUTH: 'AUTH' },
-                name: 'Home',
-                component: () => import('@/views/home/index.vue')
+                component: () => import('@/views/main/home/index.vue')
             },
             {
                 path: '/web/:pathMatch(.*)*',

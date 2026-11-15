@@ -5,6 +5,7 @@ import Layout from '@/layouts/layout.vue'
 export const clientRoutes: Array<RouteRecordRaw> = [
     {
         path: '/main',
+        redirect: '/main/login',
         name: MainLayout.name,
         component: MainLayout,
         children: [
@@ -32,9 +33,9 @@ export const clientRoutes: Array<RouteRecordRaw> = [
         children: [
             {
                 path: '/',
+                name: 'CalintHome',
                 meta: { AUTH: 'NONE' },
-                name: 'Home',
-                component: () => import('@/views/home/index.vue')
+                component: () => import('@/views/client/home/index.vue')
             },
             {
                 path: '/:pathMatch(.*)*',
