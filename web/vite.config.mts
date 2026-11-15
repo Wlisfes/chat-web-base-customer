@@ -45,7 +45,28 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv): UserConfig => {
             }
         },
         ssr: {
-            noExternal: true
+            noExternal: isSsrBuild
+                ? true
+                : [
+                      'naive-ui',
+                      'vueuc',
+                      'date-fns',
+                      'vue-i18n',
+                      '@css-render/vue3-ssr',
+                      'class-validator',
+                      'aos-observer',
+                      '@vueuse/core',
+                      'vue-collapsed',
+                      'vue-draggable-plus',
+                      '@vicons/carbon',
+                      'big.js',
+                      '@better-scroll/core',
+                      '@better-scroll/mouse-wheel',
+                      '@better-scroll/observe-dom',
+                      '@better-scroll/observe-image',
+                      '@better-scroll/scroll-bar',
+                      '@better-scroll/shared-utils'
+                  ]
         },
         plugins: [
             vue(),
