@@ -7,7 +7,7 @@ import { fetchDialogService } from '@/plugins'
 import * as utils from '@/utils'
 
 export default defineComponent({
-    name: 'LayoutCommonConsumer',
+    name: 'LayoutCommonUser',
     setup(props, ctx) {
         const router = useRouter()
         const { faseUser, loggedIn, fetchInitialize, fetchLogout } = useStore(useGlobal)

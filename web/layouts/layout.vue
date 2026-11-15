@@ -12,8 +12,8 @@ export default defineComponent({
         const { fetchScrollbar } = useAosObserver()
         const { inverted } = useStore(useMouse)
         const { loggedIn } = useStore(useGlobal)
-        const router = useRouter()
         const { t } = useI18nContext()
+        const router = useRouter()
 
         async function onContentScroll(event: Event) {
             return await setState({ scrolled: (event.target as HTMLElement).scrollTop > 8 }).then(() => {
@@ -56,26 +56,16 @@ export default defineComponent({
                                 <div class="text-16">{t('home.site.nav.about')}</div>
                             </n-button>
                         </n-element>
-                        <n-element class="h-full flex items-center overflow-hidden">
+                        <n-element class="h-full flex items-center gap-x-20 overflow-hidden">
                             <layout-common-deploy></layout-common-deploy>
-                        </n-element>
-                        {/* <n-element class="h-full flex items-center overflow-hidden">
-                            <layout-common-deploy></layout-common-deploy>
-                            <n-divider vertical class="h-20! m-inline-20!" />
-                            <n-element class="flex items-center gap-20 overflow-hidden">
-                                {!loggedIn.value ? (
-                                    <n-button text focusable={false} onClick={() => router.push('/main/login')}>
-                                        登录
-                                    </n-button>
-                                ) : null}
+                            {loggedIn.value ? (
                                 <layout-common-consumer></layout-common-consumer>
-                                {!loggedIn.value ? (
-                                    <n-button focusable={false} round type="primary" onClick={() => router.push('/main/register')}>
-                                        免费体验
-                                    </n-button>
-                                ) : null}
-                            </n-element>
-                        </n-element> */}
+                            ) : (
+                                <n-button focusable={false} round type="primary" onClick={() => router.push('/main/register')}>
+                                    免费体验
+                                </n-button>
+                            )}
+                        </n-element>
                     </n-element>
                 </n-layout-header>
                 <n-layout-content
