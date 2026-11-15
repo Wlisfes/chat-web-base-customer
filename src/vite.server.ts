@@ -15,10 +15,10 @@ export async function createViteServer() {
 
 /**web 改动不会触发 Nest 重启，按文件时间清掉 Vite SSR 缓存。**/
 async function loadEntryServer(vite: ViteDevServer) {
-    const files = ['web/entry-server.ts', 'web/entry-client.ts', 'web/plugins/modules/logger.ts']
+    const files = ['web/entry-server.ts', 'web/entry-client.ts', 'web/plugins/modules/logger.min.tsx']
     const stamp = files.reduce((total, file) => total + statSync(resolve(process.cwd(), file)).mtimeMs, 0)
     if (stamp !== entryStamp) {
-        const urls = ['/entry-server.ts', '/entry-client.ts', '/plugins/index.ts', '/plugins/modules/logger.ts']
+        const urls = ['/entry-server.ts', '/entry-client.ts', '/plugins/index.ts', '/plugins/modules/logger.min.tsx']
         await Promise.all(
             urls.map(async url => {
                 const mod = await vite.moduleGraph.getModuleByUrl(url)

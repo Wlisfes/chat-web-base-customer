@@ -1,5 +1,5 @@
-export * from './modules/server'
-export * from './modules/logger'
+export * from './modules/server.min'
+export * from './modules/logger.min'
 export * from './modules/dialog.min'
 export * from './modules/notify.min'
 export * from './modules/stripe.min'

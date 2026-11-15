@@ -1,14 +1,16 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
 import { useI18nContext } from '@/i18n'
+import { useMouse, useStore } from '@/store'
 
 export default defineComponent({
     name: 'LayoutClientFooter',
     setup(props) {
+        const { inverted } = useStore(useMouse)
         const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-common-footer flex flex-col overflow-hidden">
+            <common-base-element is-white class="layout-common-footer flex flex-col overflow-hidden">
                 <div class="chat-connect common-width-inline flex justify-between gap-16 p-block-24 box-border">
                     <div class="flex flex-col gap-5 overflow-hidden">
                         <h1 class="m-0 text-22">{t('home.site.subscribe.title')}</h1>
@@ -35,13 +37,13 @@ export default defineComponent({
                         </router-link>
                         <n-text depth={2}>{t('home.site.brand.document')}</n-text>
                         <div class="flex gap-10 overflow-hidden p-bs-20">
-                            <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
+                            <n-button focusable={false} secondary={!inverted.value} type="primary" class="p-inline-10! h-40">
                                 <common-element-wrapper name="nest-telegram" size={20}></common-element-wrapper>
                             </n-button>
-                            <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
+                            <n-button focusable={false} secondary={!inverted.value} type="primary" class="p-inline-10! h-40">
                                 <common-element-wrapper name="nest-whatsapp" size={20}></common-element-wrapper>
                             </n-button>
-                            <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
+                            <n-button focusable={false} secondary={!inverted.value} type="primary" class="p-inline-10! h-40">
                                 <common-element-wrapper name="nest-solid-main" size={20}></common-element-wrapper>
                             </n-button>
                         </div>
@@ -87,7 +89,7 @@ export default defineComponent({
                         </n-button>
                     </n-a>
                 </n-element>
-            </n-element>
+            </common-base-element>
         )
     }
 })

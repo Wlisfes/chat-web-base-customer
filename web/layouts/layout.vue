@@ -24,6 +24,7 @@ export default defineComponent({
         return () => (
             <n-layout class="h-full overflow-hidden bg-transparent!" content-class="flex flex-col overflow-hidden">
                 <layout-client-canvas></layout-client-canvas>
+                <layout-client-stripe></layout-client-stripe>
                 <n-layout-header
                     position="absolute"
                     class={['layout-site-header w-full', { 'is-scrolled': state.scrolled, 'is-dark': inverted.value }]}
