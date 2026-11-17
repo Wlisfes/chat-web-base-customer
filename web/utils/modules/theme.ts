@@ -26,7 +26,7 @@ export function themeOverrides(inverted: boolean, state: Omix): Omix<GlobalTheme
             primaryColorPressed: lightenStr,
             primaryColorSuppl: state.primaryColor,
             heightMedium: '32px',
-            CommonBodyBgColor: inverted ? '#101014' : '#f5f5f5'
+            CommonBodyBgColor: inverted ? '#101014' : '#f8f9ff'
         },
         Scrollbar: { width: '6px', height: '6px' },
         Tree: { nodeHeight: '36px' }
