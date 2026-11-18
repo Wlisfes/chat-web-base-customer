@@ -8,7 +8,7 @@ export default defineComponent({
         const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-client-signal max-width-inline box-border">
+            <n-element class="layout-client-signal w-full box-border">
                 <div class="signal-panel">
                     <div class="signal-grid"></div>
                     <div class="signal-glow"></div>
@@ -49,10 +49,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.layout-client-signal {
-    padding-block: 12px 36px;
-}
-
 .signal-panel {
     position: relative;
     overflow: hidden;

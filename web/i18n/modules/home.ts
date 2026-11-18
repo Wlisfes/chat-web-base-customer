@@ -55,25 +55,6 @@ export const homeCn = {
             }
         ]
     },
-    hero: {
-        badge: '全新一代 SignalMesh 全球专线网络现已发布',
-        guarantee: '99.99% 触达保障',
-        title: '创新全渠道通信解决方案',
-        accent: '让 SMS 消息在全球自由无阻传递',
-        document: '为出海企业及高并发业务打造的电信级短信路由枢纽。提供超高送达率验证码、实时通知、营销推送及双向互动通道，秒级触发，全链路透明可追溯。',
-        start: '立即开通免费测试',
-        quota: '送100条额度',
-        docs: '查看开发者 API 文档',
-        points: ['免绑卡即刻开通', '3分钟极速 API 对接', '7×24h 资深工程师群内响应'],
-        console: 'console.chatbook.im/overview/realtime',
-        live: 'LIVE ROUTING ACTIVE',
-        stats: [
-            { label: '今日发送总量', value: '15,208,490', delta: '+14.2%', hint: '全球每秒吞吐量 8,420 条', tone: 'white' },
-            { label: '3分钟阅读率', value: '95.4%', delta: '', hint: '短信达设备后即时打开', tone: 'violet' },
-            { label: '端到端送达率', value: '99.1%', delta: '', hint: '电信级直连多路兜底', tone: 'cyan' },
-            { label: '平均交付时延', value: '0.82 秒', delta: '', hint: '亚太、欧洲及美洲专线', tone: 'green' }
-        ]
-    },
     signal: {
         kicker: 'SIGNAL MESH · 全球通信专网',
         title: '一条链路，把发送、智能路由和回执收在同一张网',
@@ -114,7 +95,7 @@ export const homeCn = {
     },
     facts: {
         hot: 'LIVE ROUTING ACTIVE',
-        title: '创新全渠道通信解决方案，让 SMS 消息在全球自由无阻传递',
+        title: 'ChatBook 创新全渠道通信解决方案，让 SMS 消息在全球自由无阻传递',
         columns: [
             { title: '15,208,490', document: '今日发送总量，全球每秒吞吐量 8,420 条' },
             { title: '95.4%', document: '3 分钟阅读率，短信达设备后即时打开' },
@@ -226,25 +207,6 @@ export const homeEn = {
             }
         ]
     },
-    hero: {
-        badge: 'The new SignalMesh global private network is live',
-        guarantee: '99.99% delivery assurance',
-        title: 'An innovative omnichannel messaging solution',
-        accent: 'Let SMS move freely around the world',
-        document: 'A carrier-grade SMS hub for outbound and high-concurrency businesses. High-delivery verification codes, live notices, campaigns, and two-way channels, triggered in seconds and traceable end to end.',
-        start: 'Start a free test',
-        quota: '100 free messages',
-        docs: 'View developer API docs',
-        points: ['No card required', 'API ready in 3 minutes', '7x24 engineer response'],
-        console: 'console.chatbook.im/overview/realtime',
-        live: 'LIVE ROUTING ACTIVE',
-        stats: [
-            { label: 'Sent today', value: '15,208,490', delta: '+14.2%', hint: '8,420 messages per second worldwide', tone: 'white' },
-            { label: '3-minute read rate', value: '95.4%', delta: '', hint: 'Opened right after the device receives it', tone: 'violet' },
-            { label: 'End-to-end delivery', value: '99.1%', delta: '', hint: 'Direct carrier routes with fallback', tone: 'cyan' },
-            { label: 'Average delay', value: '0.82s', delta: '', hint: 'Asia Pacific, Europe, and the Americas', tone: 'green' }
-        ]
-    },
     signal: {
         kicker: 'SIGNAL MESH · Global network',
         title: 'One link that keeps sending, smart routing, and receipts on the same network',
@@ -310,7 +272,7 @@ export const homeEn = {
     },
     facts: {
         hot: 'LIVE ROUTING ACTIVE',
-        title: 'An omnichannel messaging solution that lets SMS move freely worldwide',
+        title: 'ChatBook An omnichannel messaging solution that lets SMS move freely worldwide',
         columns: [
             { title: '15,208,490', document: 'Sent today, with 8,420 messages per second worldwide' },
             { title: '95.4%', document: 'Read within three minutes of reaching the device' },

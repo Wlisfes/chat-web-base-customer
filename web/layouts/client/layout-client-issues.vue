@@ -17,10 +17,10 @@ export default defineComponent({
         const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-client-issues max-width-inline flex flex-col p-bs-24 p-be-48 box-border">
+            <n-element class="layout-client-issues max-width-inline flex flex-col p-bs-68 p-be-100 box-border">
                 <n-text class="chat-hot">{t('home.issues.hot')}</n-text>
-                <div class="chat-issues flex justify-between p-be-24">
-                    <div class="w-full max-w-[var(--chat-issues-max-width)] flex flex-col gap-5 p-ie-16">
+                <div class="chat-issues flex justify-between p-be-24 p-bs-12">
+                    <div class="w-full max-w-[var(--chat-issues-max-width)] flex flex-col gap-10 p-ie-16">
                         <h1 class="m-0 text-28">{t('home.issues.title')}</h1>
                         <n-text depth={3} class="text-16">
                             {t('home.issues.document')}
@@ -35,7 +35,7 @@ export default defineComponent({
                         </n-button>
                     </div>
                 </div>
-                <div class="chat-block grid gap-24 p-bs-24">
+                <div class="chat-block grid gap-40 p-bs-24">
                     {tm('home.issues.columns').map((item, index) => (
                         <div key={index} class="chat-block-column" data-aos="fade-up" data-aos-delay={index * 100}>
                             <n-card hoverable content-class="p-24!" class="b-rd-8 h-full">
@@ -59,15 +59,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 .chat-hot {
     color: var(--primary-color);
-    @media (max-width: 768px) {
+    @media (max-width: 968px) {
         text-align: center;
     }
 }
 
 .chat-issues {
-    --chat-issues-max-width: 540px;
+    --chat-issues-max-width: 740px;
     position: relative;
-    @media (max-width: 768px) {
+    @media (max-width: 968px) {
         --chat-issues-max-width: 100%;
         flex-direction: column;
         text-align: center;
@@ -78,10 +78,10 @@ export default defineComponent({
 .chat-block {
     grid-template-columns: repeat(3, minmax(0px, 1fr));
     position: relative;
-    @media (max-width: 1280px) {
+    @media (max-width: 1480px) {
         grid-template-columns: repeat(2, minmax(0px, 1fr));
     }
-    @media (max-width: 768px) {
+    @media (max-width: 968px) {
         grid-template-columns: repeat(1, minmax(0px, 1fr));
     }
 }

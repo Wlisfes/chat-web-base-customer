@@ -5,54 +5,69 @@ import { useI18nContext } from '@/i18n'
 
 export default defineComponent({
     name: 'LayoutClientFacts',
-    setup() {
+    props: {
+        /**是否显示头部**/
+        hot: { type: Boolean, default: false }
+    },
+    setup(props, { slots }) {
         const { inverted } = useStore(useMouse)
         const { t, tm } = useI18nContext()
 
         return () => (
             <n-element class="layout-client-facts max-width-inline box-border">
-                <div class="facts-box flex flex-col items-center">
-                    <n-text class="chat-hot z-2 p-be-5">{t('home.facts.hot')}</n-text>
-                    <h1 class="m-0 text-size-[var(--facts-box-title-size)] text-center max-w-870 z-2 p-be-24">{t('home.facts.title')}</h1>
-                    <div class="chat-element w-full grid gap-24 p-bs-24 z-2">
-                        {tm('home.facts.columns').map((item, index) => (
-                            <div key={index} class="chat-element-column flex flex-col items-center" data-aos="zoom-in">
-                                <n-h1 type="primary" class="m-0 text-size-[var(--chat-element-title-size)]">
-                                    <n-text strong type="primary">
-                                        {item.title}
-                                    </n-text>
-                                </n-h1>
-                                <n-text class="16">{item.document}</n-text>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div data-aos="fade-up">
-                    <n-card embedded bordered={false} class={{ 'chat-super-card': true, 'is-light': !inverted.value }}>
-                        <div class="chat-super flex flex-col items-center">
-                            <div class="flex flex-col items-center justify-center">
-                                <div class="flex items-center gap-5 p-be-10">
-                                    <common-element-wrapper
-                                        size={36}
-                                        color="var(--primary-color)"
-                                        name="nest-issues-chat"
-                                    ></common-element-wrapper>
-                                    <n-text class="text-18" strong>
-                                        {t('home.facts.brand')}
-                                    </n-text>
+                {props.hot && (
+                    <div class="facts-box flex flex-col items-center">
+                        <n-text class="chat-hot z-2 p-be-5">{t('home.facts.hot')}</n-text>
+                        <h1 class="m-0 p-block-10 text-size-[var(--facts-box-title-size)] text-center max-w-960 z-2">
+                            {t('home.facts.title')}
+                        </h1>
+                        <n-text depth={3} class="text-16 text-center!">
+                            {t('home.facts.sloganAfter')}
+                        </n-text>
+                        <div class="chat-element w-full grid gap-24 p-bs-120 z-2 overflow-hidden">
+                            {tm('home.facts.columns').map((item, index) => (
+                                <div key={index} class="chat-element-column flex flex-col items-center" data-aos="zoom-in">
+                                    <n-h1 type="primary" class="m-0 text-size-[var(--chat-element-title-size)]">
+                                        <n-text strong type="primary">
+                                            {item.title}
+                                        </n-text>
+                                    </n-h1>
+                                    <n-text class="16">{item.document}</n-text>
                                 </div>
-                                <n-h1 class="m-0 text-center text-size-[var(--chat-super-title-size)]">
-                                    {t('home.facts.sloganBefore')}
-                                    <br />
-                                    {t('home.facts.sloganAfter')}
-                                </n-h1>
-                            </div>
-                            <n-button class="min-w-120" size="large" type="primary">
-                                <n-text>{t('home.facts.action')}</n-text>
-                            </n-button>
+                            ))}
                         </div>
-                    </n-card>
-                </div>
+                    </div>
+                )}
+                {slots.default ? (
+                    slots.default()
+                ) : (
+                    <div data-aos="fade-up">
+                        <n-card embedded bordered={false} class={{ 'chat-super-card': true, 'is-light': !inverted.value }}>
+                            <div class="chat-super flex flex-col items-center">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="flex items-center gap-5 p-be-10">
+                                        <common-element-wrapper
+                                            size={36}
+                                            color="var(--primary-color)"
+                                            name="nest-issues-chat"
+                                        ></common-element-wrapper>
+                                        <n-text class="text-18" strong>
+                                            {t('home.facts.brand')}
+                                        </n-text>
+                                    </div>
+                                    <n-h1 class="m-0 text-center text-size-[var(--chat-super-title-size)]">
+                                        {t('home.facts.sloganBefore')}
+                                        <br />
+                                        {t('home.facts.sloganAfter')}
+                                    </n-h1>
+                                </div>
+                                <n-button class="min-w-120" size="large" type="primary">
+                                    <n-text>{t('home.facts.action')}</n-text>
+                                </n-button>
+                            </div>
+                        </n-card>
+                    </div>
+                )}
             </n-element>
         )
     }

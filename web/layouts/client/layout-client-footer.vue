@@ -10,7 +10,7 @@ export default defineComponent({
         const { t, tm } = useI18nContext()
 
         return () => (
-            <common-base-element is-white class="layout-common-footer flex flex-col overflow-hidden">
+            <common-base-element is-white class="layout-common-footer flex flex-col p-bs-24 overflow-hidden">
                 <div class="chat-connect max-width-inline flex justify-between gap-16 p-block-24 box-border">
                     <div class="flex flex-col gap-5 overflow-hidden">
                         <h1 class="m-0 text-22">{t('home.site.subscribe.title')}</h1>
