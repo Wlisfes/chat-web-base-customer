@@ -29,7 +29,7 @@ export default defineComponent({
                     position="absolute"
                     class={['layout-site-header w-full', { 'is-scrolled': state.scrolled, 'is-dark': inverted.value }]}
                 >
-                    <n-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden bg-transparent!">
+                    <n-element class="h-60 flex p-inline-20 gap-x-32 overflow-hidden bg-transparent!">
                         <layout-common-logo></layout-common-logo>
                         <n-element class="h-full flex flex-1 items-center justify-end gap-x-24 overflow-hidden">
                             <n-button text focusable={false}>

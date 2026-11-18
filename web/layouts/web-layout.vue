@@ -14,7 +14,7 @@ export default defineComponent({
                 <n-layout-header class="layout-web-header">
                     <n-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden">
                         <layout-common-logo></layout-common-logo>
-                        <n-element class="h-full flex flex-1 items-center gap-x-24 p-inline-24 overflow-hidden">
+                        <n-element class="h-full flex flex-1 items-center gap-x-32 p-inline-24 overflow-hidden">
                             <n-button text focusable={false}>
                                 <div class="text-16">概览</div>
                             </n-button>
