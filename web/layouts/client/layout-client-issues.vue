@@ -17,7 +17,7 @@ export default defineComponent({
         const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-client-issues common-width-inline flex flex-col p-bs-24 p-be-48 box-border">
+            <n-element class="layout-client-issues max-width-inline flex flex-col p-bs-24 p-be-48 box-border">
                 <n-text class="chat-hot">{t('home.issues.hot')}</n-text>
                 <div class="chat-issues flex justify-between p-be-24">
                     <div class="w-full max-w-[var(--chat-issues-max-width)] flex flex-col gap-5 p-ie-16">

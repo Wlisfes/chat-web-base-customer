@@ -8,7 +8,7 @@ export default defineComponent({
         const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-client-signal common-width-inline box-border">
+            <n-element class="layout-client-signal max-width-inline box-border">
                 <div class="signal-panel">
                     <div class="signal-grid"></div>
                     <div class="signal-glow"></div>
@@ -23,6 +23,7 @@ export default defineComponent({
                                 <span>{item.hint}</span>
                                 <strong>{item.value}</strong>
                                 <em>{item.label}</em>
+                                {item.document ? <p>{item.document}</p> : null}
                             </div>
                         ))}
                     </div>

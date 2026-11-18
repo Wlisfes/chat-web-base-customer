@@ -15,7 +15,7 @@ export default defineComponent({
         const { t, tm } = useI18nContext()
 
         return () => (
-            <n-element class="layout-client-choose common-width-inline flex flex-col p-block-64 box-border">
+            <n-element class="layout-client-choose max-width-inline flex flex-col p-block-64 box-border">
                 <div class="flex flex-col items-center max-w-640 m-inline-auto">
                     <n-text class="chat-hot text-[var(--primary-color)]">{t('home.choose.hot')}</n-text>
                     <h1 class="m-0 text-28">{t('home.choose.title')}</h1>

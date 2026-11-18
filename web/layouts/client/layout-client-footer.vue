@@ -11,7 +11,7 @@ export default defineComponent({
 
         return () => (
             <common-base-element is-white class="layout-common-footer flex flex-col overflow-hidden">
-                <div class="chat-connect common-width-inline flex justify-between gap-16 p-block-24 box-border">
+                <div class="chat-connect max-width-inline flex justify-between gap-16 p-block-24 box-border">
                     <div class="flex flex-col gap-5 overflow-hidden">
                         <h1 class="m-0 text-22">{t('home.site.subscribe.title')}</h1>
                         <n-text depth={2}>{t('home.site.subscribe.document')}</n-text>
@@ -23,7 +23,7 @@ export default defineComponent({
                         </n-button>
                     </div>
                 </div>
-                <n-element class="chat-comment common-width-inline flex justify-between p-bs-48 p-be-64 box-border">
+                <n-element class="chat-comment max-width-inline flex justify-between p-bs-48 p-be-64 box-border">
                     <div class="chat-book flex flex-col w-[var(--chat-book-width)] min-w-[var(--chat-book-min-width)] p-ie-16">
                         <router-link to="/" class="flex overflow-hidden p-be-16 decoration-none">
                             <n-button text focusable={false}>
@@ -79,7 +79,7 @@ export default defineComponent({
                         </div>
                     </div>
                 </n-element>
-                <n-element class="common-width-inline flex flex-wrap gap-16 text-12 items-center justify-between p-block-16 gap-y-5 box-border">
+                <n-element class="max-width-inline flex flex-wrap gap-16 text-12 items-center justify-between p-block-16 gap-y-5 box-border">
                     <n-ellipsis tooltip={false}>
                         <n-text depth={2}>{`Copyright © 2021-${new Date().getFullYear()} ChatBook. All rights reserved.`}</n-text>
                     </n-ellipsis>

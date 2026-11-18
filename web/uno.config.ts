@@ -9,5 +9,5 @@ export default defineConfig({
         ['bg-transition', { transition: 'background-color 0.3s var(--cubic-bezier-ease-in-out)' }],
         [/^grid-columns-(\d+)$/, ([, d]) => ({ display: 'grid', 'grid-template-columns': `repeat(${d}, minmax(0px, 1fr))` })]
     ],
-    shortcuts: [{ 'common-width-inline': 'w-full max-w-1280 m-inline-auto p-inline-20' }]
+    shortcuts: [{ 'max-width-inline': 'w-full max-w-1480 m-inline-auto p-inline-20' }]
 })
