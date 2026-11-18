@@ -15,21 +15,21 @@ export default defineComponent({
                     <n-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden">
                         <layout-common-logo></layout-common-logo>
                         <n-element class="h-full flex flex-1 items-center gap-x-32 p-inline-24 overflow-hidden">
-                            <n-button text focusable={false}>
-                                <div class="text-16">概览</div>
-                            </n-button>
-                            <n-button text focusable={false}>
-                                <div class="text-16">短信</div>
-                            </n-button>
-                            <n-button text focusable={false}>
-                                <div class="text-16">语音</div>
-                            </n-button>
-                            <n-button text focusable={false}>
-                                <div class="text-16">邮件</div>
-                            </n-button>
-                            <n-button text focusable={false}>
-                                <div class="text-16">WhatsApp</div>
-                            </n-button>
+                            <router-link class="web-link" to="/web/home">
+                                概览
+                            </router-link>
+                            <router-link class="web-link" to="/web/sms">
+                                短信
+                            </router-link>
+                            <router-link class="web-link" to="/web/voice">
+                                语音
+                            </router-link>
+                            <router-link class="web-link" to="/web/mail">
+                                邮件
+                            </router-link>
+                            <router-link class="web-link" to="/web/whatsapp">
+                                WhatsApp
+                            </router-link>
                         </n-element>
                         <n-element class="h-full flex items-center gap-x-20 overflow-hidden">
                             <layout-common-deploy></layout-common-deploy>
@@ -76,3 +76,35 @@ export default defineComponent({
     }
 })
 </script>
+
+<style lang="scss" scoped>
+.web-link {
+    position: relative;
+    padding: 3px 2px;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text-color-2);
+    text-decoration: none;
+    transition: color 0.3s var(--cubic-bezier-ease-in-out);
+    &::before {
+        content: '';
+        height: 3px;
+        position: absolute;
+        border-radius: 2px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        transition: background-color 0.3s var(--cubic-bezier-ease-in-out);
+    }
+    &:hover {
+        color: var(--primary-color-hover);
+    }
+    &.router-link-active {
+        color: var(--primary-color-hover);
+        &::before {
+            background-color: var(--primary-color-hover);
+        }
+    }
+}
+</style>

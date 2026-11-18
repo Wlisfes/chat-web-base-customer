@@ -57,10 +57,9 @@ export default defineComponent({
 
         return () => (
             <n-button
-                {...buttonColorProps.value}
+                {...{ ...buttonColorProps.value, focusable: false }}
                 class={{ 'common-base-button': true, 'element-database': props.database }}
                 style={{ '--n-icon-size': props.iconSize + 'px' }}
-                focusable={false}
                 onClick={(event: MouseEvent) => emit('click', event, { setState: props.setState })}
             >
                 {{ icon: utils.isEmpty(props.icon) ? undefined : fetchIconRender, default: fetchContentRender }}
