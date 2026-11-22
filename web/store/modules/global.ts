@@ -27,6 +27,7 @@ export const useGlobal = defineStore('APP_NEST_GLOBAL_STORE', () => {
         }
         try {
             return await Service.httpAuthAccountTokenResolver().then(async ({ data }) => {
+                console.log(data)
                 return await fetchUserUpdate(data)
             })
         } catch {

@@ -12,8 +12,8 @@ export default defineComponent({
 
         return () => (
             <n-layout class="h-full" content-class="flex flex-col overflow-hidden">
-                <n-layout-header class="layout-web-header">
-                    <n-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden">
+                <n-layout-header bordered class="layout-web-header">
+                    <common-base-element class="h-60 flex p-inline-20 gap-x-24 overflow-hidden">
                         <layout-common-logo></layout-common-logo>
                         <n-element class="h-full flex flex-1 items-center gap-x-32 p-inline-24 overflow-hidden">
                             <router-link class="web-link" to="/web/home">
@@ -43,13 +43,16 @@ export default defineComponent({
                             <common-base-button text icon-size={22} icon="nest-notify"></common-base-button>
                             <layout-common-user></layout-common-user>
                         </n-element>
-                    </n-element>
+                    </common-base-element>
                 </n-layout-header>
                 <n-layout has-sider={showSider.value} content-class="flex flex-col overflow-hidden">
                     {showSider.value && (
                         <n-layout-sider
-                            class="layout-web-sider"
+                            embedded
                             width={240}
+                            collapsed-width={64}
+                            class="layout-web-sider"
+                            show-trigger="bar"
                             collapse-mode="width"
                             native-scrollbar={false}
                             style={{ zIndex: 2 }}
@@ -63,7 +66,7 @@ export default defineComponent({
                         scrollbar-props={{ size: 100, trigger: 'none' }}
                         native-scrollbar={false}
                     >
-                        <common-base-element is-white class="flex flex-col flex-1 overflow-hidden">
+                        <common-base-element class="flex flex-col flex-1 relative overflow-hidden bg-[var(--common-body-bg-color)]">
                             <RouterView>
                                 {{
                                     default: ({ Component, route }: Omix) => {
@@ -72,17 +75,6 @@ export default defineComponent({
                                 }}
                             </RouterView>
                         </common-base-element>
-                        {/* <n-element
-                            class={`flex flex-col flex-1 relative transition-background-color transition-duration-300 bg-[var(--common-body-bg-color)]${route.path.startsWith('/web/sms') ? ' p-20' : ''}`}
-                        >
-                            <RouterView>
-                                {{
-                                    default: ({ Component, route }: Omix) => {
-                                        return Component && h(Component, { key: route.fullPath })
-                                    }
-                                }}
-                            </RouterView>
-                        </n-element> */}
                     </n-layout-content>
                 </n-layout>
             </n-layout>

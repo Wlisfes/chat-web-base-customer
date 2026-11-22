@@ -15,7 +15,7 @@ export function isFunction(val: unknown) {
 /**
  * @description: 是否为对象
  */
-export function isObject(val: any) {
+export function isObject<T extends object = Record<string, any>>(val: unknown): val is T {
     return val !== null && is(val, 'Object')
 }
 

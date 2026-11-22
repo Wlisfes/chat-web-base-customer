@@ -31,6 +31,10 @@ export interface AccountProfile {
     remark?: string | null
     createTime?: string | null
     modifyTime?: string | null
+    config?: {
+        userKeyId: number
+        smsAppLimit: number
+    }
 }
 
 function jar(cookies?: Cookies) {
