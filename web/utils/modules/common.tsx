@@ -1,5 +1,8 @@
 import DayJS from 'dayjs'
+import { cloneDeep } from 'lodash-es'
 import { isArray, isNotEmpty, isString } from './is'
+
+export { cloneDeep }
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 DayJS.extend(timezone)

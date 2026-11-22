@@ -27,8 +27,51 @@ export const webRoutes: Array<RouteRecordRaw> = [
         children: [
             {
                 path: '/web/sms/home',
+                name: 'WebSmsHome',
+                meta: { AUTH: 'AUTH' },
+                component: () => import('@/views/sms/home/index.vue')
+            },
+            {
+                path: '/web/sms/app',
+                name: 'WebSmsApp',
                 meta: { AUTH: 'AUTH' },
                 component: () => import('@/views/sms/app/index.vue')
+            },
+            {
+                path: '/web/sms/template',
+                name: 'WebSmsTemplate',
+                meta: { AUTH: 'AUTH' },
+                component: () => import('@/views/sms/template/index.vue')
+            },
+            {
+                path: '/web/sms/file',
+                name: 'WebSmsFile',
+                meta: { AUTH: 'AUTH' },
+                component: () => import('@/views/sms/file/index.vue')
+            },
+            {
+                path: '/web/sms/send',
+                name: 'WebSmsSend',
+                meta: { AUTH: 'AUTH' },
+                component: () => import('@/views/sms/send/index.vue')
+            },
+            {
+                path: '/web/sms/task',
+                name: 'WebSmsTask',
+                meta: { AUTH: 'AUTH' },
+                component: () => import('@/views/sms/task/index.vue')
+            },
+            {
+                path: '/web/sms/record',
+                name: 'WebSmsRecord',
+                meta: { AUTH: 'AUTH' },
+                component: () => import('@/views/sms/record/index.vue')
+            },
+            {
+                path: '/web/sms/stat',
+                name: 'WebSmsStat',
+                meta: { AUTH: 'AUTH' },
+                component: () => import('@/views/sms/stat/index.vue')
             }
         ]
     },
@@ -40,7 +83,7 @@ export const webRoutes: Array<RouteRecordRaw> = [
             {
                 path: '/web/voice/home',
                 meta: { AUTH: 'AUTH' },
-                component: () => import('@/views/sms/app/index.vue')
+                component: () => import('@/views/client/home/index.vue')
             }
         ]
     },
@@ -52,7 +95,7 @@ export const webRoutes: Array<RouteRecordRaw> = [
             {
                 path: '/web/mail/home',
                 meta: { AUTH: 'AUTH' },
-                component: () => import('@/views/sms/app/index.vue')
+                component: () => import('@/views/client/home/index.vue')
             }
         ]
     },
@@ -64,7 +107,7 @@ export const webRoutes: Array<RouteRecordRaw> = [
             {
                 path: '/web/whatsapp/home',
                 meta: { AUTH: 'AUTH' },
-                component: () => import('@/views/sms/app/index.vue')
+                component: () => import('@/views/client/home/index.vue')
             }
         ]
     }

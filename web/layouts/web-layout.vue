@@ -8,6 +8,7 @@ export default defineComponent({
     setup() {
         const { isFullscreen, toggle } = useFullscreen()
         const route = useRoute()
+        const showSider = computed(() => route.meta.sider ?? true)
 
         return () => (
             <n-layout class="h-full" content-class="flex flex-col overflow-hidden">
@@ -44,23 +45,25 @@ export default defineComponent({
                         </n-element>
                     </n-element>
                 </n-layout-header>
-                <n-layout has-sider={route.meta.sider ?? true} content-class="flex flex-col overflow-hidden">
-                    {(route.meta.sider ?? true) && (
+                <n-layout has-sider={showSider.value} content-class="flex flex-col overflow-hidden">
+                    {showSider.value && (
                         <n-layout-sider
                             class="layout-web-sider"
                             width={240}
                             collapse-mode="width"
                             native-scrollbar={false}
                             style={{ zIndex: 2 }}
-                        ></n-layout-sider>
+                        >
+                            {route.path.startsWith('/web/sms') && <layout-common-sms-sider></layout-common-sms-sider>}
+                        </n-layout-sider>
                     )}
                     <n-layout-content
                         class="flex-1 overflow-hidden"
                         content-class="min-h-full flex flex-col overflow-hidden"
-                        native-scrollbar={false}
                         scrollbar-props={{ size: 100, trigger: 'none' }}
+                        native-scrollbar={false}
                     >
-                        <n-element class="flex flex-col flex-1 relative transition-background-color transition-duration-300 bg-[var(--common-body-bg-color)]">
+                        <common-base-element is-white class="flex flex-col flex-1 overflow-hidden">
                             <RouterView>
                                 {{
                                     default: ({ Component, route }: Omix) => {
@@ -68,7 +71,18 @@ export default defineComponent({
                                     }
                                 }}
                             </RouterView>
-                        </n-element>
+                        </common-base-element>
+                        {/* <n-element
+                            class={`flex flex-col flex-1 relative transition-background-color transition-duration-300 bg-[var(--common-body-bg-color)]${route.path.startsWith('/web/sms') ? ' p-20' : ''}`}
+                        >
+                            <RouterView>
+                                {{
+                                    default: ({ Component, route }: Omix) => {
+                                        return Component && h(Component, { key: route.fullPath })
+                                    }
+                                }}
+                            </RouterView>
+                        </n-element> */}
                     </n-layout-content>
                 </n-layout>
             </n-layout>
