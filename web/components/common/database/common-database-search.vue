@@ -111,6 +111,7 @@ export default defineComponent({
         function fetchColumnTransaction(vnode: Array<Omix>) {
             return {
                 vnode,
+                headers: fetchColumnCheck(vnode, ['CommonBaseHeader']),
                 columns: fetchColumnCheckForms(fetchColumnCheck(vnode, ['CommonDatabaseSearchColumn'])),
                 functions: fetchColumnCheckFunctions(fetchColumnCheck(vnode, ['CommonDatabaseSearchFunction']))
             }
@@ -120,9 +121,11 @@ export default defineComponent({
         expose(formOptions.value)
 
         return () => {
-            const { columns, functions } = fetchColumnTransaction((slots.default?.() ?? []) as Array<Omix>)
+            const { headers, columns, functions } = fetchColumnTransaction((slots.default?.() ?? []) as Array<Omix>)
+
             return (
-                <div class="common-database-search flex flex-col overflow-hidden">
+                <common-base-element class="common-database-search flex flex-col overflow-hidden">
+                    {headers.length > 0 && <Fragment>{headers}</Fragment>}
                     <common-base-element class="flex flex-col overflow-hidden" style={cardStyle.value}>
                         {columns.length > 0 && (
                             <common-base-collapse base-height={height.value} v-model:when={when.value}>
@@ -186,7 +189,7 @@ export default defineComponent({
                             </n-element>
                         )}
                     </common-base-element>
-                </div>
+                </common-base-element>
             )
         }
     }
