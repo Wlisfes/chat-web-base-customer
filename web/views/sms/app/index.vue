@@ -1,22 +1,18 @@
 <script lang="tsx">
-import { defineComponent, h, Component } from 'vue'
-import { Chat, ChatBot, ChatLaunch } from '@vicons/carbon'
+import { defineComponent, h } from 'vue'
+import { Chat, Settings } from '@vicons/carbon'
 import { useChunkService, useColumnService } from '@/hooks'
 import { useGlobal, useStore } from '@/store'
 import { fetchNotifyService } from '@/plugins'
 import * as Service from '@/api'
 
-const SMS_APP_ICONS: Record<string, Component> = {
-    MRKT: ChatBot,
-    NTFY: ChatLaunch,
-    SOTP: Chat
-}
-
 export default defineComponent({
     name: 'WebSmsApp',
     setup() {
         const { faseUser } = useStore(useGlobal)
-        const { chunkOptions } = useChunkService(() => Service.httpBaseSmsAppEnums(), { immediate: true })
+        const { chunkOptions } = useChunkService(() => Service.httpBaseSmsAppEnums(), {
+            immediate: true
+        })
         const { formRef, state, formState, fetchRefresh } = useColumnService(
             (base, payload) => Service.httpBaseSmsColumnApp({ ...payload, page: base.page, size: base.size }),
             { formState: { vague: undefined } }
@@ -44,38 +40,42 @@ export default defineComponent({
                     {state.dataSource.map((item: Omix) => (
                         <common-base-element key={item.keyId} is-white is-border>
                             <div class="flex gap-x-10 p-inline-14 p-block-14 overflow-hidden">
-                                <common-base-alert-wrapper
-                                    class="p-10"
-                                    type="info"
-                                    value={item.type}
-                                    items={chunkOptions.value.typeOptions}
-                                >
+                                <common-base-alert-wrapper class="p-10" type="info" items={chunkOptions.value.typeOptions}>
                                     <n-icon size={28} color="var(--n-icon-color)">
-                                        {h(SMS_APP_ICONS[item.type] ?? Chat)}
+                                        {h(Chat)}
                                     </n-icon>
                                 </common-base-alert-wrapper>
                                 <div class="flex flex-col flex-1 gap-y-2 overflow-hidden">
-                                    <n-text class="text-16 line-height-24" depth={1}>
-                                        {item.appName ?? '-'}
-                                    </n-text>
+                                    <n-ellipsis tooltip={false}>
+                                        <n-text class="text-16 line-height-24" depth={1}>
+                                            {item.appName ?? '-'}
+                                        </n-text>
+                                    </n-ellipsis>
                                     <n-text class="line-height-22" depth={3}>
                                         应用名称
                                     </n-text>
                                 </div>
-                                <div class="m-be-auto flex items-center">
+                                <div class="m-be-auto flex items-center gap-x-12">
                                     <common-base-chunk value={item.type} items={chunkOptions.value.typeOptions}></common-base-chunk>
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-y-10 p-inline-14 p-be-14 overflow-hidden">
+                            <div class="flex flex-col gap-y-10 p-inline-14 p-be-14 relative overflow-hidden">
                                 <common-base-columns-wrapper label-class="w-4.6em m-ie-10" label="应用ID">
                                     <n-ellipsis tooltip={false}>{item.appId ?? '-'}</n-ellipsis>
-                                </common-base-columns-wrapper>
-                                <common-base-columns-wrapper label-class="w-4.6em m-ie-10" label="应用名称">
-                                    <n-ellipsis tooltip={false}>{item.appName ?? '-'}</n-ellipsis>
                                 </common-base-columns-wrapper>
                                 <common-base-columns-wrapper label-class="w-4.6em m-ie-10" label="应用状态">
                                     <common-base-chunk value={item.status} items={chunkOptions.value.statusOptions}></common-base-chunk>
                                 </common-base-columns-wrapper>
+                                <common-base-columns-wrapper label-class="w-4.6em m-ie-10" label="创建时间">
+                                    {item.createTime ?? '-'}
+                                </common-base-columns-wrapper>
+                            </div>
+                            <div
+                                class="flex p-14 gap-x-14 items-center justify-end"
+                                style={{ transition: 'color 0.3s var(--n-bezier)', borderTop: '1px solid var(--divider-color)' }}
+                            >
+                                <common-base-button class="p-inline-6" secondary icon-size={20} icon={Settings}></common-base-button>
+                                <common-base-button secondary>发送短信</common-base-button>
                             </div>
                         </common-base-element>
                     ))}
