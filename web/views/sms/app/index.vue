@@ -76,9 +76,6 @@ export default defineComponent({
                                 <common-base-columns-wrapper label-class="w-4.6em m-ie-10" label="应用状态">
                                     <common-base-chunk value={item.status} items={chunkOptions.value.statusOptions}></common-base-chunk>
                                 </common-base-columns-wrapper>
-                                <common-base-columns-wrapper label-class="w-4.6em m-ie-10" label="备注">
-                                    <n-ellipsis tooltip={false}>{item.remark ?? '-'}</n-ellipsis>
-                                </common-base-columns-wrapper>
                             </div>
                         </common-base-element>
                     ))}
