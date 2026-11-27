@@ -93,7 +93,7 @@ export default defineComponent({
 
                 <common-base-columns-template class="gap-14 p-20" type="auto-fill" number={320}>
                     {list.value.map(item => (
-                        <common-base-element key={item.keyId} is-white is-border>
+                        <common-base-element key={item.keyId} is-white is-border is-hover>
                             <div class="flex gap-x-10 p-inline-14 p-block-14 overflow-hidden">
                                 <common-base-alert-wrapper class="p-10" type={typeTone[item.type]}>
                                     <n-icon size={28} color="var(--n-icon-color)">
@@ -159,7 +159,7 @@ export default defineComponent({
                             </common-base-button>
                         </common-base-element>
                     )}
-                    <common-base-element class="p-14 flex flex-col gap-y-5 h-246 items-center justify-center" is-white is-border>
+                    <common-base-element class="p-14 flex flex-col gap-y-5 h-246 items-center justify-center" is-white is-border is-hover>
                         <common-base-button text type="primary" onClick={() => (form.visible = true)}>
                             <common-base-icon size={18} name="nest-plus"></common-base-icon>
                             <span class="text-16 p-is-5">添加模板</span>
