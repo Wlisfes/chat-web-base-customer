@@ -30,7 +30,7 @@ export default defineComponent({
                         v-model:formState={formState.value}
                     >
                         <common-base-header
-                            class="p-inline-20 p-block-20 justify-between"
+                            class="p-inline-20 p-block-16 justify-between"
                             title="短信应用管理"
                             document="创建或修改应用请联系商务人员或在线客服，您可以选择一个应用进行发送短信。"
                         ></common-base-header>

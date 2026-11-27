@@ -13,9 +13,9 @@ export default defineComponent({
         return () => (
             <common-base-element class="common-base-header flex items-center overflow-hidden">
                 <div class="flex flex-col overflow-hidden">
-                    <n-h1 class="text-28 line-height-34 m-0">{props.title}</n-h1>
+                    <n-h1 class="text-24 line-height-28 m-0">{props.title}</n-h1>
                     {props.document && (
-                        <n-p depth={3} class="text-14 line-height-24 m-0 p-bs-5">
+                        <n-p depth={3} class="text-14 line-height-20 m-bs-4 overflow-hidden">
                             {props.document}
                         </n-p>
                     )}

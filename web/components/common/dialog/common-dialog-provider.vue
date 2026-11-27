@@ -50,6 +50,7 @@ export default defineComponent({
                 auto-focus={false}
                 mask-closable={false}
                 show-icon={false}
+                title={slots.title ? slots.title() : undefined}
                 show={visible.value}
                 style={styleNodes.value}
                 class={`flex flex-col ${props.className}`}
