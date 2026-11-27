@@ -42,6 +42,12 @@ export default defineComponent({
         loading: { type: Boolean, default: false },
         /**初始化状态**/
         initialize: { type: Boolean, default: false },
+        /**是否展示标签**/
+        showLabel: { type: Boolean, default: false },
+        /**表单节点样式**/
+        formClass: { type: String, default: '' },
+        /**表单item最新宽度**/
+        formMinmax: { type: Number, default: 200 },
         /**表单对象**/
         formState: { type: Object as PropType<Omix>, default: () => ({}) },
         /**文案描述宽度**/
@@ -59,9 +65,9 @@ export default defineComponent({
         const height = computed(() => fetchWherer(Boolean(props.line), 10 + 32 * props.line + (props.line - 1) * 10, 0))
         /**表单样式**/
         const formClass = computed(() => ({
-            'common-database-formstate': true,
+            [`common-database-formstate ${props.formClass}`]: true,
             'p-be-12': when.value || (database.value.length > 0 && database.value.some(item => item.check)),
-            'formstate-collapse': width.value < 634
+            'formstate-collapse': width.value < props.formMinmax + 10
         }))
         /**圆角、边框样式**/
         const cardStyle = computed<CSSProperties>(() => {
@@ -124,7 +130,10 @@ export default defineComponent({
             const { headers, columns, functions } = fetchColumnTransaction((slots.default?.() ?? []) as Array<Omix>)
 
             return (
-                <common-base-element class="common-database-search flex flex-col overflow-hidden">
+                <common-base-element
+                    class="common-database-search flex flex-col overflow-hidden"
+                    style={{ '--n-form-minmax': `${props.formMinmax}px` }}
+                >
                     {headers.length > 0 && <Fragment>{headers}</Fragment>}
                     <common-base-element class="flex flex-col overflow-hidden" style={cardStyle.value}>
                         {columns.length > 0 && (
@@ -134,6 +143,7 @@ export default defineComponent({
                                     class={formClass.value}
                                     label-placement="left"
                                     model={formState.value}
+                                    show-label={props.showLabel}
                                     label-width={props.labelWidth}
                                 >
                                     <Fragment>{columns}</Fragment>
@@ -213,7 +223,7 @@ export default defineComponent({
     gap: 10px;
     display: grid;
     grid-auto-flow: row dense;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--n-form-minmax), 1fr));
     &.formstate-collapse :deep(.common-database-search-column.grid-col-span-2) {
         grid-column: span 1 / span 1 !important;
     }

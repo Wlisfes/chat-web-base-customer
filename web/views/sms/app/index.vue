@@ -20,24 +20,23 @@ export default defineComponent({
 
         return () => (
             <common-base-element class="flex flex-col absolute inset-0 overflow-hidden">
-                <common-base-element is-white>
-                    <common-database-search
-                        ref={formRef}
-                        label-width={85}
-                        v-model:loading={state.loading}
-                        v-model:when={state.when}
-                        v-model:database={state.database}
-                        v-model:formState={formState.value}
-                    >
-                        <common-base-header
-                            class="p-inline-20 p-block-16 justify-between"
-                            title="短信应用管理"
-                            document="创建或修改应用请联系商务人员或在线客服，您可以选择一个应用进行发送短信。"
-                        ></common-base-header>
-                    </common-database-search>
-                </common-base-element>
+                <common-database-search
+                    is-white
+                    ref={formRef}
+                    label-width={85}
+                    v-model:loading={state.loading}
+                    v-model:when={state.when}
+                    v-model:database={state.database}
+                    v-model:formState={formState.value}
+                >
+                    <common-base-header
+                        class="p-inline-20 p-block-16 justify-between"
+                        title="短信应用"
+                        document="创建或修改应用请联系商务人员或在线客服，您可以选择一个应用进行发送短信。"
+                    ></common-base-header>
+                </common-database-search>
                 <common-base-scrollbar>
-                    <common-base-columns-template class="gap-16 p-20" type="auto-fill" number={320}>
+                    <common-base-columns-template class="gap-20 p-inline-20 p-block-20" type="auto-fill" number={320}>
                         {state.dataSource.map((item: Omix) => (
                             <common-base-element key={item.keyId} is-white is-border is-hover>
                                 <div class="flex gap-x-10 p-inline-14 p-block-14 overflow-hidden">
